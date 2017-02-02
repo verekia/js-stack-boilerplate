@@ -4,7 +4,7 @@ import { createStore, combineReducers } from 'redux'
 import { expect } from 'chai'
 
 import dogReducer from './dog'
-import { makeBark } from '../action/dog'
+import { bark } from '../action/dog'
 
 let store
 
@@ -15,10 +15,10 @@ describe('Dog Reducer', () => {
     }))
   })
   describe('makeBark', () => {
-    it('should make hasBarked go from false to true', () => {
-      expect(store.getState().dog.get('hasBarked')).to.be.false
-      store.dispatch(makeBark())
-      expect(store.getState().dog.get('hasBarked')).to.be.true
+    it('should change barkMessage', () => {
+      expect(store.getState().dog.get('barkMessage')).to.equal('The dog is quiet')
+      store.dispatch(bark('Wah wah!'))
+      expect(store.getState().dog.get('barkMessage')).to.equal('Wah wah!')
     })
   })
 })

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 
 import dogReducer from './reducer/dog'
 import BarkMessage from './container/bark-message'
-import BarkButton from './container/bark-button'
+import BarkButton from './container/bark-buttons'
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(combineReducers({

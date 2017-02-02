@@ -1,10 +1,10 @@
 // @flow
 
 import { connect } from 'react-redux'
-import Message from '../component/message'
+import BarkMessage from '../component/bark-message'
 
 const mapStateToProps = state => ({
-  message: state.dog.get('hasBarked') ? 'The dog barked' : 'The dog did not bark',
+  message: state.dog.get('barkMessage'),
 })
 
-export default connect(mapStateToProps)(Message)
+export default connect(mapStateToProps)(BarkMessage)

@@ -1,6 +1,5 @@
 apps:
   - script: ./src/server
-    interpreter: ./node_modules/.bin/babel-node
     out_file: logs/server-dev.log
     error_file: logs/server-dev.log
     combine_logs: true
