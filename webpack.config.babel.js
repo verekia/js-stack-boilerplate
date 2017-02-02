@@ -1,3 +1,5 @@
+import { WDS_PORT } from './src/shared/config'
+
 export default {
   entry: './src/client/entry.jsx',
   output: { filename: 'dist/js/bundle.js' },
@@ -11,5 +13,5 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devServer: { port: 7000 },
+  devServer: { port: WDS_PORT },
 }

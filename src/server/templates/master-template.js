@@ -1,6 +1,6 @@
 // @flow
 
-import { IS_PROD, WDS_PORT } from '../config'
+import { IS_PROD, WDS_PORT } from '../../shared/config'
 
 export default (title: string) => `
 <!doctype html>

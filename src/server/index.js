@@ -4,7 +4,7 @@
 
 import express from 'express'
 
-import { EXPRESS_PORT } from './config'
+import { EXPRESS_PORT } from '../shared/config'
 import masterTemplate from './templates/master-template'
 
 const app = express()
