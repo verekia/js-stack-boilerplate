@@ -4,12 +4,12 @@ import 'babel-polyfill'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
 
-import dogReducer from './reducer/dog'
-import BarkMessage from './container/bark-message'
 import BarkButton from './container/bark-buttons'
+import BarkMessage from './container/bark-message'
+import dogReducer from './reducer/dog'
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(combineReducers({

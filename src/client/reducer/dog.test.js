@@ -1,10 +1,10 @@
-/* eslint-disable no-undef, no-unused-expressions */
+/* eslint-disable no-undef, no-unused-expressions, import/no-extraneous-dependencies */
 
-import { createStore, combineReducers } from 'redux'
 import { expect } from 'chai'
+import { createStore, combineReducers } from 'redux'
 
-import dogReducer from './dog'
 import { bark } from '../action/dog'
+import dogReducer from './dog'
 
 let store
 

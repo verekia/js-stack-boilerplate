@@ -1,6 +1,7 @@
 // @flow
 
 import * as Immutable from 'immutable'
+
 import { BARK } from '../action/dog'
 
 const initialState = Immutable.fromJS({
