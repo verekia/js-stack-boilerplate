@@ -1,2 +1,3 @@
-# js-stack-boilerplate
-The final boilerplate code of JavaScript Stack from Scratch
+# JavaScript Stack Boilerplate
+
+Work in progress - The final boilerplate code of JavaScript Stack from Scratch v2.

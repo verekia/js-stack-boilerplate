@@ -1,0 +1,50 @@
+{
+  "name": "js-stack-from-scratch",
+  "version": "2.0.0",
+  "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
+  "scripts": {
+    "start": "yarn run dev",
+    "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server",
+    "prod": "yarn stop && yarn build-prod && pm2 start pm2-prod.yaml",
+    "build-prod": "rimraf dist lib && NODE_ENV=production webpack -p && babel src -d lib",
+    "stop": "rimraf logs/* && pm2 delete all || true",
+    "lint": "eslint src/**/*.js src/**/*.jsx",
+    "check-all": "yarn run lint && flow",
+    "precommit": "yarn run check-all",
+    "prepush": "yarn run check-all"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.22.0",
+    "express": "^4.14.1",
+    "immutable": "^3.8.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.2.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-flow": "^1.0.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "eslint": "^3.13.0",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-flowtype": "^2.30.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "flow-bin": "^0.38.0",
+    "husky": "^0.13.1",
+    "pm2": "^2.3.0",
+    "rimraf": "^2.5.4",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.2.1"
+  },
+  "repository": "verekia/js-stack-from-scratch",
+  "author": "Jonathan Verrecchia - @verekia",
+  "license": "MIT"
+}
