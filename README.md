@@ -8,4 +8,6 @@ The final boilerplate code of [JavaScript Stack from Scratch](https://github.com
 
 Don't clone this repository, just download the [latest release](https://github.com/verekia/js-stack-boilerplate/releases), and edit `package.json` with your own info.
 
+Run `yarn && yarn start` or `npm install && npm start`.
+
 That's it!
