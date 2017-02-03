@@ -11,3 +11,9 @@ Don't clone this repository, just download the [latest release](https://github.c
 Run `yarn && yarn start` or `npm install && npm start`.
 
 That's it!
+
+## Credits
+
+Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
+
+License: MIT
