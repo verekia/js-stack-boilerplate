@@ -6,4 +6,6 @@ The final boilerplate code of [JavaScript Stack from Scratch](https://github.com
 
 ## How to use this boilerplate
 
-Don't clone this repository, just download the [latest release](https://github.com/verekia/js-stack-boilerplate/releases), and edit the `package.json` file with your own info. That's it!
+Don't clone this repository, just download the [latest release](https://github.com/verekia/js-stack-boilerplate/releases), and edit the `package.json` file with your own info.
+
+That's it!
