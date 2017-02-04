@@ -4,14 +4,14 @@
 
 import express from 'express'
 
-import { EXPRESS_PORT } from '../shared/config'
+import { EXPRESS_PORT, STATIC_PATH } from '../shared/config'
 import routes from '../shared/routes'
 import masterTemplate from './template/master-template'
 
 const app = express()
 
-app.use('/dist', express.static('dist'))
-app.use('/public', express.static('public'))
+app.use(STATIC_PATH, express.static('dist'))
+app.use(STATIC_PATH, express.static('public'))
 
 app.get('/', (req, res) => {
   res.send(masterTemplate('Dog App'))
