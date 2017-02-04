@@ -6,7 +6,7 @@ import express from 'express'
 
 import { EXPRESS_PORT } from '../shared/config'
 import routes from '../shared/routes'
-import masterTemplate from './templates/master-template'
+import masterTemplate from './template/master-template'
 
 const app = express()
 
