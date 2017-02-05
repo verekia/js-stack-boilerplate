@@ -9,7 +9,6 @@ export default {
     ],
   },
   devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
-  target: 'web',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
