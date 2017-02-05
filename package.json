@@ -3,13 +3,13 @@
   "version": "2.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "start": "yarn run dev",
+    "start": "yarn dev",
     "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server",
     "prod": "yarn stop && yarn build-prod && pm2 start pm2-prod.yaml",
     "build-prod": "rimraf dist lib && NODE_ENV=production webpack -p && babel src -d lib",
     "stop": "rimraf logs/* && pm2 delete all || true",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
-    "test": "yarn run lint && flow && yarn run mocha",
+    "test": "yarn lint && flow && yarn mocha",
     "mocha": "mocha src/**/*.test.js --compilers js:babel-register",
     "precommit": "yarn test",
     "prepush": "yarn test"
