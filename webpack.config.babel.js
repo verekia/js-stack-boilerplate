@@ -1,3 +1,5 @@
+// @flow
+
 import { WDS_PORT } from './src/shared/config'
 
 export default {
