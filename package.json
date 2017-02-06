@@ -11,8 +11,9 @@
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "yarn lint && flow && yarn mocha",
     "mocha": "mocha src/**/*.test.js --compilers js:babel-register",
-    "precommit": "yarn test && yarn build",
-    "prepush": "yarn test && yarn build"
+    "full-check": "yarn test && yarn prod && yarn stop",
+    "precommit": "yarn full-check",
+    "prepush": "yarn full-check"
   },
   "dependencies": {
     "babel-polyfill": "^6.22.0",
