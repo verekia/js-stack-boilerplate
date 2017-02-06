@@ -12,7 +12,6 @@
     "test": "yarn lint && flow && yarn mocha",
     "mocha": "mocha src/**/*.test.js --compilers js:babel-register",
     "full-check": "yarn test && yarn prod && yarn stop",
-    "travis": "yarn full-check && pm2 kill",
     "precommit": "yarn full-check",
     "prepush": "yarn full-check"
   },
