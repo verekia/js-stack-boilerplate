@@ -9,10 +9,10 @@
     "build": "rimraf dist lib && NODE_ENV=production webpack -p && babel src/server -d lib/server && babel src/shared -d lib/shared",
     "stop": "rimraf logs/* && pm2 delete all || true",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
-    "test": "yarn lint && flow && yarn mocha && yarn build",
+    "test": "yarn lint && flow && yarn mocha",
     "mocha": "mocha src/**/*.test.js --compilers js:babel-register",
-    "precommit": "yarn test",
-    "prepush": "yarn test"
+    "precommit": "yarn test && yarn build",
+    "prepush": "yarn test && yarn build"
   },
   "dependencies": {
     "babel-polyfill": "^6.22.0",
