@@ -1,41 +1,34 @@
-/* eslint-disable no-undef, no-unused-expressions, import/no-extraneous-dependencies */
+/* eslint-disable no-undef */
 
-import { expect } from 'chai'
-import fetchMock from 'fetch-mock'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-
-import { bark, barkAsync } from '../action/dog'
+import { bark, barkAsyncRequest, barkAsyncSuccess, barkAsyncFailure } from '../action/dog'
 import dogReducer from './dog'
 
-let store
+let dogState
 
-describe('Dog Reducer', () => {
-  beforeEach(() => {
-    store = createStore(combineReducers({
-      dog: dogReducer,
-    }), applyMiddleware(thunkMiddleware))
-  })
-  describe('makeBark', () => {
-    it('should change barkMessage', () => {
-      expect(store.getState().dog.get('barkMessage')).to.equal('The dog is quiet')
-      store.dispatch(bark('Wah wah!'))
-      expect(store.getState().dog.get('barkMessage')).to.equal('Wah wah!')
-    })
-    it('should change barkMessage asynchronously', (done) => {
-      fetchMock.get('/async/bark', { message: 'Async Mock' })
-      let isLoading = true
-      store.subscribe(() => {
-        if (isLoading) {
-          expect(store.getState().dog.get('barkMessage')).to.equal('...')
-          isLoading = false
-        } else {
-          expect(store.getState().dog.get('barkMessage')).to.equal('Async Mock')
-          fetchMock.restore()
-          done()
-        }
-      })
-      store.dispatch(barkAsync())
-    })
-  })
+beforeEach(() => {
+  dogState = dogReducer(undefined, {})
+})
+
+test('handle default', () => {
+  expect(dogState.get('barkMessage')).toBe('The dog is quiet')
+})
+
+test('handle BARK', () => {
+  dogState = dogReducer(dogState, bark('Bark test'))
+  expect(dogState.get('barkMessage')).toBe('Bark test')
+})
+
+test('handle BARK_ASYNC_REQUEST', () => {
+  dogState = dogReducer(dogState, barkAsyncRequest())
+  expect(dogState.get('barkMessage')).toBe('...')
+})
+
+test('handle BARK_ASYNC_SUCCESS', () => {
+  dogState = dogReducer(dogState, barkAsyncSuccess('Bark test'))
+  expect(dogState.get('barkMessage')).toBe('Bark test')
+})
+
+test('handle BARK_ASYNC_FAILURE', () => {
+  dogState = dogReducer(dogState, barkAsyncFailure())
+  expect(dogState.get('barkMessage')).toBe('Could not bark, please check your connection')
 })

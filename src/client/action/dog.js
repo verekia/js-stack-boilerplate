@@ -12,9 +12,9 @@ export const BARK_ASYNC_REQUEST = 'BARK_ASYNC_REQUEST'
 export const BARK_ASYNC_SUCCESS = 'BARK_ASYNC_SUCCESS'
 export const BARK_ASYNC_FAILURE = 'BARK_ASYNC_FAILURE'
 
-export const bark = createAction(BARK, message => message)
+export const bark = createAction(BARK)
 export const barkAsyncRequest = createAction(BARK_ASYNC_REQUEST)
-export const barkAsyncSuccess = createAction(BARK_ASYNC_SUCCESS, message => message)
+export const barkAsyncSuccess = createAction(BARK_ASYNC_SUCCESS)
 export const barkAsyncFailure = createAction(BARK_ASYNC_FAILURE)
 
 export const barkAsync = () => (dispatch: Function) =>
@@ -26,8 +26,12 @@ export const barkAsync = () => (dispatch: Function) =>
       dispatch(barkAsyncRequest())
       return res.json()
     })
-    .then(data => dispatch(barkAsyncSuccess(data.message)))
-    .catch((error) => {
-      console.error(error)
+    .then((data) => {
+      if (!data.message) {
+        throw Error('No message received')
+      }
+      dispatch(barkAsyncSuccess(data.message))
+    })
+    .catch(() => {
       dispatch(barkAsyncFailure())
     })

@@ -1,11 +1,26 @@
-/* eslint-disable import/no-extraneous-dependencies */
+// @flow
 
-/*
- * PM2 is capable of running babel-node as an alternative interpreter, but killing the process
- * via PM2 would sometimes not work and leave the babel-node process hanging. By using Babel's
- * require hook, PM2 runs the regular node executable, which seems more reliable.
- * http://pm2.keymetrics.io/docs/tutorials/using-transpilers-with-pm2
- */
+/* eslint-disable no-console */
 
-require('babel-register')
-require('./server.js')
+import express from 'express'
+
+import { EXPRESS_PORT, STATIC_PATH } from '../shared/config'
+import routes from '../shared/routes'
+import masterTemplate from './template/master-template'
+
+const app = express()
+
+app.use(STATIC_PATH, express.static('dist'))
+app.use(STATIC_PATH, express.static('public'))
+
+app.get('/', (req, res) => {
+  res.send(masterTemplate('Dog App'))
+})
+
+app.get(routes.asyncBark, (req, res) => {
+  res.send({ message: 'Wah wah! (from the server)' })
+})
+
+app.listen(EXPRESS_PORT, () => {
+  console.log(`Express running on port ${EXPRESS_PORT}.`)
+})
