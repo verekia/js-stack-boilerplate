@@ -1,6 +1,6 @@
 // @flow
 
-import { WDS_PORT } from './src/shared/config'
+import { WDS_PORT, isProd } from './src/shared/config'
 
 export default {
   entry: './src/client/entry.jsx',
@@ -10,7 +10,7 @@ export default {
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
     ],
   },
-  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
+  devtool: isProd ? false : 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
