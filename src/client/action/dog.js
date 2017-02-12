@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable no-console */
-
 import 'isomorphic-fetch'
 
 import { createAction } from 'redux-actions'
