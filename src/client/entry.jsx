@@ -8,8 +8,9 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-import BarkButton from './container/bark-buttons'
-import BarkMessage from './container/bark-message'
+import BarkAsyncButton from './container/bark-async-button'
+import BarkButton from './container/bark-button'
+import Message from './container/message'
 import dogReducer from './reducer/dog'
 
 /* eslint-disable no-underscore-dangle */
@@ -23,8 +24,9 @@ const store = createStore(combineReducers({
 ReactDOM.render(
   <Provider store={store}>
     <div>
-      <BarkMessage />
+      <Message />
       <BarkButton />
+      <BarkAsyncButton />
     </div>
   </Provider>
   , document.querySelector('.js-app'),

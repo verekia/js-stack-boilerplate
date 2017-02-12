@@ -2,10 +2,10 @@
 
 import { connect } from 'react-redux'
 
-import BarkMessage from '../component/bark-message'
+import Message from '../component/message'
 
 const mapStateToProps = state => ({
   message: state.dog.get('barkMessage'),
 })
 
-export default connect(mapStateToProps)(BarkMessage)
+export default connect(mapStateToProps)(Message)
