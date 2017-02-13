@@ -4,8 +4,10 @@
 
 import express from 'express'
 
+import staticApp from './static-app'
 import { EXPRESS_PORT, STATIC_PATH } from '../shared/config'
 import routes from '../shared/routes'
+import initStore from './store'
 import masterTemplate from './template/master-template'
 
 const app = express()
@@ -13,12 +15,13 @@ const app = express()
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
-app.get('/', (req, res) => {
-  res.send(masterTemplate('Dog App'))
-})
-
 app.get(routes.asyncBark, (req, res) => {
   res.send({ message: 'Wah wah! (from the server)' })
+})
+
+app.get('*', (req, res) => {
+  const store = initStore({ barkMessage: 'The dog is quiet (server-side)' })
+  res.send(masterTemplate(staticApp(req.url, store), store.getState()))
 })
 
 app.listen(EXPRESS_PORT, () => {
