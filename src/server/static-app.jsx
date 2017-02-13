@@ -11,4 +11,6 @@ export default (location: string, store: Object) =>
       <StaticRouter location={location} context={{}}>
         <App />
       </StaticRouter>
-    </Provider>)
+    </Provider>,
+// Temporary fix until react-router/pull/4484 is released
+).replace(/<a href="\/\//g, '<a href="/')
