@@ -2,7 +2,8 @@
 
 import DocumentTitle from 'react-document-title'
 
-import { isProd, STATIC_PATH, WDS_PORT } from '../../shared/config'
+import { STATIC_PATH, WDS_PORT } from '../shared/config'
+import { isProd } from '../shared/util'
 
 export default (appHtml: string, preloadedState: Object) => `
 <!doctype html>

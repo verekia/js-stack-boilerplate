@@ -1,16 +1,14 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import DocumentTitle from 'react-document-title'
 
-const HomePage = ({ title }: { title: string }) =>
+import { SITE_NAME } from '../../config'
+
+const HomePage = () =>
   <div>
-    <DocumentTitle title={title}>
-      <h1>{title}</h1>
+    <DocumentTitle title={SITE_NAME}>
+      <h1>{SITE_NAME}</h1>
     </DocumentTitle>
     Welcome.
   </div>
-
-HomePage.propTypes = {
-  title: PropTypes.string.isRequired,
-}
 
 export default HomePage

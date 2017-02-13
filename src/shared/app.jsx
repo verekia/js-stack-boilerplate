@@ -10,9 +10,9 @@ import DogAsyncPage from './component/page/dog-async'
 const App = () =>
   <div>
     <Nav />
-    <Route exact path="/" render={() => <HomePage title="Home" />} />
-    <Route path="/dog" render={() => <DogPage title="Dog" />} />
-    <Route path="/dog-async" render={() => <DogAsyncPage title="Dog Async" />} />
+    <Route exact path="/" render={() => <HomePage />} />
+    <Route path="/dog" render={() => <DogPage />} />
+    <Route path="/dog-async" render={() => <DogAsyncPage />} />
   </div>
 
 export default App

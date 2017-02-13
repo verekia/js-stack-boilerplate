@@ -8,7 +8,7 @@ import staticApp from './static-app'
 import { EXPRESS_PORT, STATIC_PATH } from '../shared/config'
 import routes from '../shared/routes'
 import initStore from './store'
-import masterTemplate from './template/master-template'
+import staticTemplate from './static-template'
 
 const app = express()
 
@@ -21,7 +21,7 @@ app.get(routes.asyncBark, (req, res) => {
 
 app.get('*', (req, res) => {
   const store = initStore({ barkMessage: 'The dog is quiet (server-side)' })
-  res.send(masterTemplate(staticApp(req.url, store), store.getState()))
+  res.send(staticTemplate(staticApp(req.url, store), store.getState()))
 })
 
 app.listen(EXPRESS_PORT, () => {
