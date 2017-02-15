@@ -1,7 +1,10 @@
 {
   "name": "js-stack-from-scratch",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
+  "repository": "verekia/js-stack-from-scratch",
+  "author": "Jonathan Verrecchia - @verekia",
+  "license": "MIT",
   "scripts": {
     "start": "yarn dev",
     "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
@@ -54,8 +57,5 @@
     "rimraf": "^2.5.4",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.2.1"
-  },
-  "repository": "verekia/js-stack-from-scratch",
-  "author": "Jonathan Verrecchia - @verekia",
-  "license": "MIT"
+  }
 }
