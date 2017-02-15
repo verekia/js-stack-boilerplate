@@ -4,7 +4,7 @@ import { WDS_PORT } from './src/shared/config'
 import { isProd } from './src/shared/util'
 
 export default {
-  entry: './src/client/entry.jsx',
+  entry: './src/client',
   output: { filename: 'dist/js/bundle.js' },
   module: {
     rules: [
