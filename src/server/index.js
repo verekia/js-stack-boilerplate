@@ -6,7 +6,7 @@ import express from 'express'
 
 import staticApp from './static-app'
 import { WEB_PORT, STATIC_PATH } from '../shared/config'
-import routes from '../shared/routes'
+import { asyncHelloRoute } from '../shared/routes'
 import store from './store'
 import staticTemplate from './static-template'
 
@@ -15,7 +15,7 @@ const app = express()
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
-app.get(routes.asyncHello(), (req, res) => {
+app.get(asyncHelloRoute(), (req, res) => {
   res.json({ message: `Hello from the server! (received ${req.params.num})` })
 })
 

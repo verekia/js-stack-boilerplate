@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 
-import routes from './routes'
+import { asyncHelloRoute } from './routes'
 
 test('asyncHello', () => {
-  expect(routes.asyncHello()).toBe('/async/hello/:num')
-  expect(routes.asyncHello(123)).toBe('/async/hello/123')
+  expect(asyncHelloRoute()).toBe('/async/hello/:num')
+  expect(asyncHelloRoute(123)).toBe('/async/hello/123')
 })
