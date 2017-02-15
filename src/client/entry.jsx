@@ -11,7 +11,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
 import App from '../shared/app'
-import dogReducer from '../shared/reducer/dog'
+import helloReducer from '../shared/reducer/hello'
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -19,9 +19,9 @@ const preloadedState = window.__PRELOADED_STATE__
 /* eslint-enable no-underscore-dangle */
 
 const store = createStore(combineReducers({
-  dog: dogReducer,
+  hello: helloReducer,
 }), {
-  dog: Immutable.fromJS(preloadedState.dog),
+  hello: Immutable.fromJS(preloadedState.hello),
 }, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 ReactDOM.render(

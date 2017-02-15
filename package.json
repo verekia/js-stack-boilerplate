@@ -6,7 +6,7 @@
     "start": "yarn dev",
     "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
     "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-    "build": "rimraf dist lib && babel src/server -d lib/server --ignore test.js && babel src/shared -d lib/shared --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
+    "build": "rimraf dist lib && babel src -d lib --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
     "stop": "rimraf logs/* && pm2 delete all || true",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "yarn lint && flow && jest --coverage",

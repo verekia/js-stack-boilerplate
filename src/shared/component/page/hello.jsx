@@ -2,18 +2,18 @@ import React from 'react'
 import DocumentTitle from 'react-document-title'
 
 import Message from '../../container/message'
-import BarkButton from '../../container/bark-button'
+import HelloButton from '../../container/hello-button'
 import { fullTitle } from '../../util'
 
-const title = 'Dog'
+const title = 'Hello Page'
 
-const DogPage = () =>
+const HelloPage = () =>
   <div>
     <DocumentTitle title={fullTitle(title)}>
       <h1>{title}</h1>
     </DocumentTitle>
     <Message />
-    <BarkButton />
+    <HelloButton />
   </div>
 
-export default DogPage
+export default HelloPage

@@ -2,18 +2,18 @@ import React from 'react'
 import DocumentTitle from 'react-document-title'
 
 import MessageAsync from '../../container/message-async'
-import BarkAsyncButton from '../../container/bark-async-button'
+import HelloAsyncButton from '../../container/hello-async-button'
 import { fullTitle } from '../../util'
 
-const title = 'Dog Async'
+const title = 'Async Hello Page'
 
-const DogAsyncPage = () =>
+const HelloAsyncPage = () =>
   <div>
     <DocumentTitle title={fullTitle(title)}>
       <h1>{title}</h1>
     </DocumentTitle>
     <MessageAsync />
-    <BarkAsyncButton />
+    <HelloAsyncButton />
   </div>
 
-export default DogAsyncPage
+export default HelloAsyncPage

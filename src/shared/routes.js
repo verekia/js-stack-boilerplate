@@ -1,5 +1,5 @@
 // @flow
 
 export default {
-  asyncBark: (num: ?number) => `/async/bark/${num || ':num'}`,
+  asyncHello: (num: ?number) => `/async/hello/${num || ':num'}`,
 }

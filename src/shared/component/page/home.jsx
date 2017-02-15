@@ -8,7 +8,6 @@ const HomePage = () =>
     <DocumentTitle title={SITE_NAME}>
       <h1>{SITE_NAME}</h1>
     </DocumentTitle>
-    Welcome.
   </div>
 
 export default HomePage

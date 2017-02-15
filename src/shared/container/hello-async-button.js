@@ -2,15 +2,15 @@
 
 import { connect } from 'react-redux'
 
-import { barkAsync } from '../action/dog'
+import { sayHelloAsync } from '../action/hello'
 import Button from '../component/button'
 
 const mapStateToProps = () => ({
-  label: 'Send 1234 to server',
+  label: 'Say hello asynchronously and send 1234',
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: () => { dispatch(barkAsync(1234)) },
+  handleClick: () => { dispatch(sayHelloAsync(1234)) },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Button)

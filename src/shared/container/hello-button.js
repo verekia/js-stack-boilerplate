@@ -2,15 +2,15 @@
 
 import { connect } from 'react-redux'
 
-import { bark } from '../action/dog'
+import { sayHello } from '../action/hello'
 import Button from '../component/button'
 
 const mapStateToProps = () => ({
-  label: 'Bark',
+  label: 'Say hello',
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: () => { dispatch(bark('Wah wah!')) },
+  handleClick: () => { dispatch(sayHello('Hello!')) },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Button)
