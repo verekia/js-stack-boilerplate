@@ -4,11 +4,13 @@ import thunkMiddleware from 'redux-thunk'
 
 import helloReducer from '../shared/reducer/hello'
 
-export default createStore(combineReducers({
+export const initStore = (initialState: Object) => createStore(combineReducers({
   hello: helloReducer,
 }), {
-  hello: Immutable.fromJS({
-    message: 'Server-side preloaded message',
-    messageAsync: 'Server-side preloaded message for async page',
-  }),
+  hello: Immutable.fromJS(initialState),
 }, applyMiddleware(thunkMiddleware))
+
+export const defaultStore = {
+  message: 'Server-side preloaded message',
+  messageAsync: 'Server-side preloaded message for async page',
+}

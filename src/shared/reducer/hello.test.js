@@ -17,7 +17,7 @@ beforeEach(() => {
 
 test('handle default', () => {
   expect(helloState.get('message')).toBe('Initial message')
-  expect(helloState.get('messageAsync')).toBe('Initial message of async page')
+  expect(helloState.get('messageAsync')).toBe('Initial message for async call')
 })
 
 test('handle SAY_HELLO', () => {
