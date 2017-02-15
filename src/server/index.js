@@ -16,7 +16,7 @@ app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
 app.get(routes.asyncHello(), (req, res) => {
-  res.send({ message: `Hello from the server! (received ${req.params.num})` })
+  res.json({ message: `Hello from the server! (received ${req.params.num})` })
 })
 
 app.get('*', (req, res) => {
