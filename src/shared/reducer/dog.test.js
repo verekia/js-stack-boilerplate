@@ -11,6 +11,7 @@ beforeEach(() => {
 
 test('handle default', () => {
   expect(dogState.get('barkMessage')).toBe('The dog is quiet')
+  expect(dogState.get('barkMessageAsync')).toBe('The dog is quiet (async)')
 })
 
 test('handle BARK', () => {
@@ -20,15 +21,15 @@ test('handle BARK', () => {
 
 test('handle BARK_ASYNC_REQUEST', () => {
   dogState = dogReducer(dogState, barkAsyncRequest())
-  expect(dogState.get('barkMessage')).toBe('...')
+  expect(dogState.get('barkMessageAsync')).toBe('...')
 })
 
 test('handle BARK_ASYNC_SUCCESS', () => {
   dogState = dogReducer(dogState, barkAsyncSuccess('Bark test'))
-  expect(dogState.get('barkMessage')).toBe('Bark test')
+  expect(dogState.get('barkMessageAsync')).toBe('Bark test')
 })
 
 test('handle BARK_ASYNC_FAILURE', () => {
   dogState = dogReducer(dogState, barkAsyncFailure())
-  expect(dogState.get('barkMessage')).toBe('Could not bark, please check your connection')
+  expect(dogState.get('barkMessageAsync')).toBe('Could not bark, please check your connection')
 })

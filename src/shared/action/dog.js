@@ -15,8 +15,8 @@ export const barkAsyncRequest = createAction(BARK_ASYNC_REQUEST)
 export const barkAsyncSuccess = createAction(BARK_ASYNC_SUCCESS)
 export const barkAsyncFailure = createAction(BARK_ASYNC_FAILURE)
 
-export const barkAsync = () => (dispatch: Function) =>
-  fetch(routes.asyncBark, { method: 'GET' })
+export const barkAsync = (num: number) => (dispatch: Function) =>
+  fetch(routes.asyncBark(num), { method: 'GET' })
     .then((res) => {
       if (!res.ok) {
         throw Error(res.statusText)

@@ -15,8 +15,8 @@ const app = express()
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
-app.get(routes.asyncBark, (req, res) => {
-  res.send({ message: 'Wah wah! (from the server)' })
+app.get(routes.asyncBark(), (req, res) => {
+  res.send({ message: `Wah wah! (server received ${req.params.num})` })
 })
 
 app.get('*', (req, res) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import DocumentTitle from 'react-document-title'
 
-import Message from '../../container/message'
+import MessageAsync from '../../container/message-async'
 import BarkAsyncButton from '../../container/bark-async-button'
 import { fullTitle } from '../../util'
 
@@ -12,7 +12,7 @@ const DogAsyncPage = () =>
     <DocumentTitle title={fullTitle(title)}>
       <h1>{title}</h1>
     </DocumentTitle>
-    <Message />
+    <MessageAsync />
     <BarkAsyncButton />
   </div>
 
