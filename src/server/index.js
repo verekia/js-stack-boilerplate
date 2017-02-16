@@ -6,7 +6,7 @@ import express from 'express'
 
 import staticApp from './static-app'
 import { WEB_PORT, STATIC_PATH } from '../shared/config'
-import { defaultStore, initStore } from './store'
+import initStore from './init-store'
 import staticTemplate from './static-template'
 import {
   HOME_PAGE_ROUTE,
@@ -23,18 +23,19 @@ app.use(STATIC_PATH, express.static('public'))
 const buildPage = (location, store) => staticTemplate(staticApp(location, store), store.getState())
 
 app.get(HOME_PAGE_ROUTE, (req, res) => {
-  const store = initStore(defaultStore) // Use DB data for this page instead
-  res.send(buildPage(req.url, store))
+  res.send(buildPage(req.url, initStore()))
 })
 
 app.get(HELLO_PAGE_ROUTE, (req, res) => {
-  const store = initStore(defaultStore) // Use DB data for this page instead
-  res.send(buildPage(req.url, store))
+  res.send(buildPage(req.url, initStore({
+    hello: { message: 'Server-side preloaded message' },
+  })))
 })
 
 app.get(HELLO_ASYNC_PAGE_ROUTE, (req, res) => {
-  const store = initStore(defaultStore) // Use DB data for this page instead
-  res.send(buildPage(req.url, store))
+  res.send(buildPage(req.url, initStore({
+    hello: { messageAsync: 'Server-side preloaded message for async page' },
+  })))
 })
 
 app.get(asyncHelloRoute(), (req, res) => {
