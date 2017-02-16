@@ -7,8 +7,7 @@ import { isProd } from '../shared/util'
 
 export default (appHtml: string, preloadedState: Object, sheets: Object) => {
   const head = Helmet.rewind()
-  return `
-  <!doctype html>
+  return `<!doctype html>
   <html>
     <head>
       ${head.title}
