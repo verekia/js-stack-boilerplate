@@ -24,7 +24,7 @@ const HomePage = () =>
         <div className="col-md-4 mb-4">
           <h2 className="mb-3">Modal</h2>
           <p>
-            <button type="button" role="button" className="js-open-modal-example btn btn-primary">Open Modal</button>
+            <button type="button" role="button" data-toggle="modal" data-target=".js-modal-example" className="btn btn-primary">Open Modal</button>
           </p>
         </div>
         <div className="col-md-4 mb-4">
