@@ -13,7 +13,7 @@ export default (appHtml: string, preloadedState: Object) => {
     <head>
       ${head.title}
       ${head.meta}
-      <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
+      <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
     </head>
     <body>
       <div class="app">${appHtml}</div>

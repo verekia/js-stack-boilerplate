@@ -13,6 +13,10 @@ import thunkMiddleware from 'redux-thunk'
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
 
+window.jQuery = require('jquery')
+window.Tether = require('tether')
+require('bootstrap')
+
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const preloadedState = window.__PRELOADED_STATE__
