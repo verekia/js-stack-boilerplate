@@ -1,17 +1,21 @@
 import React from 'react'
-import DocumentTitle from 'react-document-title'
+import Helmet from 'react-helmet'
 
 import MessageAsync from '../../container/message-async'
 import HelloAsyncButton from '../../container/hello-async-button'
-import { fullTitle } from '../../util'
 
 const title = 'Async Hello Page'
 
 const HelloAsyncPage = () =>
   <div>
-    <DocumentTitle title={fullTitle(title)}>
-      <h1>{title}</h1>
-    </DocumentTitle>
+    <Helmet
+      title={title}
+      meta={[
+        { name: 'description', content: 'A page to say hello asynchronously' },
+        { property: 'og:title', content: title },
+      ]}
+    />
+    <h1>{title}</h1>
     <MessageAsync />
     <HelloAsyncButton />
   </div>

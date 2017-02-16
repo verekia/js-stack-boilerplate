@@ -1,7 +1,5 @@
 // @flow
 
-import { APP_NAME } from './config'
+/* eslint-disable import/prefer-default-export */
 
 export const isProd = process.env.NODE_ENV === 'production'
-
-export const fullTitle = (pageTitle: string) => `${pageTitle} | ${APP_NAME}`
