@@ -7,20 +7,20 @@ const navLinkActiveStyle = { color: 'white' }
 
 const Nav = () =>
   <nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-    <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <button className="js-navbar-toggler navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon" />
     </button>
     <Link to={HOME_PAGE_ROUTE} className="navbar-brand">{APP_NAME}</Link>
-    <div className="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div className="js-navbar-collapse collapse navbar-collapse" id="navbarsExampleDefault">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
-          <NavLink to={HOME_PAGE_ROUTE} className="nav-link" activeStyle={navLinkActiveStyle} exact>Home</NavLink>
+          <NavLink to={HOME_PAGE_ROUTE} className="js-nav-link nav-link" activeStyle={navLinkActiveStyle} exact>Home</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to={HELLO_PAGE_ROUTE} className="nav-link" activeStyle={navLinkActiveStyle}>Say Hello</NavLink>
+          <NavLink to={HELLO_PAGE_ROUTE} className="js-nav-link nav-link" activeStyle={navLinkActiveStyle}>Say Hello</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to={HELLO_ASYNC_PAGE_ROUTE} className="nav-link" activeStyle={navLinkActiveStyle}>Say Hello Asynchronously</NavLink>
+          <NavLink to={HELLO_ASYNC_PAGE_ROUTE} className="js-nav-link nav-link" activeStyle={navLinkActiveStyle}>Say Hello Asynchronously</NavLink>
         </li>
       </ul>
     </div>
