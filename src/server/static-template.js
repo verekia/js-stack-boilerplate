@@ -16,7 +16,7 @@ export default (appHtml: string, preloadedState: Object) => {
       <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
     </head>
     <body>
-      <div class="app">${appHtml}</div>
+      <div class="js-app">${appHtml}</div>
       <script>
         window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
       </script>

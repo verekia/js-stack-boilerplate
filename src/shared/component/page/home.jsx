@@ -1,6 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
+import ModalExample from '../modal-example'
 import { APP_NAME } from '../../config'
 
 const HomePage = () =>
@@ -13,7 +14,8 @@ const HomePage = () =>
     />
     <div className="jumbotron">
       <div className="container">
-        <h1 className="display-3">{APP_NAME}</h1>
+        <h1 className="display-3 mb-4">{APP_NAME}</h1>
+        <button type="button" role="button" className="js-open-modal-example btn btn-primary">Open Modal</button>
       </div>
     </div>
     <div className="container">
@@ -32,6 +34,7 @@ const HomePage = () =>
         </div>
       </div>
     </div>
+    <ModalExample />
   </div>
 
 export default HomePage

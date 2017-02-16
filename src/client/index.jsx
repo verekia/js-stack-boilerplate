@@ -13,9 +13,7 @@ import thunkMiddleware from 'redux-thunk'
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
 
-window.jQuery = require('jquery')
-window.Tether = require('tether')
-require('bootstrap')
+import './non-react'
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -34,5 +32,5 @@ ReactDOM.render(
       <App />
     </Router>
   </Provider>
-  , document.querySelector('.app'),
+  , document.querySelector('.js-app'),
 )
