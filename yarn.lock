@@ -805,6 +805,13 @@ babel-register@^6.22.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
+babel-runtime@6.20.0:
+  version "6.20.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.20.0.tgz#87300bdcf4cd770f09bf0048c64204e17806d16f"
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.10.0"
+
 babel-runtime@^6.18.0, babel-runtime@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.22.0.tgz#1cf8b4ac67c77a4ddb0db2ae1f74de52ac4ca611"
@@ -1314,6 +1321,12 @@ crypto-browserify@^3.11.0:
     pbkdf2 "^3.0.3"
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
+
+css-vendor@^0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/css-vendor/-/css-vendor-0.3.8.tgz#6421cfd3034ce664fe7673972fd0119fc28941fa"
+  dependencies:
+    is-in-browser "^1.0.2"
 
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.2"
@@ -2468,6 +2481,10 @@ is-glob@^3.1.0:
   dependencies:
     is-extglob "^2.1.0"
 
+is-in-browser@1.0.2, is-in-browser@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/is-in-browser/-/is-in-browser-1.0.2.tgz#f688bea8f1e5aadc3244ebc870d188cfb9b613cf"
+
 is-my-json-valid@^2.10.0, is-my-json-valid@^2.12.4:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.15.0.tgz#936edda3ca3c211fd98f3b2d3e08da43f7b2915b"
@@ -2911,6 +2928,73 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.3.6"
 
+jss-camel-case@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jss-camel-case/-/jss-camel-case-3.0.0.tgz#46aa18eb149e95afce074532ad47df1c2a7d45cb"
+
+jss-compose@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/jss-compose/-/jss-compose-2.0.0.tgz#f144357fc3d6a0341741590716b03d313143bdb4"
+  dependencies:
+    warning "^3.0.0"
+
+jss-default-unit@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/jss-default-unit/-/jss-default-unit-5.0.2.tgz#c4d7fd957cb41baab0b4cb37f92016aa1db08667"
+
+jss-expand@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/jss-expand/-/jss-expand-2.0.3.tgz#c7b0d511dd7b21cca47d36e3e4fb75d5bf174f11"
+
+jss-extend@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jss-extend/-/jss-extend-3.0.0.tgz#01bda4ad71a3048ed776e085b61566e104743975"
+  dependencies:
+    warning "^3.0.0"
+
+jss-global@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/jss-global/-/jss-global-0.4.1.tgz#41862c78528de4d333853004eb71adecde1a5fda"
+
+jss-nested@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/jss-nested/-/jss-nested-3.0.1.tgz#14c10265c8fc5bd61b450b48f1e9fb36d90ae569"
+  dependencies:
+    warning "^3.0.0"
+
+jss-preset-default@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/jss-preset-default/-/jss-preset-default-1.3.1.tgz#8a4b7f9a41ec412d19fb1d23e6dc80ebef040d5a"
+  dependencies:
+    jss-camel-case "^3.0.0"
+    jss-compose "^2.0.0"
+    jss-default-unit "^5.0.2"
+    jss-expand "^2.0.3"
+    jss-extend "^3.0.0"
+    jss-global "^0.4.1"
+    jss-nested "^3.0.1"
+    jss-props-sort "^3.0.0"
+    jss-vendor-prefixer "^4.0.0"
+
+jss-props-sort@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jss-props-sort/-/jss-props-sort-3.0.0.tgz#19544610109b1fa953f22799eecb080240d8dc00"
+
+jss-vendor-prefixer@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jss-vendor-prefixer/-/jss-vendor-prefixer-4.0.0.tgz#df16a8fcc6ecb4567394174e6ab90145cf8b34a3"
+  dependencies:
+    css-vendor "^0.3.8"
+
+jss@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/jss/-/jss-6.2.0.tgz#73f6eb5f3f9ebd278905ea4392c0fe47d7bd9225"
+  dependencies:
+    babel-runtime "6.20.0"
+    is-in-browser "1.0.2"
+    murmurhash-js "1.0.0"
+    warning "3.0.0"
+
 jsx-ast-utils@^1.0.0, jsx-ast-utils@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.3.5.tgz#9ba6297198d9f754594d62e59496ffb923778dd4"
@@ -3201,6 +3285,10 @@ ms@0.7.1:
 ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
+
+murmurhash-js@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
 
 mute-stream@0.0.5:
   version "0.0.5"
@@ -4639,7 +4727,7 @@ walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
-warning@^3.0.0:
+warning@3.0.0, warning@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
   dependencies:
