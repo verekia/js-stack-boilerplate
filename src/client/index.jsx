@@ -34,3 +34,8 @@ ReactDOM.render(
   </Provider>
   , document.querySelector('.js-app'),
 )
+
+const jssServerSide = document.querySelector('.jss-ssr')
+if (jssServerSide && jssServerSide.parentNode) {
+  jssServerSide.parentNode.removeChild(jssServerSide)
+}

@@ -3,8 +3,9 @@
 /* eslint-disable no-console */
 
 import express from 'express'
+import { SheetsRegistry } from 'react-jss'
 
-import staticApp from './static-app'
+import renderApp from './static-app'
 import { WEB_PORT, STATIC_PATH } from '../shared/config'
 import initStore from './init-store'
 import staticTemplate from './static-template'
@@ -20,20 +21,24 @@ const app = express()
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
-const buildPage = (location, store) => staticTemplate(staticApp(location, store), store.getState())
+const renderPage = (location, store) => {
+  const sheets = new SheetsRegistry()
+  const staticApp = renderApp(location, store, sheets)
+  return staticTemplate(staticApp, store.getState(), sheets)
+}
 
 app.get(HOME_PAGE_ROUTE, (req, res) => {
-  res.send(buildPage(req.url, initStore()))
+  res.send(renderPage(req.url, initStore()))
 })
 
 app.get(HELLO_PAGE_ROUTE, (req, res) => {
-  res.send(buildPage(req.url, initStore({
+  res.send(renderPage(req.url, initStore({
     hello: { message: 'Server-side preloaded message' },
   })))
 })
 
 app.get(HELLO_ASYNC_PAGE_ROUTE, (req, res) => {
-  res.send(buildPage(req.url, initStore({
+  res.send(renderPage(req.url, initStore({
     hello: { messageAsync: 'Server-side preloaded message for async page' },
   })))
 })

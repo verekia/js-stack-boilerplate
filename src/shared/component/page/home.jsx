@@ -1,12 +1,26 @@
+// @flow
+
 import React from 'react'
 import Helmet from 'react-helmet'
+import injectSheet from 'react-jss'
 
 import ModalExample from '../modal-example'
 import { APP_NAME } from '../../config'
 
-import { classes } from '../../styles'
+const styles = {
+  hoverMe: {
+    '&:hover': {
+      color: 'red',
+    },
+  },
+  '@media (max-width: 800px)': {
+    resizeMe: {
+      color: 'red',
+    },
+  },
+}
 
-const HomePage = () =>
+const HomePage = ({ classes }: { classes: Object }) =>
   <div>
     <Helmet
       meta={[
@@ -40,4 +54,4 @@ const HomePage = () =>
     <ModalExample />
   </div>
 
-export default HomePage
+export default injectSheet(styles)(HomePage)

@@ -4,9 +4,8 @@ import Helmet from 'react-helmet'
 
 import { STATIC_PATH, WDS_PORT } from '../shared/config'
 import { isProd } from '../shared/util'
-import styles from '../shared/styles'
 
-export default (appHtml: string, preloadedState: Object) => {
+export default (appHtml: string, preloadedState: Object, sheets: Object) => {
   const head = Helmet.rewind()
   return `
   <!doctype html>
@@ -15,7 +14,7 @@ export default (appHtml: string, preloadedState: Object) => {
       ${head.title}
       ${head.meta}
       <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
-      <style>${styles.toString()}</style>
+      <style class="jss-ssr">${sheets.toString()}</style>
     </head>
     <body>
       <div class="js-app">${appHtml}</div>
