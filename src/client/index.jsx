@@ -11,7 +11,6 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
 

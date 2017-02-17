@@ -6,16 +6,15 @@
   "author": "Jonathan Verrecchia - @verekia",
   "license": "MIT",
   "scripts": {
-    "start": "yarn dev",
-    "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
-    "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-    "build": "rimraf dist lib && babel src -d lib --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
-    "stop": "rimraf logs/* && pm2 delete all || true",
+    "dev:server": "nodemon -e js,jsx --exec babel-node src/server",
+    "dev:wds": "webpack-dev-server --progress",
+    "prod:build": "rimraf dist lib && babel src -d lib --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
+    "prod:start": "cross-env NODE_ENV=production pm2 start lib/server",
+    "prod:stop": "pm2 delete all",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "yarn lint && flow && jest --coverage",
-    "full-check": "yarn test && yarn prod && yarn stop",
-    "precommit": "yarn full-check",
-    "prepush": "yarn full-check"
+    "precommit": "yarn test",
+    "prepush": "yarn test && yarn prod:build"
   },
   "dependencies": {
     "babel-polyfill": "^6.22.0",
@@ -56,7 +55,8 @@
     "flow-bin": "^0.38.0",
     "husky": "^0.13.1",
     "jest": "^18.1.0",
-    "pm2": "^2.3.0",
+    "nodemon": "^1.11.0",
+    "pm2": "^2.4.0",
     "react-hot-loader": "next",
     "redux-mock-store": "^1.2.2",
     "rimraf": "^2.5.4",
