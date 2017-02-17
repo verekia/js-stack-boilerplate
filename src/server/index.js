@@ -2,6 +2,7 @@
 
 /* eslint-disable no-console */
 
+import compression from 'compression'
 import express from 'express'
 import { SheetsRegistry } from 'react-jss'
 
@@ -18,6 +19,7 @@ import {
 
 const app = express()
 
+app.use(compression())
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
