@@ -1,14 +1,16 @@
-// @flow
+/* eslint-disable import/no-extraneous-dependencies, global-require */
 
 import 'babel-polyfill'
 
 import * as Immutable from 'immutable'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
+
 
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
@@ -26,14 +28,25 @@ const store = createStore(combineReducers({
   hello: Immutable.fromJS(preloadedState.hello),
 }, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
-ReactDOM.render(
+const rootEl = document.querySelector('.js-app')
+
+const app = Component =>
   <Provider store={store}>
     <Router>
-      <App />
+      <AppContainer>
+        <Component />
+      </AppContainer>
     </Router>
   </Provider>
-  , document.querySelector('.js-app'),
-)
+
+ReactDOM.render(app(App), rootEl)
+
+if (module.hot) {
+  module.hot.accept('../shared/app', () => {
+    const NextApp = require('../shared/app').default
+    ReactDOM.render(app(NextApp), rootEl)
+  })
+}
 
 const jssServerSide = document.querySelector('.jss-ssr')
 if (jssServerSide && jssServerSide.parentNode) {
