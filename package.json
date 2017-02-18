@@ -6,10 +6,11 @@
   "author": "Jonathan Verrecchia - @verekia",
   "license": "MIT",
   "scripts": {
+    "start": "yarn dev:start",
     "dev:start": "nodemon -e js,jsx --exec babel-node src/server",
     "dev:wds": "webpack-dev-server --progress",
     "prod:build": "rimraf dist lib && babel src -d lib --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
-    "prod:start": "cross-env NODE_ENV=production pm2 start lib/server",
+    "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
     "prod:stop": "pm2 delete all",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "yarn lint && flow && jest --coverage",

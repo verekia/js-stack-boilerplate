@@ -16,6 +16,7 @@ import {
   HELLO_ASYNC_PAGE_ROUTE,
   asyncHelloRoute,
 } from '../shared/routes'
+import { isProd } from '../shared/util'
 
 const app = express()
 
@@ -50,5 +51,8 @@ app.get(asyncHelloRoute(), (req, res) => {
 })
 
 app.listen(WEB_PORT, () => {
-  console.log(`Express running on port ${WEB_PORT}.`)
+  console.log(`Server running on port ${WEB_PORT} (${isProd ? 'production' : 'development'}).`)
+  if (!isProd) {
+    console.log('Keep `yarn dev:wds` running in an other terminal.')
+  }
 })
