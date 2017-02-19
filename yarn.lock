@@ -4066,7 +4066,7 @@ react-helmet@^4.0.0:
     object-assign "^4.0.1"
     react-side-effect "^1.1.0"
 
-react-hot-loader@next:
+react-hot-loader@^3.0.0-beta.6:
   version "3.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-3.0.0-beta.6.tgz#463fac0bfc8b63a8385258af20c91636abce75f4"
   dependencies:
@@ -4101,14 +4101,14 @@ react-redux@^5.0.2:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
 
-react-router-dom@next:
+react-router-dom@4.0.0-beta.6:
   version "4.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.0.0-beta.6.tgz#bdbd8f2fea3def52970735778db03b24cc082a02"
   dependencies:
     history "^4.5.1"
     react-router "^4.0.0-beta.6"
 
-react-router@^4.0.0-beta.6, react-router@next:
+react-router@4.0.0-beta.6, react-router@^4.0.0-beta.6:
   version "4.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.0.0-beta.6.tgz#561ac0bf1929960813bf201319ff85d821d5547b"
   dependencies:
