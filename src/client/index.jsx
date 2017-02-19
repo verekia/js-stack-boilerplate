@@ -6,7 +6,7 @@ import * as Immutable from 'immutable'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
@@ -29,21 +29,21 @@ const store = createStore(combineReducers({
 
 const rootEl = document.querySelector('.js-app')
 
-const app = Component =>
+const wrapClientApp = AppComponent =>
   <Provider store={store}>
-    <Router>
+    <BrowserRouter>
       <AppContainer>
-        <Component />
+        <AppComponent />
       </AppContainer>
-    </Router>
+    </BrowserRouter>
   </Provider>
 
-ReactDOM.render(app(App), rootEl)
+ReactDOM.render(wrapClientApp(App), rootEl)
 
 if (module.hot) {
   module.hot.accept('../shared/app', () => {
     const NextApp = require('../shared/app').default
-    ReactDOM.render(app(NextApp), rootEl)
+    ReactDOM.render(wrapClientApp(NextApp), rootEl)
   })
 }
 

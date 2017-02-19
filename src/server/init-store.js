@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import helloReducer from '../shared/reducer/hello'
 
-export default (plainPartialState: ?Object) => {
+const initStore = (plainPartialState: ?Object) => {
   const preloadedState = plainPartialState ? {} : undefined
 
   if (plainPartialState) {
@@ -18,3 +18,5 @@ export default (plainPartialState: ?Object) => {
     hello: helloReducer,
   }), preloadedState, applyMiddleware(thunkMiddleware))
 }
+
+export default initStore
