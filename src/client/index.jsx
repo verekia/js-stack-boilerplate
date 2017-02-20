@@ -13,6 +13,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
+import { emitHello, setUpSocket } from './socket'
 
 import './non-react'
 
@@ -51,3 +52,6 @@ const jssServerSide = document.querySelector('.jss-ssr')
 if (jssServerSide && jssServerSide.parentNode) {
   jssServerSide.parentNode.removeChild(jssServerSide)
 }
+
+setUpSocket()
+emitHello()

@@ -36,6 +36,8 @@
     "redux": "^3.6.0",
     "redux-actions": "^1.2.1",
     "redux-thunk": "^2.2.0",
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3",
     "tether": "^1.4.0"
   },
   "devDependencies": {
