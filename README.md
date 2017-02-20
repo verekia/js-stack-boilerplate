@@ -12,6 +12,10 @@ Run `yarn && yarn start` or `npm install && npm start`.
 
 That's it!
 
+## Demo
+
+Check out the [live demo](https://js-stack.herokuapp.com/).
+
 ## Credits
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
