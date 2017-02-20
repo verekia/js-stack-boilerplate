@@ -37,6 +37,7 @@ test('sayHelloAsync 404', () => {
   return store.dispatch(sayHelloAsync(666))
     .then(() => {
       expect(store.getActions()).toEqual([
+        sayHelloAsyncRequest(),
         sayHelloAsyncFailure(),
       ])
     })
