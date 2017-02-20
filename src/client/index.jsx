@@ -13,12 +13,13 @@ import thunkMiddleware from 'redux-thunk'
 
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
+import { isProd } from '../shared/util'
 import { emitHello, setUpSocket } from './socket'
 
 import './non-react'
 
 /* eslint-disable no-underscore-dangle */
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 const preloadedState = window.__PRELOADED_STATE__
 /* eslint-enable no-underscore-dangle */
 
