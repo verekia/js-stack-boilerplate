@@ -9,7 +9,7 @@ Final boilerplate code of the [JavaScript Stack from Scratch](https://github.com
 This boilerplate is available in **two versions**:
 
 - `js-stack-boilerplate` (this version): Contains only free open-source tools.
-- [`js-stack-boilerplate-with-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-with-services): A version with Heroku, Travis, and Coveralls included.
+- [`js-stack-boilerplate-with-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-with-services): Includes Heroku, Travis, and Coveralls.
 
 Either way:
 
