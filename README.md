@@ -1,6 +1,6 @@
 # JavaScript Stack Boilerplate
 
-[![Build Status](https://travis-ci.org/verekia/js-stack-boilerplate.svg?branch=master)](https://travis-ci.org/verekia/js-stack-boilerplate)
+[![Build Status](https://travis-ci.org/verekia/js-stack-boilerplate.svg?branch=master-with-services)](https://travis-ci.org/verekia/js-stack-boilerplate) [![Coverage Status](https://coveralls.io/repos/github/verekia/js-stack-boilerplate/badge.svg?branch=master-with-services)](https://coveralls.io/github/verekia/js-stack-boilerplate?branch=master-with-services)
 
 Final boilerplate code of the [JavaScript Stack from Scratch](https://github.com/verekia/js-stack-from-scratch) tutorial.
 
@@ -8,7 +8,7 @@ Final boilerplate code of the [JavaScript Stack from Scratch](https://github.com
 
 This boilerplate is available in **two versions**:
 
-- [`js-stack-boilerplate`](https://github.com/verekia/js-stack-boilerplate/tree/master-with-services): Contains only free open-source tools.
+- [`js-stack-boilerplate`](https://github.com/verekia/js-stack-boilerplate): Contains only free open-source tools.
 - `js-stack-boilerplate-with-services` (this version): Includes Heroku, Travis, and Coveralls.
 
 Either way:
