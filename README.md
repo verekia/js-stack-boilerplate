@@ -11,9 +11,13 @@ This boilerplate is available in **two versions**:
 - `js-stack-boilerplate` (this version): Contains only free open-source tools.
 - [`js-stack-boilerplate-with-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-with-services): A version with Heroku, Travis, and Coveralls included.
 
-Don't clone this repository, just download the [latest release](https://github.com/verekia/js-stack-boilerplate/releases) for the version you want, and edit `package.json` with your own info.
+Either way:
 
-Run `yarn && yarn start`. That's it!
+- Download the [latest release](https://github.com/verekia/js-stack-boilerplate/releases) for the version you want.
+- Edit `package.json` with your own info.
+- Run `yarn` and `yarn start`. That's it!
+
+**Don't clone this repository**, as it includes some files that are irrelevant for you.
 
 ## Demo
 
