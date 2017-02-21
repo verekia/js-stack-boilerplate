@@ -1,6 +1,8 @@
 {
-  "name": "live-apps",
-  "scripts": {},
+  "name": "js-stack-boilerplate",
+  "scripts": {
+    "postbuild": "yarn prod:build"
+  },
   "env": {
     "NPM_CONFIG_PRODUCTION": "false"
   },
