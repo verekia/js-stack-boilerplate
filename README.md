@@ -2,15 +2,18 @@
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-boilerplate.svg?branch=master)](https://travis-ci.org/verekia/js-stack-boilerplate)
 
-The final boilerplate code of [JavaScript Stack from Scratch](https://github.com/verekia/js-stack-from-scratch) V2 tutorial.
+Final boilerplate code of the [JavaScript Stack from Scratch](https://github.com/verekia/js-stack-from-scratch) tutorial.
 
 ## How to use this boilerplate
 
-Don't clone this repository, just download the [latest release](https://github.com/verekia/js-stack-boilerplate/releases), and edit `package.json` with your own info.
+This boilerplate is available in **two versions**:
 
-Run `yarn && yarn start` or `npm install && npm start`.
+- `js-stack-boilerplate` (this version): Contains only free open-source tools.
+- [`js-stack-boilerplate-with-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-with-services): A version with Heroku, Travis, and Coveralls included.
 
-That's it!
+Don't clone this repository, just download the [latest release](https://github.com/verekia/js-stack-boilerplate/releases) for the version you want, and edit `package.json` with your own info.
+
+Run `yarn && yarn start`. That's it!
 
 ## Demo
 
