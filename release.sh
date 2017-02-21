@@ -7,14 +7,19 @@ rm -rf dist
 mkdir dist
 mkdir $dir
 
-cp -R src $dir
 cp -R public $dir
+cp -R src $dir
 
 cp .babelrc $dir
+cp .coveralls.yml $dir
+cp .env-sample $dir
 cp .eslintrc.json $dir
 cp .flowconfig $dir
 cp .gitignore $dir
+cp .travis.yml $dir
+cp app.json $dir
 cp package.json $dir
+cp Procfile $dir
 cp webpack.config.babel.js $dir
 cp yarn.lock $dir
 
