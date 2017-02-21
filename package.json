@@ -13,6 +13,7 @@
     "prod:start": "node lib/server",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "yarn lint && flow && jest --coverage",
+    "heroku-postbuild": "yarn prod:build",
     "precommit": "yarn test",
     "prepush": "yarn test && yarn prod:build"
   },
