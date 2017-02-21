@@ -61,7 +61,6 @@
     "husky": "^0.13.1",
     "jest": "^18.1.0",
     "nodemon": "^1.11.0",
-    "pm2": "^2.4.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "redux-mock-store": "^1.2.2",
     "rimraf": "^2.5.4",
