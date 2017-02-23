@@ -6,6 +6,7 @@
   "author": "Jonathan Verrecchia - @verekia",
   "license": "MIT",
   "engines": {
+    "node": "7.x",
     "yarn": "0.20.3"
   },
   "scripts": {
