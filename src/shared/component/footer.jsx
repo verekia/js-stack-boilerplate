@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import { APP_NAME } from '../config'
 

@@ -12,10 +12,9 @@ import App from './../shared/app'
 import { STATIC_PATH, WDS_PORT } from '../shared/config'
 import { isProd } from '../shared/util'
 
-const renderApp = (location: string, plainPartialState: ?Object) => {
+const renderApp = (location: string, plainPartialState: ?Object, routerContext: ?Object = {}) => {
   const store = initStore(plainPartialState)
   const sheets = new SheetsRegistry()
-  const routerContext = {}
   const appHtml = ReactDOMServer.renderToString(
     <Provider store={store}>
       <StaticRouter location={location} context={routerContext}>

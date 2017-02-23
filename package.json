@@ -5,6 +5,10 @@
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
   "license": "MIT",
+  "engines": {
+    "node": "7.x",
+    "yarn": "0.20.3"
+  },
   "scripts": {
     "start": "yarn dev:start",
     "dev:start": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
