@@ -54,5 +54,5 @@ if (jssServerSide && jssServerSide.parentNode) {
   jssServerSide.parentNode.removeChild(jssServerSide)
 }
 
-setUpSocket()
+setUpSocket(store)
 emitHello()

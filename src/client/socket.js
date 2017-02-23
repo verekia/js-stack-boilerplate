@@ -14,10 +14,11 @@ import {
 
 const socket = socketIOClient(window.location.host)
 
-export const setUpSocket = () => {
+/* eslint-disable no-unused-vars */
+export const setUpSocket = (store: Object) => {
   socket.on(IO_CONNECT, () => {
-    socket.emit(IO_CLIENT_JOIN_ROOM, 'hello-1234')
     console.log('[socket.io] Connected.')
+    socket.emit(IO_CLIENT_JOIN_ROOM, 'hello-1234')
   })
 
   socket.on(IO_SERVER_HELLO, (serverMessage) => {
@@ -28,6 +29,7 @@ export const setUpSocket = () => {
     console.log('[socket.io] Disconnected.')
   })
 }
+/* eslint-enable no-unused-vars */
 
 export const emitHello = () => {
   socket.emit(IO_CLIENT_HELLO, 'Hello!')
