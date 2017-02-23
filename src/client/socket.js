@@ -15,10 +15,11 @@ import {
 const socket = socketIOClient(window.location.host)
 
 /* eslint-disable no-unused-vars */
-export const setUpSocket = (store: Object) => {
+const setUpSocket = (store: Object) => {
   socket.on(IO_CONNECT, () => {
     console.log('[socket.io] Connected.')
     socket.emit(IO_CLIENT_JOIN_ROOM, 'hello-1234')
+    socket.emit(IO_CLIENT_HELLO, 'Hello!')
   })
 
   socket.on(IO_SERVER_HELLO, (serverMessage) => {
@@ -31,6 +32,4 @@ export const setUpSocket = (store: Object) => {
 }
 /* eslint-enable no-unused-vars */
 
-export const emitHello = () => {
-  socket.emit(IO_CLIENT_HELLO, 'Hello!')
-}
+export default setUpSocket

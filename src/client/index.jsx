@@ -14,7 +14,7 @@ import thunkMiddleware from 'redux-thunk'
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
 import { isProd } from '../shared/util'
-import { emitHello, setUpSocket } from './socket'
+import setUpSocket from './socket'
 
 import './non-react'
 
@@ -55,4 +55,3 @@ if (jssServerSide && jssServerSide.parentNode) {
 }
 
 setUpSocket(store)
-emitHello()

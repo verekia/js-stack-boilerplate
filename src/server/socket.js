@@ -12,10 +12,13 @@ import {
 
 const setUpSocket = (io: Object) => {
   io.on(IO_CONNECT, (socket) => {
+    console.log('[socket.io] A user connected.')
     socket.on(IO_CLIENT_JOIN_ROOM, (room) => {
       socket.join(room)
       console.log(`[socket.io] A user joined room ${room}.`)
-      io.to(room).emit(IO_SERVER_HELLO, `Welcome to room ${room}.`)
+      io.emit(IO_SERVER_HELLO, 'Hello everyone!')
+      io.to(room).emit(IO_SERVER_HELLO, `Hello users of room ${room}!`)
+      socket.emit(IO_SERVER_HELLO, 'Hello you!')
     })
 
     socket.on(IO_CLIENT_HELLO, (clientMessage) => {
