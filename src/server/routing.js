@@ -6,12 +6,14 @@ import {
   helloAsyncPage,
   helloEndpoint,
 } from './controller'
+
 import {
   HOME_PAGE_ROUTE,
   HELLO_PAGE_ROUTE,
   HELLO_ASYNC_PAGE_ROUTE,
   helloEndpointRoute,
 } from '../shared/routes'
+
 import renderApp from './render-app'
 
 export default (app: Object) => {

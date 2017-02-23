@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { APP_NAME } from '../config'
