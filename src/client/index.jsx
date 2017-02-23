@@ -31,8 +31,8 @@ const store = createStore(combineReducers({
 
 const rootEl = document.querySelector('.js-app')
 
-const wrapClientApp = AppComponent =>
-  <Provider store={store}>
+const wrapClientApp = (AppComponent, reduxStore) =>
+  <Provider store={reduxStore}>
     <BrowserRouter>
       <AppContainer>
         <AppComponent />
@@ -40,12 +40,12 @@ const wrapClientApp = AppComponent =>
     </BrowserRouter>
   </Provider>
 
-ReactDOM.render(wrapClientApp(App), rootEl)
+ReactDOM.render(wrapClientApp(App, store), rootEl)
 
 if (module.hot) {
   module.hot.accept('../shared/app', () => {
     const NextApp = require('../shared/app').default
-    ReactDOM.render(wrapClientApp(NextApp), rootEl)
+    ReactDOM.render(wrapClientApp(NextApp, store), rootEl)
   })
 }
 
