@@ -22,6 +22,9 @@ const Nav = () =>
         <li className="nav-item">
           <NavLink to={HELLO_ASYNC_PAGE_ROUTE} className="js-nav-link nav-link" activeStyle={navLinkActiveStyle}>Say Hello Asynchronously</NavLink>
         </li>
+        <li className="nav-item">
+          <Link to="/404" className="js-nav-link nav-link">404</Link>
+        </li>
       </ul>
     </div>
   </nav>
