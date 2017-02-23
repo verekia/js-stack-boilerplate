@@ -31,6 +31,10 @@ export default (app: Object) => {
     res.json(helloEndpoint(req.params.num))
   })
 
+  app.get('/500', () => {
+    throw Error('Fake Internal Server Error')
+  })
+
   app.get('*', (req, res) => {
     res.status(404).send(renderApp(req.url))
   })
