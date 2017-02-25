@@ -12,12 +12,12 @@ import {
 
 const setUpSocket = (io: Object) => {
   io.on(IO_CONNECT, (socket) => {
-    console.log('[socket.io] A user connected.')
+    console.log('[socket.io] A client connected.')
     socket.on(IO_CLIENT_JOIN_ROOM, (room) => {
       socket.join(room)
-      console.log(`[socket.io] A user joined room ${room}.`)
+      console.log(`[socket.io] A client joined room ${room}.`)
       io.emit(IO_SERVER_HELLO, 'Hello everyone!')
-      io.to(room).emit(IO_SERVER_HELLO, `Hello users of room ${room}!`)
+      io.to(room).emit(IO_SERVER_HELLO, `Hello clients of room ${room}!`)
       socket.emit(IO_SERVER_HELLO, 'Hello you!')
     })
 
@@ -26,7 +26,7 @@ const setUpSocket = (io: Object) => {
     })
 
     socket.on(IO_DISCONNECT, () => {
-      console.log('[socket.io] A user disconnected.')
+      console.log('[socket.io] A client disconnected.')
     })
   })
 }
