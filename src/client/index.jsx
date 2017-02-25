@@ -1,4 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies, global-require */
+// @flow
+
+/* eslint-disable import/no-extraneous-dependencies */
 
 import 'babel-polyfill'
 
@@ -31,7 +33,7 @@ const store = createStore(combineReducers({
 
 const rootEl = document.querySelector('.js-app')
 
-const wrapClientApp = (AppComponent, reduxStore) =>
+const wrapApp = (AppComponent, reduxStore) =>
   <Provider store={reduxStore}>
     <BrowserRouter>
       <AppContainer>
@@ -40,12 +42,15 @@ const wrapClientApp = (AppComponent, reduxStore) =>
     </BrowserRouter>
   </Provider>
 
-ReactDOM.render(wrapClientApp(App, store), rootEl)
+ReactDOM.render(wrapApp(App, store), rootEl)
 
 if (module.hot) {
+  // flow-disable-next-line
   module.hot.accept('../shared/app', () => {
+    /* eslint-disable global-require */
     const NextApp = require('../shared/app').default
-    ReactDOM.render(wrapClientApp(NextApp, store), rootEl)
+    /* eslint-enable global-require */
+    ReactDOM.render(wrapApp(NextApp, store), rootEl)
   })
 }
 

@@ -1,7 +1,7 @@
 // @flow
 
-import webpack from 'webpack'
 import path from 'path'
+import webpack from 'webpack'
 
 import { WDS_PORT } from './src/shared/config'
 import { isProd } from './src/shared/util'
@@ -26,8 +26,8 @@ export default {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
-    hot: true,
     port: WDS_PORT,
+    hot: true,
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
