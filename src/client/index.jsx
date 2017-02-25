@@ -15,6 +15,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
+import { APP_CONTAINER_SELECTOR, JSS_SSR_SELECTOR } from '../shared/config'
 import { isProd } from '../shared/util'
 import setUpSocket from './socket'
 
@@ -31,7 +32,7 @@ const store = createStore(combineReducers({
   hello: Immutable.fromJS(preloadedState.hello),
 }, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
-const rootEl = document.querySelector('.js-app')
+const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
 
 const wrapApp = (AppComponent, reduxStore) =>
   <Provider store={reduxStore}>
@@ -54,7 +55,7 @@ if (module.hot) {
   })
 }
 
-const jssServerSide = document.querySelector('.jss-ssr')
+const jssServerSide = document.querySelector(JSS_SSR_SELECTOR)
 if (jssServerSide && jssServerSide.parentNode) {
   jssServerSide.parentNode.removeChild(jssServerSide)
 }
