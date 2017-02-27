@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-
 import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
