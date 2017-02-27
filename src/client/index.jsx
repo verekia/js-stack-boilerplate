@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable import/no-extraneous-dependencies */
-
 import 'babel-polyfill'
 
 import * as Immutable from 'immutable'
