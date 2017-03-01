@@ -36,18 +36,19 @@ const HomePage = ({ classes }: { classes: Object }) =>
     <div className="container">
       <div className="row">
         <div className="col-md-4 mb-4">
-          <h2 className="mb-3">Modal</h2>
+          <h3 className="mb-3">Bootstrap</h3>
           <p>
             <button type="button" role="button" data-toggle="modal" data-target=".js-modal-example" className="btn btn-primary">Open Modal</button>
           </p>
         </div>
         <div className="col-md-4 mb-4">
-          <h2 className="mb-3">Hover</h2>
-          <p className={classes.hoverMe}>Hover me</p>
+          <h3 className="mb-3">JSS</h3>
+          <p className={classes.hoverMe}>Hover me.</p>
+          <p className={classes.resizeMe}>Resize the window.</p>
         </div>
         <div className="col-md-4 mb-4">
-          <h2 className="mb-3">Media Query</h2>
-          <p className={classes.resizeMe}>Resize the window</p>
+          <h3 className="mb-3">Websockets</h3>
+          <p>Open your browser console.</p>
         </div>
       </div>
     </div>

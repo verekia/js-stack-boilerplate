@@ -1,3 +1,5 @@
+// @flow
+
 import compression from 'compression'
 import express from 'express'
 import { Server } from 'http'
@@ -9,6 +11,7 @@ import { isProd } from '../shared/util'
 import setUpSocket from './socket'
 
 const app = express()
+// flow-disable-next-line
 const http = Server(app)
 const io = socketIO(http)
 setUpSocket(io)
