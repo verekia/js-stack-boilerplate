@@ -11,7 +11,6 @@ cp -R public $dir
 cp -R src $dir
 
 cp .babelrc $dir
-cp .coveralls.yml $dir
 cp .env-sample $dir
 cp .eslintrc.json $dir
 cp .flowconfig $dir

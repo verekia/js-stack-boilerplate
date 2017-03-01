@@ -1,5 +1,5 @@
 {
-  "name": "live-apps",
+  "name": "js-stack",
   "scripts": {},
   "env": {
     "NPM_CONFIG_PRODUCTION": "false"

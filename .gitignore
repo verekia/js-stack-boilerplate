@@ -6,4 +6,4 @@ node_modules/
 /dist/
 
 # Heroku (remove if you're using the no-service boilerplate)
-.env
+/.env
