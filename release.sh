@@ -1,6 +1,6 @@
 # This file is used to generate Github releases, please ignore it.
 
-name='js-stack-boilerplate-v2.4.0'
+name='js-stack-boilerplate-v2.4.2'
 dir='dist/'$name
 
 rm -rf dist
