@@ -11,8 +11,6 @@ import {
   NOT_FOUND_DEMO_PAGE_ROUTE,
 } from '../routes'
 
-const navLinkActiveStyle = { color: 'white' }
-
 const handleNavLinkClick = () => {
   $('body').scrollTop(0)
   $('.js-navbar-collapse').collapse('hide')
@@ -33,7 +31,7 @@ const Nav = () =>
           { route: NOT_FOUND_DEMO_PAGE_ROUTE, label: '404 Demo' },
         ].map(link => (
           <li className="nav-item" key={link.route}>
-            <NavLink to={link.route} className="nav-link" activeStyle={navLinkActiveStyle} exact onClick={handleNavLinkClick}>{link.label}</NavLink>
+            <NavLink to={link.route} className="nav-link" activeStyle={{ color: 'white' }} exact onClick={handleNavLinkClick}>{link.label}</NavLink>
           </li>
         ))}
       </ul>
