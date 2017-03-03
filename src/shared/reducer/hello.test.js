@@ -27,7 +27,7 @@ test('handle SAY_HELLO', () => {
 
 test('handle SAY_HELLO_ASYNC_REQUEST', () => {
   helloState = helloReducer(helloState, sayHelloAsyncRequest())
-  expect(helloState.get('messageAsync')).toBe('...')
+  expect(helloState.get('messageAsync')).toBe('Loading...')
 })
 
 test('handle SAY_HELLO_ASYNC_SUCCESS', () => {
