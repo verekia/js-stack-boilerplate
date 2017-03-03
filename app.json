@@ -1,5 +1,4 @@
 {
-  "name": "js-stack",
   "env": {
     "NPM_CONFIG_PRODUCTION": "false"
   }
