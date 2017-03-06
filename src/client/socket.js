@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable no-console */
-
 import socketIOClient from 'socket.io-client'
 
 import {
@@ -14,7 +12,8 @@ import {
 
 const socket = socketIOClient(window.location.host)
 
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+// eslint-disable-next-line no-unused-vars
 const setUpSocket = (store: Object) => {
   socket.on(IO_CONNECT, () => {
     console.log('[socket.io] Connected.')
@@ -30,6 +29,6 @@ const setUpSocket = (store: Object) => {
     console.log('[socket.io] Disconnected.')
   })
 }
-/* eslint-enable no-unused-vars */
+/* eslint-enable no-console */
 
 export default setUpSocket

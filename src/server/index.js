@@ -23,8 +23,7 @@ app.use(STATIC_PATH, express.static('public'))
 routing(app)
 
 http.listen(WEB_PORT, () => {
-  /* eslint-disable no-console */
+  // eslint-disable-next-line no-console
   console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
     '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
-  /* eslint-enable no-console */
 })

@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable no-console */
-
 import {
   IO_CONNECT,
   IO_DISCONNECT,
@@ -10,6 +8,7 @@ import {
   IO_SERVER_HELLO,
 } from '../shared/config'
 
+/* eslint-disable no-console */
 const setUpSocket = (io: Object) => {
   io.on(IO_CONNECT, (socket) => {
     console.log('[socket.io] A client connected.')
@@ -32,5 +31,6 @@ const setUpSocket = (io: Object) => {
     })
   })
 }
+/* eslint-enable no-console */
 
 export default setUpSocket
