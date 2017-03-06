@@ -11,7 +11,7 @@ This boilerplate is available in **two versions**:
 
 Either way:
 
-- Download the [latest release](https://github.com/verekia/js-stack-boilerplate/releases) for the version you want.
+- Download the [latest release](https://github.com/verekia/js-stack-from-scratch/releases) for the version you want.
 - Edit `package.json` with your own info.
 - Run `yarn` and `yarn start`. That's it!
 
