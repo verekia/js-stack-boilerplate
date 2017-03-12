@@ -2,7 +2,12 @@
 
 import React, { PropTypes } from 'react'
 
-const Button = ({ label, handleClick }: { label: string, handleClick: Function }) =>
+type Props = {
+  label: string,
+  handleClick: Function,
+}
+
+const Button = ({ label, handleClick }: Props) =>
   <button
     onClick={handleClick}
     className="btn btn-primary"
