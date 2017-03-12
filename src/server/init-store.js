@@ -1,6 +1,6 @@
 // @flow
 
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
