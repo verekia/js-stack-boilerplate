@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 type Props = {
   label: string,
@@ -14,10 +14,5 @@ const Button = ({ label, handleClick }: Props) =>
     type="button"
     role="button"
   >{label}</button>
-
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
-}
 
 export default Button

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 type Props = {
   message: string,
@@ -8,9 +8,5 @@ type Props = {
 
 const Message = ({ message }: Props) =>
   <p>{message}</p>
-
-Message.propTypes = {
-  message: PropTypes.string.isRequired,
-}
 
 export default Message
