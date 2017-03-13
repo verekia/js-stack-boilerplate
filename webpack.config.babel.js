@@ -18,7 +18,6 @@ export default {
   },
   module: {
     rules: [
-      { test: /\.png$/, use: { loader: 'file-loader', options: { name: 'img/[hash].[ext]' } } },
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
     ],
   },
