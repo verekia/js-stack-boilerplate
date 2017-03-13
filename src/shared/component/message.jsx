@@ -2,7 +2,11 @@
 
 import React, { PropTypes } from 'react'
 
-const Message = ({ message }: { message: string }) =>
+type Props = {
+  message: string,
+}
+
+const Message = ({ message }: Props) =>
   <p>{message}</p>
 
 Message.propTypes = {
