@@ -1,6 +1,6 @@
 # This file is used to generate Github releases, please ignore it.
 
-version='v2.4.4'
+version='v2.4.5'
 name='js-stack-boilerplate-'$version
 dir='dist/'$name
 
