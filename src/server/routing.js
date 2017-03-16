@@ -22,7 +22,12 @@ export default (app: Object) => {
   })
 
   app.get(HELLO_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, helloPage()))
+    helloPage()
+      .then(
+        plainPartialState => res.send(renderApp(req.url, plainPartialState)),
+        // eslint-disable-next-line no-console
+        err => console.error(err),
+      )
   })
 
   app.get(HELLO_ASYNC_PAGE_ROUTE, (req, res) => {

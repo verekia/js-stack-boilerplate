@@ -1,17 +1,18 @@
 // @flow
 
-import dotenv from 'dotenv'
+import './dotenv'
+
+/* eslint-disable import/first */
+
 import compression from 'compression'
 import express from 'express'
 import { Server } from 'http'
 import socketIO from 'socket.io'
 
+import './db'
 import routing from './routing'
-import { STATIC_PATH, isProd } from '../shared/config'
+import { WEB_PORT, STATIC_PATH, isProd } from '../shared/config'
 import setUpSocket from './socket'
-
-dotenv.config()
-const WEB_PORT = process.env.PORT
 
 const app = express()
 // flow-disable-next-line
