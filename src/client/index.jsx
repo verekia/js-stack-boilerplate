@@ -14,9 +14,8 @@ import thunkMiddleware from 'redux-thunk'
 import Tether from 'tether'
 
 import App from '../shared/app'
-import { APP_CONTAINER_SELECTOR, JSS_SSR_SELECTOR } from '../shared/config'
+import { APP_CONTAINER_SELECTOR, JSS_SSR_SELECTOR, isProd } from '../shared/config'
 import helloReducer from '../shared/reducer/hello'
-import { isProd } from '../shared/util'
 import setUpSocket from './socket'
 
 window.jQuery = $

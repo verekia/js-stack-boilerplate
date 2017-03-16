@@ -1,14 +1,17 @@
 // @flow
 
+import dotenv from 'dotenv'
 import compression from 'compression'
 import express from 'express'
 import { Server } from 'http'
 import socketIO from 'socket.io'
 
 import routing from './routing'
-import { WEB_PORT, STATIC_PATH } from '../shared/config'
-import { isProd } from '../shared/util'
+import { STATIC_PATH, isProd } from '../shared/config'
 import setUpSocket from './socket'
+
+dotenv.config()
+const WEB_PORT = process.env.PORT
 
 const app = express()
 // flow-disable-next-line
@@ -24,6 +27,6 @@ routing(app)
 
 http.listen(WEB_PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
+  console.log(`Server running on port ${String(WEB_PORT)} ${isProd ? '(production)' :
     '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
 })

@@ -4,17 +4,19 @@
   "repository": "verekia/js-stack-boilerplate",
   "author": "Jonathan Verrecchia - @verekia",
   "license": "MIT",
-  "browserslist": ["> 1%"],
+  "browserslist": [
+    "> 1%"
+  ],
   "engines": {
     "node": "7.x",
-    "yarn": "0.20.3"
+    "yarn": "0.21.3"
   },
   "scripts": {
     "start": "yarn dev:start",
     "dev:start": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
     "dev:wds": "webpack-dev-server --progress",
     "prod:build": "rimraf lib dist && babel src -d lib --ignore .test.js && cross-env NODE_ENV=production webpack -p --progress",
-    "prod:start": "heroku local",
+    "prod:start": "cross-env NODE_ENV=production heroku local",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "yarn lint && flow && jest --coverage",
     "heroku-postbuild": "yarn prod:build",
@@ -25,6 +27,7 @@
     "babel-polyfill": "^6.23.0",
     "bootstrap": "4.0.0-alpha.6",
     "compression": "^1.6.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.0",
     "immutable": "^4.0.0-rc.1",
     "isomorphic-fetch": "^2.2.1",
