@@ -9,7 +9,7 @@ export const homePage = () => null
 export const helloPage = () =>
   new Promise((resolve, reject) => {
     const helloMessage = new Message({
-      key: 'hello',
+      key: 'hello-msg',
       content: 'Server-side preloaded message from the DB',
     })
 
@@ -17,12 +17,12 @@ export const helloPage = () =>
     .then(
       /* eslint-disable no-console */
       () => console.log('Message collection dropped'),
-      () => console.log('Message collection not found'),
+      () => console.log('Message collection already empty'),
       /* eslint-enable no-console */
     )
-    .then(() => helloMessage.save(err => reject(err)))
+    .then(() => helloMessage.save((err) => { if (err) reject(err) }))
     .then(() => Message
-      .findOne({ key: 'hello' })
+      .findOne({ key: 'hello-msg' })
       .exec((err, result) => {
         if (err) reject(err)
         resolve({ hello: { message: result.content } })
