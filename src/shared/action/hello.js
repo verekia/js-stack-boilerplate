@@ -15,18 +15,15 @@ export const sayHelloAsyncRequest = createAction(SAY_HELLO_ASYNC_REQUEST)
 export const sayHelloAsyncSuccess = createAction(SAY_HELLO_ASYNC_SUCCESS)
 export const sayHelloAsyncFailure = createAction(SAY_HELLO_ASYNC_FAILURE)
 
-export const sayHelloAsync = (num: number) => (dispatch: Function) => {
+export const sayHelloAsync = (num: number) => async (dispatch: Function) => {
   dispatch(sayHelloAsyncRequest())
-  return fetch(helloEndpointRoute(num), { method: 'GET' })
-    .then((res) => {
-      if (!res.ok) throw Error(res.statusText)
-      return res.json()
-    })
-    .then((data) => {
-      if (!data.serverMessage) throw Error('No message received')
-      dispatch(sayHelloAsyncSuccess(data.serverMessage))
-    })
-    .catch(() => {
-      dispatch(sayHelloAsyncFailure())
-    })
+  try {
+    const res = await fetch(helloEndpointRoute(num), { method: 'GET' })
+    if (!res.ok) throw Error(res.statusText)
+    const data = await res.json()
+    if (!data.serverMessage) throw Error('No message received')
+    dispatch(sayHelloAsyncSuccess(data.serverMessage))
+  } catch (err) {
+    dispatch(sayHelloAsyncFailure())
+  }
 }
