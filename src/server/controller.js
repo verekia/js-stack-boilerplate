@@ -6,29 +6,31 @@ import Message from './model/message'
 
 export const homePage = () => null
 
-export const helloPage = () =>
-  new Promise((resolve, reject) => {
-    const helloMessage = new Message({
-      key: 'hello-msg',
-      content: 'Server-side preloaded message from the DB',
-    })
-
-    mongoose.connection.db.collection('messages').drop()
-    .then(
-      /* eslint-disable no-console */
-      () => console.log('Message collection dropped'),
-      () => console.log('Message collection already empty'),
-      /* eslint-enable no-console */
-    )
-    .then(() => helloMessage.save((err) => { if (err) reject(err) }))
-    .then(() => Message
-      .findOne({ key: 'hello-msg' })
-      .exec((err, result) => {
-        if (err) reject(err)
-        resolve({ hello: { message: result.content } })
-      }),
-    )
+export const helloPage = async () => {
+  const helloMessage = new Message({
+    key: 'hello-msg',
+    content: 'Server-side preloaded message from the DB',
   })
+
+  try {
+    await mongoose.connection.db.collection('messages').drop()
+    // eslint-disable-next-line no-console
+    console.log('Message collection dropped')
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('Message collection already empty')
+  }
+
+  try {
+    await helloMessage.save((err) => { if (err) throw err })
+    const foundMessage = await Message
+      .findOne({ key: 'hello-msg' })
+      .exec(() => { throw Error('Fake error') })
+    return { hello: { message: foundMessage.content } }
+  } catch (err) {
+    throw err
+  }
+}
 
 export const helloAsyncPage = () => ({
   hello: { messageAsync: 'Server-side preloaded message for async page' },

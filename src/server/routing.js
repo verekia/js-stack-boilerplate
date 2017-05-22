@@ -21,13 +21,12 @@ export default (app: Object) => {
     res.send(renderApp(req.url, homePage()))
   })
 
-  app.get(HELLO_PAGE_ROUTE, (req, res) => {
-    helloPage()
-      .then(
-        plainPartialState => res.send(renderApp(req.url, plainPartialState)),
-        // eslint-disable-next-line no-console
-        err => console.error(err),
-      )
+  app.get(HELLO_PAGE_ROUTE, async (req, res) => {
+    try {
+      res.send(renderApp(req.url, await helloPage()))
+    } catch (err) {
+      res.status(500).send('Something went wrong!')
+    }
   })
 
   app.get(HELLO_ASYNC_PAGE_ROUTE, (req, res) => {
@@ -38,7 +37,7 @@ export default (app: Object) => {
     res.json(helloEndpoint(req.params.num))
   })
 
-  app.get('/500', () => {
+  app.get('/500', async () => {
     throw Error('Fake Internal Server Error')
   })
 
