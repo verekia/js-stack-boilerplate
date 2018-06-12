@@ -1,22 +1,31 @@
 {
   "extends": [
     "airbnb",
-    "plugin:flowtype/recommended"
+    "plugin:flowtype/recommended",
+    "prettier",
+    "prettier/flowtype",
+    "react-app",
+    "prettier/react"
   ],
   "plugins": [
     "flowtype",
-    "compat"
+    "prettier"
   ],
   "env": {
     "browser": true,
     "jest": true
   },
   "settings": {
-    "polyfills": ["fetch"]
+    "import/resolver": {
+      "babel-module": {}
+    }
   },
   "rules": {
-    "semi": [2, "never"],
     "no-unexpected-multiline": 2,
-    "compat/compat": 2
+    "func-names": 0,
+    "import/prefer-default-export": 0,
+    "prettier/prettier": 2,
+    "jsx-a11y/href-no-hash": 0,
+    "node/no-unsupported-features": 0
   }
 }
