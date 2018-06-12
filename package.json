@@ -23,7 +23,11 @@
       "react"
     ],
     "plugins": [
-      "flow-react-proptypes"
+      "flow-react-proptypes",
+      "transform-object-rest-spread",
+      ["module-resolver", {
+        "root": ["./src"]
+      }]
     ]
   },
   "nodemonConfig": {
@@ -37,7 +41,7 @@
     "exec": "babel --inspect node src/server"
   },
   "prettier": {
-    "printWidth": 110,
+    "printWidth": 100,
     "semi": false,
     "singleQuote": true,
     "trailingComma": "all"
@@ -87,7 +91,7 @@
     "coveralls": "^3.0.1",
     "cross-env": "^5.1.6",
     "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-import-resolver-babel-module": "^4.0.0",

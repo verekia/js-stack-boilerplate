@@ -1,8 +1,5 @@
 // @flow
 
-import Immutable from 'immutable'
-import type { fromJS as Immut } from 'immutable'
-
 import {
   SAY_HELLO,
   SAY_HELLO_ASYNC_REQUEST,
@@ -10,21 +7,21 @@ import {
   SAY_HELLO_ASYNC_FAILURE,
 } from '../action/hello'
 
-const initialState = Immutable.fromJS({
+const initialState = {
   message: 'Initial reducer message',
   messageAsync: 'Initial reducer message for async call',
-})
+}
 
-const helloReducer = (state: Immut = initialState, action: { type: string, payload: any }) => {
+const helloReducer = (state: Object = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
     case SAY_HELLO:
-      return state.set('message', action.payload)
+      return { ...state, message: action.payload }
     case SAY_HELLO_ASYNC_REQUEST:
-      return state.set('messageAsync', 'Loading...')
+      return { ...state, messageAsync: 'Loading...' }
     case SAY_HELLO_ASYNC_SUCCESS:
-      return state.set('messageAsync', action.payload)
+      return { ...state, messageAsync: action.payload }
     case SAY_HELLO_ASYNC_FAILURE:
-      return state.set('messageAsync', 'No message received, please check your connection')
+      return { ...state, messageAsync: 'No message received, please check your connection' }
     default:
       return state
   }

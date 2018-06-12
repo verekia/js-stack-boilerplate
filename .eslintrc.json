@@ -1,6 +1,6 @@
 {
   "extends": [
-    "airbnb",
+    "airbnb-base",
     "plugin:flowtype/recommended",
     "prettier",
     "prettier/flowtype",
@@ -8,8 +8,8 @@
     "prettier/react"
   ],
   "plugins": [
-    "flowtype",
-    "prettier"
+    "prettier",
+    "flowtype"
   ],
   "env": {
     "browser": true,
@@ -25,7 +25,6 @@
     "func-names": 0,
     "import/prefer-default-export": 0,
     "prettier/prettier": 2,
-    "jsx-a11y/href-no-hash": 0,
-    "node/no-unsupported-features": 0
+    "jsx-a11y/href-no-hash": 0
   }
 }

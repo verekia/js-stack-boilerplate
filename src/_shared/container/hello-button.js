@@ -10,7 +10,10 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: () => { dispatch(sayHello('Hello!')) },
+  handleClick: () => dispatch(sayHello('Hello!')),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Button)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Button)

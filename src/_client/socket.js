@@ -8,7 +8,7 @@ import {
   IO_CLIENT_HELLO,
   IO_CLIENT_JOIN_ROOM,
   IO_SERVER_HELLO,
-  } from '../shared/config'
+} from '_shared/config'
 
 const socket = socketIOClient(window.location.host)
 
@@ -21,13 +21,9 @@ const setUpSocket = (store: Object) => {
     socket.emit(IO_CLIENT_HELLO, 'Hello!')
   })
 
-  socket.on(IO_SERVER_HELLO, (serverMessage) => {
-    console.log(`[socket.io] Server: ${serverMessage}`)
-  })
+  socket.on(IO_SERVER_HELLO, serverMessage => console.log(`[socket.io] Server: ${serverMessage}`))
 
-  socket.on(IO_DISCONNECT, () => {
-    console.log('[socket.io] Disconnected.')
-  })
+  socket.on(IO_DISCONNECT, () => console.log('[socket.io] Disconnected.'))
 }
 /* eslint-enable no-console */
 
