@@ -1,9 +1,8 @@
 .DS_Store
 /*.log
+/.env
 node_modules/
 /coverage/
 /lib/
 /dist/
-
-# Heroku (remove if you're using the no-service boilerplate)
-/.env
+/data/

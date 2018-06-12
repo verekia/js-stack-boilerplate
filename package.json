@@ -5,6 +5,8 @@
   "author": "Jonathan Verrecchia - @verekia",
   "license": "MIT",
   "scripts": {
+    "truc": "babel-node src/_db",
+    "go": "docker-compose up -d && yon migrate-db",
     "start": "yarn dev:start",
     "dev:start": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
     "dev:wds": "webpack-dev-server --progress",
@@ -12,6 +14,7 @@
     "prod:start": "cross-env NODE_ENV=production heroku local",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "yarn lint && flow && jest --coverage",
+    "migrate-db": "knex --knexfile src/_db/knexfile.js --cwd . migrate:latest",
     "heroku-postbuild": "yarn prod:build",
     "precommit": "yarn test",
     "prepush": "yarn test && yarn prod:build"
@@ -25,9 +28,14 @@
     "plugins": [
       "flow-react-proptypes",
       "transform-object-rest-spread",
-      ["module-resolver", {
-        "root": ["./src"]
-      }]
+      [
+        "module-resolver",
+        {
+          "root": [
+            "./src"
+          ]
+        }
+      ]
     ]
   },
   "nodemonConfig": {
@@ -53,6 +61,7 @@
     "dotenv": "^6.0.0",
     "jss": "^9.8.3",
     "jss-preset-default": "^4.5.0",
+    "knex": "^0.14.6",
     "koa": "^2.5.1",
     "koa-compress": "^3.0.0",
     "koa-favicon": "^2.0.1",
@@ -61,6 +70,7 @@
     "koa-static": "^4.0.3",
     "lodash": "^4.17.10",
     "parcel-bundler": "^1.8.1",
+    "pg": "^7.4.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",
@@ -69,12 +79,14 @@
     "react-redux": "^5.0.7",
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
+    "read-env": "^1.2.0",
     "recompose": "^0.27.1",
     "redux": "^4.0.0",
     "redux-actions": "^2.4.0",
     "redux-thunk": "^2.3.0",
     "socket.io": "^2.1.1",
-    "socket.io-client": "^2.1.1"
+    "socket.io-client": "^2.1.1",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

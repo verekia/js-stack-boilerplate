@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:latest
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - "6379:6379"
