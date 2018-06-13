@@ -1,8 +1,8 @@
 require('dotenv/config')
-const { databaseUrl } = require('read-env').default()
+const { DATABASE_URL } = require('read-env').default(null, false)
 
 module.exports = {
   client: 'pg',
-  connection: databaseUrl,
+  connection: DATABASE_URL,
   migrations: { directory: './src/_db/migrations' },
 }

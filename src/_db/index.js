@@ -6,11 +6,11 @@ import uuid from 'uuid/v4'
 import Knex from 'knex'
 import pg from 'pg'
 
-pg.defaults.ssl = env.useSslDb
+pg.defaults.ssl = env.USE_SSL_DB
 
 export const knex = Knex({
   client: 'pg',
-  connection: env.databaseUrl,
+  connection: env.DATABASE_URL,
   migrations: { directory: './migrations' },
 })
 

@@ -5,19 +5,18 @@
   "author": "Jonathan Verrecchia - @verekia",
   "license": "MIT",
   "scripts": {
-    "truc": "babel-node src/_db",
-    "go": "docker-compose up -d && yon migrate-db",
-    "start": "yarn dev:start",
-    "dev:start": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
-    "dev:wds": "webpack-dev-server --progress",
-    "prod:build": "rimraf lib dist && babel src -d lib --ignore .test.js && cross-env NODE_ENV=production webpack -p --progress",
+    "start": "run-p dev:server dev:client",
+    "dev:server": "yon docker-up && nodemon",
+    "dev:client": "yon clean && parcel watch src/index.js --public-url .",
+    "prod:build": "yon clean && babel src -d lib --ignore .test.js && parcel build src/index.js --no-source-maps",
     "prod:start": "cross-env NODE_ENV=production heroku local",
-    "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
-    "test": "yarn lint && flow && jest --coverage",
+    "lint": "eslint src && flow",
+    "test": "jest --coverage",
+    "lint-test": "yon lint && yon test",
+    "clean": "rimraf lib dist",
     "migrate-db": "knex --knexfile src/_db/knexfile.js --cwd . migrate:latest",
-    "heroku-postbuild": "yarn prod:build",
-    "precommit": "yarn test",
-    "prepush": "yarn test && yarn prod:build"
+    "heroku-postbuild": "yon prod:build",
+    "precommit": "yon lint-test"
   },
   "babel": {
     "presets": [
@@ -69,7 +68,6 @@
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.3",
     "lodash": "^4.17.10",
-    "parcel-bundler": "^1.8.1",
     "pg": "^7.4.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
@@ -118,6 +116,7 @@
     "jest": "^23.1.0",
     "nodemon": "^1.17.5",
     "npm-run-all": "^4.1.3",
+    "parcel-bundler": "^1.8.1",
     "prettier": "^1.13.5",
     "rimraf": "^2.6.2",
     "yarn-or-npm": "^2.0.4"
