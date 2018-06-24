@@ -49,7 +49,7 @@ setUpSocket(store)
 
 const renderApp = () => {
   // eslint-disable-next-line global-require
-  const { App } = require('../_app/app')
+  const { App } = require('../app/app')
   // flow-disable-next-line
   ReactDOM.render(<App />, document.getElementById('app-root'))
 }

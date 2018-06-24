@@ -1,6 +1,9 @@
 // @flow
 
 import React from 'react'
+
+import Nav from 'app/cmp/nav-cmp'
+
 // import { Switch } from 'react-router'
 // import { Route } from 'react-router-dom'
 // import Helmet from 'react-helmet'
@@ -28,6 +31,11 @@ import React from 'react'
 //   </div>
 // )
 
-const AppJSX = () => <h1>App</h1>
+const App = () => (
+  <div>
+    <Nav />
+    <h1>App</h1>
+  </div>
+)
 
-export const App = AppJSX
+export default App

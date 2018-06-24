@@ -13,23 +13,12 @@ const PORT = 8000
 
 const main = async () => {
   const app = new Koa()
-  app.keys = [SESSION_SECRET_KEY]
 
-  const redis = Redis().createClient(REDIS_URL)
-  const passwordResetKeys = await redis.keys(`${REDIS_PREFIX_PASSWORD_RESET}:*`)
-  passwordResetKeys.forEach(k => redis.del(k))
-  redis.on('error', error => logger.error('Redis error', { error }))
-  process.on('SIGINT', async () => {
-    await redis.quit()
-    process.exit()
+  const router = new Router()
+
+  router.get('*', ctx => {
+    ctx.body = `<html><body><div id="app-root"></div><script src="/static/js/bundle.js"></script></body></html>`
   })
-  setRedisClient(redis)
-
-  await initServerStore()
-
-  const router = setUpRouting(new Router())
-
-  NO_HTTPS || app.use(enforceHttps({ trustProtoHeader: true }))
 
   app
     .use(compress())
@@ -40,7 +29,7 @@ const main = async () => {
     .use(router.allowedMethods())
 
   const server = http.createServer(app.callback())
-  console.log('Server now listenning', { port: PORT })
+  console.log(`Server now listenning on port ${PORT} (${IS_PROD ? 'production' : 'development'})`)
   server.listen(PORT)
 }
 
