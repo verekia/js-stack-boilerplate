@@ -3,20 +3,19 @@
 import 'babel-polyfill'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { hydrate } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
 /*
 
-import { AppContainer } from 'react-hot-loader'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
 import { isProd } from '_shared/config'
 import helloReducer from '_shared/reducer/hello'
 import setUpSocket from '_client/socket'
-
 
 /* eslint-disable no-underscore-dangle */
 // const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
@@ -47,11 +46,23 @@ jssServerSide.parentNode.removeChild(jssServerSide)
 setUpSocket(store)
 */
 
+const store = createStore(() => window.__PRELOADED_STATE__)
+
+console.log(store.getState())
+
 const renderApp = () => {
   // eslint-disable-next-line global-require
   const App = require('../app/app').default
+  /* eslint-disable no-underscore-dangle */
   // flow-disable-next-line
-  ReactDOM.hydrate(<App />, document.getElementById('app-root'))
+  hydrate(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>,
+    document.getElementById('app-root'),
+  )
 }
 
 renderApp()
