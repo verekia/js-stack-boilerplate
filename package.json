@@ -5,18 +5,22 @@
   "author": "Jonathan Verrecchia - @verekia",
   "license": "MIT",
   "scripts": {
-    "start": "run-p dev:server dev:client",
-    "dev:server": "yon docker-up && nodemon",
-    "dev:client": "yon clean && parcel watch src/index.js --public-url .",
-    "prod:build": "yon clean && babel src -d lib --ignore .test.js && parcel build src/index.js --no-source-maps",
-    "prod:start": "cross-env NODE_ENV=production heroku local",
+    "start": "run-p dev:*",
+    "dev:server": "yon docker && yon nodemon",
+    "dev:client": "run-s clean parcel:watch",
+    "prod:build": "run-s clean parcel:build babel",
+    "prod:start": "run-s docker prod:build heroku-local",
+    "heroku-local": "cross-env NODE_ENV=production heroku local",
+    "parcel:watch": "parcel watch src/_client/index.js --public-url . -o bundle.js",
+    "parcel:build": "parcel build src/_client/index.js --no-source-maps -o bundle.js",
+    "babel": "babel src -d lib --ignore .test.js",
+    "docker": "docker-compose up -d",
     "lint": "eslint src && flow",
     "test": "jest --coverage",
-    "lint-test": "yon lint && yon test",
     "clean": "rimraf lib dist",
     "migrate-db": "knex --knexfile src/_db/knexfile.js --cwd . migrate:latest",
     "heroku-postbuild": "yon prod:build",
-    "precommit": "yon lint-test"
+    "precommit": "run-s lint test"
   },
   "babel": {
     "presets": [
@@ -45,7 +49,7 @@
       "lib",
       "dist"
     ],
-    "exec": "babel --inspect node src/server"
+    "exec": "babel-node src/_server/server.js"
   },
   "prettier": {
     "printWidth": 100,

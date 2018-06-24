@@ -4,6 +4,9 @@ import 'babel-polyfill'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+
+/*
+
 import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
@@ -14,11 +17,13 @@ import { isProd } from '_shared/config'
 import helloReducer from '_shared/reducer/hello'
 import setUpSocket from '_client/socket'
 
+
 /* eslint-disable no-underscore-dangle */
-const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
-const preloadedState = window.__PRELOADED_STATE__
+// const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
+// const preloadedState = window.__PRELOADED_STATE__
 /* eslint-enable no-underscore-dangle */
 
+/*
 const store = createStore(
   combineReducers({ hello: helloReducer }),
   { hello: preloadedState.hello },
@@ -35,18 +40,19 @@ const wrapApp = (AppComponent, reduxStore) => (
   </Provider>
 )
 
-const renderApp = () => {
-  // eslint-disable-next-line global-require
-  const { App } = require('_app/app')
-  // flow-disable-next-line
-  ReactDOM.render(<App />, document.getElementById('app-root'))
-}
-
 const jssServerSide = document.getElementById('jss-ssr')
 // flow-disable-next-line
 jssServerSide.parentNode.removeChild(jssServerSide)
 
 setUpSocket(store)
+*/
+
+const renderApp = () => {
+  // eslint-disable-next-line global-require
+  const { App } = require('../_app/app')
+  // flow-disable-next-line
+  ReactDOM.render(<App />, document.getElementById('app-root'))
+}
 
 renderApp()
 
