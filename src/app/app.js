@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import Helmet from 'react-helmet'
 
 import Nav from 'app/cmp/nav-cmp'
 
@@ -33,6 +34,10 @@ import Nav from 'app/cmp/nav-cmp'
 
 const App = () => (
   <div>
+    <Helmet>
+      <title>My Title</title>
+      <meta httpEquiv="x-ua-compatible" content="ie=edge" />>
+    </Helmet>
     <Nav />
     <h1>App</h1>
   </div>

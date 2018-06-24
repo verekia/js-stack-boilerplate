@@ -49,9 +49,9 @@ setUpSocket(store)
 
 const renderApp = () => {
   // eslint-disable-next-line global-require
-  const { App } = require('../app/app')
+  const App = require('../app/app').default
   // flow-disable-next-line
-  ReactDOM.render(<App />, document.getElementById('app-root'))
+  ReactDOM.hydrate(<App />, document.getElementById('app-root'))
 }
 
 renderApp()
