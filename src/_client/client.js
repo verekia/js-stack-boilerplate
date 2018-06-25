@@ -46,22 +46,20 @@ jssServerSide.parentNode.removeChild(jssServerSide)
 setUpSocket(store)
 */
 
+/* eslint-disable no-underscore-dangle */
 const store = createStore(() => window.__PRELOADED_STATE__)
-
-console.log(store.getState())
 
 const renderApp = () => {
   // eslint-disable-next-line global-require
   const App = require('../app/app').default
-  /* eslint-disable no-underscore-dangle */
-  // flow-disable-next-line
   hydrate(
     <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>,
-    document.getElementById('app-root'),
+    // flow-disable-next-line
+    document.getElementById('app'),
   )
 }
 

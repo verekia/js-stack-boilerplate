@@ -25,6 +25,10 @@ const IS_PROD = false
 
 const dogs = [{ id: '123', name: 'Medor' }, { id: '456', name: 'Max' }]
 
+const getGeneralData = ctx => ({
+  username: 'Sven',
+})
+
 const main = async () => {
   const app = new Koa()
   const router = new Router()
@@ -44,8 +48,7 @@ const main = async () => {
       return
     }
     const pageData = activeRoute.apiCall ? await activeRoute.apiCall(ctx.req.url) : {}
-    const generalData = {}
-    const store = createStore(() => ({ page: pageData, general: generalData }))
+    const store = createStore(() => ({ page: pageData, general: getGeneralData(ctx) }))
     const appHtml = ReactDOMServer.renderToString(
       <Provider store={store}>
         <StaticRouter location={ctx.req.url} context={{}}>
@@ -64,7 +67,7 @@ const main = async () => {
         ${helmet.link.toString()}
       </head>
       <body ${helmet.bodyAttributes.toString()}>
-        <div id="app-root">${appHtml}</div>
+        <div id="app">${appHtml}</div>
         <script>window.__PRELOADED_STATE__ = ${serialize(store.getState())}</script>
         <script src="/static/js/bundle.js"></script>
       </body>

@@ -16,9 +16,11 @@ const App = () => (
     </Helmet>
     <Nav />
     <Switch>
-      {routes.map(({ path, exact, component }) => (
-        <Route key={path} path={path} exact={exact} component={component} />
-      ))}
+      {routes.map(
+        ({ path, exact, component }: { path: string, exact?: boolean, component: Function }) => (
+          <Route key={path} path={path} exact={exact} component={component} />
+        ),
+      )}
       <Route component={NotFoundPage} />
     </Switch>
   </div>
