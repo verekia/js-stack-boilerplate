@@ -1,6 +1,7 @@
 // @flow
 
 import 'babel-polyfill'
+import 'isomorphic-fetch'
 
 import React from 'react'
 import { hydrate } from 'react-dom'

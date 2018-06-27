@@ -16,7 +16,11 @@ import Router from 'koa-router'
 import serveStatic from 'koa-static'
 import Helmet from 'react-helmet'
 import serialize from 'serialize-javascript'
+import graphqlHTTP from 'koa-graphql'
+import { buildSchema } from 'graphql'
+
 import routes from '_shared/routes'
+import { fetchGraphQL } from '_shared/api-calls'
 
 import App from 'app/app'
 
@@ -24,6 +28,23 @@ const PORT = 8000
 const IS_PROD = false
 
 const dogs = [{ id: '123', name: 'Medor' }, { id: '456', name: 'Max' }]
+
+const graphqlSchema = buildSchema(`
+  type Dog {
+    id: ID!
+    name: String
+  }
+
+  type Query {
+    dogs: [Dog]
+    dog(id: ID!): Dog
+  }
+`)
+
+const root = {
+  dogs: () => dogs,
+  dog: ({ id }) => dogs.find(d => d.id === id),
+}
 
 const getGeneralData = ctx => ({
   username: 'Sven',
@@ -33,21 +54,30 @@ const main = async () => {
   const app = new Koa()
   const router = new Router()
 
-  router.get('/api/dogs', ctx => {
-    ctx.body = { dogs }
-  })
-
-  router.get('/api/dog/:id', ctx => {
-    ctx.body = { dog: dogs.find(d => d.id === ctx.params.id) }
-  })
+  router.all(
+    '/graphql',
+    graphqlHTTP({
+      schema: graphqlSchema,
+      rootValue: root,
+      graphiql: true,
+    }),
+  )
 
   router.get('*', async (ctx, next) => {
-    const activeRoute: Object = routes.find(route => matchPath(ctx.req.url, route)) || {}
+    let match = {}
+
+    const activeRoute: Object =
+      routes.find(route => {
+        match = matchPath(ctx.req.url, route)
+        return match
+      }) || {}
+
     if (ctx.req.url.startsWith('/static')) {
       next()
       return
     }
-    const pageData = activeRoute.apiCall ? await activeRoute.apiCall(ctx.req.url) : {}
+    const queryVariables = activeRoute.getVariables && activeRoute.getVariables(match.params)
+    const pageData = activeRoute.query ? await fetchGraphQL(activeRoute.query, queryVariables) : {}
     const store = createStore(() => ({ page: pageData, general: getGeneralData(ctx) }))
     const appHtml = ReactDOMServer.renderToString(
       <Provider store={store}>

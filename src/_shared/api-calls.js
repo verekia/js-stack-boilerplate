@@ -2,26 +2,24 @@
 
 import fetch from 'isomorphic-fetch'
 
-export const fetchDogs = async () => {
-  let data
+export const fetchGraphQL = async (query: string, variables: Object) => {
+  let resp
   try {
-    data = await (await fetch('http://localhost:8000/api/dogs')).json()
+    resp = await (await fetch('http://localhost:8000/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query, variables }),
+    })).json()
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err)
     return null
   }
-  return data
-}
-
-export const fetchDog = async (id: string) => {
-  let data
-  try {
-    data = await (await fetch(`http://localhost:8000/api/dog/${id}`)).json()
-  } catch (err) {
+  if (resp.errors) {
     // eslint-disable-next-line no-console
-    console.error(err)
-    return null
+    console.error(resp.errors)
+    throw Error(resp.errors[0])
+  } else {
+    return resp.data
   }
-  return data
 }

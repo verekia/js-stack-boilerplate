@@ -13,8 +13,6 @@ import SignupPage from 'user/cmp-page/signup-page'
 import DogsPage from 'dog/cmp-page/dogs-page'
 import DogPage from 'dog/cmp-page/dog-page'
 
-import { fetchDogs, fetchDog } from '_shared/api-calls'
-
 const routes = [
   {
     path: '/',
@@ -34,12 +32,13 @@ const routes = [
   {
     path: '/dogs',
     component: DogsPage,
-    apiCall: fetchDogs,
+    query: '{ dogs { id, name } }',
   },
   {
     path: '/dog/:id',
     component: DogPage,
-    apiCall: (url: string) => fetchDog(url.split('/').pop()),
+    query: 'query ($id: ID!) { dog(id: $id) { id, name } }',
+    getVariables: ({ id }: { id: string }) => ({ id }), // Mapping URL params => query variables
   },
 ]
 

@@ -17,16 +17,32 @@ const App = () => (
     <Nav />
     <Switch>
       {routes.map(
-        ({ path, exact, component }: { path: string, exact?: boolean, component: Function }) => (
-          <Route key={path} path={path} exact={exact} component={component} />
+        ({
+          path,
+          exact,
+          component: Cmp,
+          ...rest
+        }: {
+          path: string,
+          exact?: boolean,
+          component: Function,
+        }) => (
+          // <Route key={path} path={path} exact={exact} component={component} />
+          <Route
+            key={path}
+            path={path}
+            exact={exact}
+            render={props => <Cmp {...props} {...rest} />}
+          />
         ),
       )}
-      <Route component={NotFoundPage} />
+      {/* <Route component={NotFoundPage} /> */}
+      <Route render={props => <NotFoundPage {...props} />} />
     </Switch>
   </div>
 )
 
-// About the warning in the console:
+// Using component={component} instead of render causes a warning in the console, related to:
 // https://github.com/ReactTraining/react-router/issues/6056
 // https://github.com/reduxjs/react-redux/issues/914
 

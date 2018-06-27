@@ -16,6 +16,9 @@ const Nav = () => (
       <li>
         <Link to="/dog/123">Dog 1</Link>
       </li>
+      <li>
+        <Link to="/404">404</Link>
+      </li>
     </ul>
   </nav>
 )
