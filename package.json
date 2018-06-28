@@ -60,6 +60,7 @@
   "dependencies": {
     "@material-ui/core": "^1.2.3",
     "@material-ui/icons": "^1.1.0",
+    "async-exit-hook": "^2.0.1",
     "babel-polyfill": "^6.26.0",
     "bcrypt": "^2.0.1",
     "bluebird": "^3.5.1",

@@ -7,4 +7,6 @@ module.system.node.resolve_dirname=src
 [ignore]
 .*/node_modules/jss/.*
 .*/node_modules/graphql/.*
+.*/node_modules/express-graphql/.*
+.*/node_modules/koa-graphql/.*
 .*/node_modules/config-chain/.*
