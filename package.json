@@ -61,6 +61,7 @@
     "@material-ui/core": "^1.2.3",
     "@material-ui/icons": "^1.1.0",
     "babel-polyfill": "^6.26.0",
+    "bcrypt": "^2.0.1",
     "dotenv": "^6.0.0",
     "graphql": "^0.13.2",
     "isomorphic-fetch": "^2.2.1",

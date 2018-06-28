@@ -17,12 +17,18 @@ import serveStatic from 'koa-static'
 import Helmet from 'react-helmet'
 import serialize from 'serialize-javascript'
 import graphqlHTTP from 'koa-graphql'
+// flow-disable-next-line
 import { buildSchema } from 'graphql'
+import bcrypt from 'bcrypt'
 
+import { notesPageConfig } from 'note/note-config'
 import { allPageRoutes } from '_shared/shared-config'
 import { fetchGraphQL } from '_shared/api-calls'
+import { createUser, findUserByUsername } from 'user/user-db'
 
 import App from 'app/app'
+
+// CALL knex.destroy at sigint
 
 const PORT = 8000
 const IS_PROD = false
@@ -67,6 +73,34 @@ const main = async () => {
       graphiql: true,
     }),
   )
+
+  router.post('/signup', async ctx => {
+    const { username, password } = ctx.request.body
+    if (!username || username === '' || !password || password === '') {
+      renderPage(ctx, {
+        prefill: ctx.request.body,
+        errorMessage: 'Please enter a username and a password.',
+      })
+    } else {
+      const passwordHash = await bcrypt.hash(password, 12)
+      await createUser({ username, passwordHash })
+      ctx.redirect(notesPageConfig.route.path)
+    }
+  })
+
+  router.post('/login', async ctx => {
+    const { username, password } = ctx.request.body
+    const user = await findUserByUsername(username)
+    if (user && (await bcrypt.compare(password, user.passwordHash))) {
+      ctx.session.user = user
+      ctx.redirect(notesPageConfig.route.path)
+    } else {
+      renderPage(ctx, {
+        prefill: ctx.request.body,
+        errorMessage: 'Incorrect username or password.',
+      })
+    }
+  })
 
   router.get('/logout', ctx => {
     ctx.session = null
