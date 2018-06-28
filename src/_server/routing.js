@@ -2,6 +2,8 @@
 
 import { matchPath } from 'react-router-dom'
 
+import knex from '_db/pg'
+// flow-disable-next-line
 import graphqlHTTP from 'koa-graphql'
 // flow-disable-next-line
 import { buildSchema } from 'graphql'

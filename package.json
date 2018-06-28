@@ -17,7 +17,7 @@
     "babel": "babel src -d lib --ignore .test.js",
     "lint": "eslint src && flow",
     "test": "jest --coverage",
-    "migrate-db": "knex --knexfile src/_db/knexfile.js --cwd . migrate:latest",
+    "migrate-db": "knex --knexfile src/_db/knex-config.js --cwd . migrate:latest",
     "heroku-local": "cross-env NODE_ENV=production heroku local",
     "heroku-postbuild": "yon prod:build",
     "precommit": "run-s lint test"
