@@ -22,9 +22,9 @@
   },
   "rules": {
     "no-unexpected-multiline": 2,
-    "func-names": 0,
     "import/prefer-default-export": 0,
     "prettier/prettier": 2,
-    "jsx-a11y/href-no-hash": 0
+    "jsx-a11y/href-no-hash": 0,
+    "func-names": 0
   }
 }

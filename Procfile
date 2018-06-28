@@ -1,2 +1,2 @@
 web: node lib/_server/server.js
-release: yon migrate-db
+release: yarn migrate-db
