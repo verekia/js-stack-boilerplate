@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import LogoutIcon from '@material-ui/icons/ExitToApp'
 
 import { allPageConfigs } from '_shared/shared-config'
 
@@ -20,10 +21,9 @@ const Nav = () => (
         </li>
       ))}
       <li>
-        <Link to="/note/123">Note 123</Link>
-      </li>
-      <li>
-        <Link to="/logout">404</Link>
+        <a href="/logout">
+          <LogoutIcon />Log Out
+        </a>
       </li>
     </ul>
   </nav>

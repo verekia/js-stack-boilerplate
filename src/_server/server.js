@@ -68,7 +68,10 @@ const main = async () => {
     }),
   )
 
-  router.post('/login') // TODO
+  router.get('/logout', ctx => {
+    ctx.session = null
+    ctx.redirect('/')
+  })
 
   router.get('/500', () => {
     throw Error('Fake Internal Server Error')
