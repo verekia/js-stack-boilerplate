@@ -3,7 +3,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
+import { compose } from 'recompose'
 
 import Nav from 'app/cmp/nav-cmp'
 import { allPageRoutes } from '_shared/shared-config'
@@ -49,4 +50,7 @@ const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
 // https://github.com/ReactTraining/react-router/issues/6056
 // https://github.com/reduxjs/react-redux/issues/914
 
-export default connect(mstp)(App)
+export default compose(
+  withRouter,
+  connect(mstp),
+)(App)

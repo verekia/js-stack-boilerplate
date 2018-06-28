@@ -2,7 +2,6 @@
 
 import { matchPath } from 'react-router-dom'
 
-import knex from '_db/pg'
 // flow-disable-next-line
 import graphqlHTTP from 'koa-graphql'
 // flow-disable-next-line
@@ -12,45 +11,26 @@ import { fetchGraphQL } from '_shared/api-calls'
 import { allPageRoutes } from '_shared/shared-config'
 import renderPage from '_server/render-page'
 
-const graphqlSchema = buildSchema(`
-  type Note {
-    id: ID!
-    name: String
-  }
+import { noteSchema, noteResolvers } from 'note/note-ctrl'
+import authRouting from 'auth/auth-routing'
 
-  type Query {
-    notes: [Note]
-    note(id: ID!): Note
-  }
-`)
-
-const protect = (fn: Function) => (vars, ctx, ...rest) => {
-  console.log(ctx.session)
-  return fn(vars, ctx, ...rest)
-}
-
-const root = {
-  notes: protect(() => []),
-  note: protect(({ id }) => [].find(d => d.id === id)),
-}
+const combinedSchemas = [noteSchema].join(' ')
+const combinedResolvers = { ...noteResolvers }
 
 const setUpRouting = (router: Object) => {
+  authRouting(router)
+
   router.all(
     '/graphql',
     graphqlHTTP({
-      schema: graphqlSchema,
-      rootValue: root,
+      schema: buildSchema(combinedSchemas),
+      rootValue: combinedResolvers,
       graphiql: true,
     }),
   )
 
-  router.get('/logout', ctx => {
-    ctx.session = null
-    ctx.redirect('/')
-  })
-
   router.get('/fake-error', () => {
-    throw Error('Fake Internal Server Error')
+    throw Error('Fake Server Error')
   })
 
   router.get('*', async (ctx, next) => {

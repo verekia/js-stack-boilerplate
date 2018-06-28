@@ -34,6 +34,11 @@ const authRouting = (router: Object) => {
       })
     }
   })
+
+  router.get('/logout', ctx => {
+    ctx.session = null
+    ctx.redirect('/')
+  })
 }
 
 export default authRouting
