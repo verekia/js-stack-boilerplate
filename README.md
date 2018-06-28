@@ -1,7 +1,7 @@
 # JavaScript Stack Boilerplate
 
-[![Dependencies](https://img.shields.io/david/verekia/js-stack-boilerplate.svg?style=flat-square)](https://david-dm.org/verekia/js-stack-boilerplate)
-[![Dev Dependencies](https://img.shields.io/david/dev/verekia/js-stack-boilerplate.svg?style=flat-square)](https://david-dm.org/verekia/js-stack-boilerplate?type=dev)
+[![Dependencies](https://img.shields.io/david/verekia/js-stack-boilerplate.svg)](https://david-dm.org/verekia/js-stack-boilerplate)
+[![Dev Dependencies](https://img.shields.io/david/dev/verekia/js-stack-boilerplate.svg)](https://david-dm.org/verekia/js-stack-boilerplate?type=dev)
 
 This is the final boilerplate code of the [JavaScript Stack from Scratch](https://github.com/verekia/js-stack-from-scratch) tutorial.
 
@@ -10,7 +10,7 @@ This is the final boilerplate code of the [JavaScript Stack from Scratch](https:
 - [Download](https://github.com/verekia/js-stack-boilerplate/archive/master.zip) the repository
 - Edit `package.json` with your own info
 - Copy `.env-sample` to `.env`
-- Run `yarn` and `yarn start` – That's it!
+- Run `yarn` and `yarn start`, then open your browser on `http://localhost:8000` – That's it!
 - Delete the content of this `README.md` file
 
 ## Demo
