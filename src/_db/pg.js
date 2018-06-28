@@ -16,11 +16,11 @@ export const knex = Knex({
 
 const main = async () => {
   try {
-    await knex('Dog').insert({ id: uuid(), name: 'Fido' })
+    await knex('Note').insert({ id: uuid(), title: 'Great note', description: 'Great description' })
   } catch (e) {
     console.error(e)
   }
-  console.log(await knex('Dog'))
+  console.log(await knex('Note'))
   knex.destroy()
 }
 

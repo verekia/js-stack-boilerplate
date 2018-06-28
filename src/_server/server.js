@@ -19,7 +19,7 @@ import serialize from 'serialize-javascript'
 import graphqlHTTP from 'koa-graphql'
 import { buildSchema } from 'graphql'
 
-import routes from '_shared/routes'
+import { allPageRoutes } from '_shared/shared-config'
 import { fetchGraphQL } from '_shared/api-calls'
 
 import App from 'app/app'
@@ -27,23 +27,28 @@ import App from 'app/app'
 const PORT = 8000
 const IS_PROD = false
 
-const dogs = [{ id: '123', name: 'Medor' }, { id: '456', name: 'Max' }]
+const notes = [{ id: '123', name: 'Medor' }, { id: '456', name: 'Max' }]
 
 const graphqlSchema = buildSchema(`
-  type Dog {
+  type Note {
     id: ID!
     name: String
   }
 
   type Query {
-    dogs: [Dog]
-    dog(id: ID!): Dog
+    notes: [Note]
+    note(id: ID!): Note
   }
 `)
 
+const protect = (fn: Function) => (vars, ctx, ...rest) => {
+  console.log(ctx.session)
+  return fn(vars, ctx, ...rest)
+}
+
 const root = {
-  dogs: () => dogs,
-  dog: ({ id }) => dogs.find(d => d.id === id),
+  notes: protect(() => notes),
+  note: protect(({ id }) => notes.find(d => d.id === id)),
 }
 
 const getGeneralData = ctx => ({
@@ -63,11 +68,17 @@ const main = async () => {
     }),
   )
 
+  router.post('/login') // TODO
+
+  router.get('/500', () => {
+    throw Error('Fake Internal Server Error')
+  })
+
   router.get('*', async (ctx, next) => {
     let match = {}
 
     const activeRoute: Object =
-      routes.find(route => {
+      allPageRoutes.find(route => {
         match = matchPath(ctx.req.url, route)
         return match
       }) || {}
@@ -76,8 +87,17 @@ const main = async () => {
       next()
       return
     }
+
     const queryVariables = activeRoute.getVariables && activeRoute.getVariables(match.params)
-    const pageData = activeRoute.query ? await fetchGraphQL(activeRoute.query, queryVariables) : {}
+    let pageData
+
+    try {
+      pageData = activeRoute.query ? await fetchGraphQL(activeRoute.query, queryVariables) : {}
+    } catch (err) {
+      ctx.redirect('/unauthorized')
+      return
+    }
+
     const store = createStore(() => ({ page: pageData, general: getGeneralData(ctx) }))
     const appHtml = ReactDOMServer.renderToString(
       <Provider store={store}>

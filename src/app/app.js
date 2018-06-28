@@ -1,22 +1,25 @@
 // @flow
 
 import React from 'react'
+import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 import { Route, Switch } from 'react-router-dom'
 
 import Nav from 'app/cmp/nav-cmp'
-import routes from '_shared/routes'
+import { allPageRoutes } from '_shared/shared-config'
 import NotFoundPage from 'error/cmp-page/not-found-page'
 
-const App = () => (
+const mstp = ({ general }) => ({ isLoggedIn: !!general.user })
+
+const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
   <div>
     <Helmet>
       <title>App</title>
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />>
     </Helmet>
-    <Nav />
+    {isLoggedIn && <Nav />}
     <Switch>
-      {routes.map(
+      {allPageRoutes.map(
         ({
           path,
           exact,
@@ -46,4 +49,4 @@ const App = () => (
 // https://github.com/ReactTraining/react-router/issues/6056
 // https://github.com/reduxjs/react-redux/issues/914
 
-export default App
+export default connect(mstp)(App)

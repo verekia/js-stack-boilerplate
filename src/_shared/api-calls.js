@@ -2,7 +2,7 @@
 
 import fetch from 'isomorphic-fetch'
 
-export const fetchGraphQL = async (query: string, variables: Object) => {
+export const fetchGraphQL = async (query: string, variables?: Object) => {
   let resp
   try {
     resp = await (await fetch('http://localhost:8000/graphql', {

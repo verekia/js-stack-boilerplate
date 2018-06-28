@@ -1,3 +1,4 @@
 // @flow
 
-export const IS_PROD = NODE_ENV === 'production'
+export const WEB_PORT = process.env.PORT
+export const isProd = process.env.NODE_ENV === 'production'

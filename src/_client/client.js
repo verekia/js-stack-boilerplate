@@ -8,6 +8,7 @@ import { hydrate } from 'react-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import reducer from '_client/duck'
 
 /*
 
@@ -48,7 +49,7 @@ setUpSocket(store)
 */
 
 /* eslint-disable no-underscore-dangle */
-const store = createStore(() => window.__PRELOADED_STATE__)
+const store = createStore(reducer, window.__PRELOADED_STATE__)
 
 const renderApp = () => {
   // eslint-disable-next-line global-require

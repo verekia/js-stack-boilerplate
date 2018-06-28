@@ -1,6 +1,6 @@
 module.exports = {
   up: knex =>
-    knex.schema.createTable('Dog', t => {
+    knex.schema.createTable('Note', t => {
       t.uuid('id').primary()
       t.timestamp('createdAt')
         .notNullable()
@@ -8,7 +8,8 @@ module.exports = {
       t.timestamp('updatedAt')
         .notNullable()
         .defaultTo(knex.fn.now())
-      t.string('name').notNullable()
+      t.string('title').notNullable()
+      t.text('description')
     }),
   down: () => {},
 }

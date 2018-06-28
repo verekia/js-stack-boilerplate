@@ -1,19 +1,20 @@
 // @flow
 
+/* eslint-disable no-console */
+
 import {
   IO_CONNECT,
   IO_DISCONNECT,
   IO_CLIENT_JOIN_ROOM,
   IO_CLIENT_HELLO,
   IO_SERVER_HELLO,
-} from '../shared/config'
+} from '_shared/socket-events'
 
-/* eslint-disable no-console */
 const setUpSocket = (io: Object) => {
-  io.on(IO_CONNECT, (socket) => {
+  io.on(IO_CONNECT, socket => {
     console.log('[socket.io] A client connected.')
 
-    socket.on(IO_CLIENT_JOIN_ROOM, (room) => {
+    socket.on(IO_CLIENT_JOIN_ROOM, room => {
       socket.join(room)
       console.log(`[socket.io] A client joined room ${room}.`)
 
@@ -22,7 +23,7 @@ const setUpSocket = (io: Object) => {
       socket.emit(IO_SERVER_HELLO, 'Hello you!')
     })
 
-    socket.on(IO_CLIENT_HELLO, (clientMessage) => {
+    socket.on(IO_CLIENT_HELLO, clientMessage => {
       console.log(`[socket.io] Client: ${clientMessage}`)
     })
 
@@ -31,6 +32,5 @@ const setUpSocket = (io: Object) => {
     })
   })
 }
-/* eslint-enable no-console */
 
 export default setUpSocket

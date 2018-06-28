@@ -1,5 +1,6 @@
 // @flow
 
-import { REDIS_URL } from '_server/server-env'
+import { REDIS_URL } from '_server/env'
 
+console.log(REDIS_URL)
 export const redis = null

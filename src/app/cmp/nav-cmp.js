@@ -2,22 +2,28 @@
 
 import React from 'react'
 
+import { allPageConfigs } from '_shared/shared-config'
+
 import { Link } from 'react-router-dom'
+
+const loggedInPageConfigs = allPageConfigs.filter(c => !c.loggedOutOnly)
 
 const Nav = () => (
   <nav>
     <ul>
+      {loggedInPageConfigs.map(({ title, icon: Icon, route }) => (
+        <li>
+          <Link to={route.path}>
+            <Icon />
+            {title}
+          </Link>
+        </li>
+      ))}
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/note/123">Note 123</Link>
       </li>
       <li>
-        <Link to="/dogs">Dogs</Link>
-      </li>
-      <li>
-        <Link to="/dog/123">Dog 1</Link>
-      </li>
-      <li>
-        <Link to="/404">404</Link>
+        <Link to="/logout">404</Link>
       </li>
     </ul>
   </nav>

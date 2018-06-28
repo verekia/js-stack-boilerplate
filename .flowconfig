@@ -6,3 +6,5 @@ module.system.node.resolve_dirname=src
 
 [ignore]
 .*/node_modules/jss/.*
+.*/node_modules/graphql/.*
+.*/node_modules/config-chain/.*
