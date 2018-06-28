@@ -8,5 +8,4 @@ export const homePageConfig: Object = {
     exact: true,
     component: HomePage,
   },
-  loggedOutOnly: true,
 }

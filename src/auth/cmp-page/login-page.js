@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { homePageConfig } from 'home/home-config'
 
 export default () => (
-  <form>
+  <form action="/login" method="post">
     <label>
       Username
       <input name="username" />

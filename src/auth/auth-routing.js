@@ -1,10 +1,16 @@
 // @flow
 
+import uuid from 'uuid/v4'
 import bcrypt from 'bcrypt'
 
 import { notesPageConfig } from 'note/note-config'
 import { createUser, findUserByUsername } from 'user/user-db'
 import renderPage from '_server/render-page'
+
+const logIn = (ctx, id, username) => {
+  ctx.session.user = { id, username }
+  ctx.redirect(notesPageConfig.route.path)
+}
 
 const authRouting = (router: Object) => {
   router.post('/signup', async ctx => {
@@ -16,8 +22,9 @@ const authRouting = (router: Object) => {
       })
     } else {
       const passwordHash = await bcrypt.hash(password, 12)
-      await createUser({ username, passwordHash })
-      ctx.redirect(notesPageConfig.route.path)
+      const id = uuid()
+      await createUser({ id, username, passwordHash })
+      logIn(ctx, id, username)
     }
   })
 
@@ -25,8 +32,7 @@ const authRouting = (router: Object) => {
     const { username, password } = ctx.request.body
     const user = await findUserByUsername(username)
     if (user && (await bcrypt.compare(password, user.passwordHash))) {
-      ctx.session.user = user
-      ctx.redirect(notesPageConfig.route.path)
+      logIn(ctx, user.id, user.username)
     } else {
       renderPage(ctx, {
         prefill: ctx.request.body,

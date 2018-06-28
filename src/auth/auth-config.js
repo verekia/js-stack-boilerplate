@@ -9,5 +9,4 @@ export const loginPageConfig: Object = {
     component: LoginPage,
   },
   title: 'Log In',
-  loggedOutOnly: true,
 }

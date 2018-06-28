@@ -5,17 +5,21 @@ import 'babel-polyfill'
 import http from 'http'
 
 import Koa from 'koa'
+import body from 'koa-body'
 import compress from 'koa-compress'
 import favicon from 'koa-favicon'
 import mount from 'koa-mount'
 import Router from 'koa-router'
+import session from 'koa-session'
 import serveStatic from 'koa-static'
 
-import { PORT, isProd } from '_server/env'
+import redis from '_db/redis'
+import { PORT, SESSION_SECRET_KEY, isProd } from '_server/env'
 import setUpRouting from '_server/routing'
 
 const main = async () => {
   const app = new Koa()
+  app.keys = [SESSION_SECRET_KEY]
 
   const router = new Router()
   setUpRouting(router)
@@ -30,7 +34,24 @@ const main = async () => {
     }
   })
 
+  app.use(
+    session(
+      {
+        maxAge: 1000 * 60 * 60 * 24 * 14, // 2 weeks
+        rolling: true,
+        // httpOnly: false,
+        store: {
+          get: async key => JSON.parse(await redis.getAsync(`session:${key}`)),
+          set: (key, sess) => redis.setAsync(`session:${key}`, JSON.stringify(sess)),
+          destroy: key => redis.delAsync(key),
+        },
+      },
+      app,
+    ),
+  )
+
   app
+    .use(body())
     .use(compress())
     .use(mount('/static', serveStatic('dist')))
     .use(mount('/static', serveStatic('public')))

@@ -1,12 +1,11 @@
 // @flow
 
 const getGeneralData = (ctx: Object) => {
-  // Remove this check when we have sessions
-  if (ctx.session) {
-    const { user } = ctx.session
-    return { username: user && user.username }
+  const generalData = {}
+  if (ctx.session && ctx.session.user) {
+    generalData.user = ctx.session.user
   }
-  return {}
+  return generalData
 }
 
 export default getGeneralData

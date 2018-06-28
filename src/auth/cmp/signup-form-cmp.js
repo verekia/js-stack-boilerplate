@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { loginPageConfig } from 'auth/auth-config'
 
 export default () => (
-  <form>
+  <form action="/signup" method="post">
     <label>
       Username
       <input name="username" />

@@ -15,9 +15,7 @@ import reducer from '_client/duck'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-import { isProd } from '_shared/config'
-import helloReducer from '_shared/reducer/hello'
-import setUpSocket from '_client/socket'
+import setUpSocket from '_client/socket-client'
 
 /* eslint-disable no-underscore-dangle */
 // const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
@@ -29,16 +27,6 @@ const store = createStore(
   combineReducers({ hello: helloReducer }),
   { hello: preloadedState.hello },
   composeEnhancers(applyMiddleware(thunkMiddleware)),
-)
-
-const wrapApp = (AppComponent, reduxStore) => (
-  <Provider store={reduxStore}>
-    <BrowserRouter>
-      <AppContainer>
-        <AppComponent />
-      </AppContainer>
-    </BrowserRouter>
-  </Provider>
 )
 
 const jssServerSide = document.getElementById('jss-ssr')

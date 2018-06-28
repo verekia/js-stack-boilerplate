@@ -13,7 +13,7 @@ export const notesPageConfig: Object = {
     query: '{ notes { id, title, description } }',
   },
   title: 'Notes',
-  loggedInOnly: true,
+  showInNav: true,
   icon: NotesIcon,
 }
 
@@ -26,5 +26,4 @@ export const notePageConfig: Object = {
     query: 'query ($id: ID!) { note(id: $id) { id, title, description } }',
     urlParamsToVars: ({ id }: { id: string }) => ({ id }),
   },
-  loggedInOnly: true,
 }
