@@ -7,11 +7,11 @@ This is the final boilerplate code of the [JavaScript Stack from Scratch](https:
 
 ## Getting started with this repository
 
-- [Download](https://github.com/verekia/js-stack-boilerplate/archive/master.zip) the repository.
-- Edit `package.json` with your own info.
-- Copy `.env-sample` to `.env`.
-- Run `yarn` and `yarn start`. That's it!
-- Delete the content of this `README.md` file.
+- [Download](https://github.com/verekia/js-stack-boilerplate/archive/master.zip) the repository
+- Edit `package.json` with your own info
+- Copy `.env-sample` to `.env`
+- Run `yarn` and `yarn start` – That's it!
+- Delete the content of this `README.md` file
 
 ## Demo
 
