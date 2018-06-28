@@ -16,7 +16,7 @@ cp .env-sample $dir
 cp .eslintrc.json $dir
 cp .flowconfig $dir
 cp .gitignore $dir
-cp .travis.yml $dir
+cp docker-compose.yml $dir
 cp package.json $dir
 cp Procfile $dir
 
