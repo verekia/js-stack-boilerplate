@@ -1,6 +1,7 @@
 // @flow
 
 import 'babel-polyfill'
+import { PORT, isProd } from '_server/env'
 
 import React from 'react'
 import http from 'http'
@@ -21,6 +22,7 @@ import graphqlHTTP from 'koa-graphql'
 import { buildSchema } from 'graphql'
 import bcrypt from 'bcrypt'
 
+import redis from '_db/redis'
 import { notesPageConfig } from 'note/note-config'
 import { allPageRoutes } from '_shared/shared-config'
 import { fetchGraphQL } from '_shared/api-calls'
@@ -29,9 +31,6 @@ import { createUser, findUserByUsername } from 'user/user-db'
 import App from 'app/app'
 
 // CALL knex.destroy at sigint
-
-const PORT = 8000
-const IS_PROD = false
 
 const notes = [{ id: '123', name: 'Medor' }, { id: '456', name: 'Max' }]
 
@@ -184,7 +183,7 @@ const main = async () => {
     .use(router.allowedMethods())
 
   const server = http.createServer(app.callback())
-  console.log(`Server now listenning on port ${PORT} (${IS_PROD ? 'production' : 'development'})`)
+  console.log(`Server now listenning on port ${PORT} (${isProd ? 'production' : 'development'})`)
   server.listen(PORT)
 }
 

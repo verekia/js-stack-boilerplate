@@ -1,14 +1,14 @@
 // @flow
 
-import { env } from '_server/setup'
+import { DATABASE_URL, USE_SSL_DB } from '_server/env'
 
 import Knex from 'knex'
 import pg from 'pg'
 
-pg.defaults.ssl = env.USE_SSL_DB
+pg.defaults.ssl = USE_SSL_DB
 
 export default Knex({
   client: 'pg',
-  connection: env.DATABASE_URL,
+  connection: DATABASE_URL,
   migrations: { directory: './migrations' },
 })
