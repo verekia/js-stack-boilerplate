@@ -8,7 +8,9 @@ module.exports = {
       t.timestamp('updatedAt')
         .notNullable()
         .defaultTo(knex.fn.now())
-      t.string('username').notNullable()
+      t.string('username')
+        .unique()
+        .notNullable()
       t.string('passwordHash').notNullable()
     })
     await knex.schema.createTable('Note', t => {
