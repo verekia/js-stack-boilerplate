@@ -10,6 +10,12 @@ This is the final boilerplate code of the [JavaScript Stack from Scratch](https:
 - [Download](https://github.com/verekia/js-stack-boilerplate/archive/master.zip) the repository
 - Edit `package.json` with your own info
 - Copy `.env-sample` to `.env`
+
+Then, _if you do not want to use Heroku and its CLI_:
+- Delete the `Procfile` file
+- Replace the `prod:start-local` NPM script in `package.json` by: `yon docker && node lib/_server/server.js`
+- Delete the `heroku-` NPM scripts
+
 - Run `yarn` and `yarn start`, then open your browser on `http://localhost:8000` – That's it!
 - Delete the content of this `README.md` file
 
