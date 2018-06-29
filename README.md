@@ -16,6 +16,8 @@ Then, _if you do not want to use Heroku and its CLI_:
 - Replace the `prod:start-local` NPM script in `package.json` by: `yon docker && node lib/_server/server.js`
 - Delete the `heroku-` NPM scripts
 
+And for everyone:
+
 - Run `yarn` and `yarn start`, then open your browser on `http://localhost:8000` – That's it!
 - Delete the content of this `README.md` file
 
