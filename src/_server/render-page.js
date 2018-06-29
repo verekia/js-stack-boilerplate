@@ -12,6 +12,7 @@ import { StaticRouter } from 'react-router-dom'
 import serialize from 'serialize-javascript'
 import CleanCSS from 'clean-css'
 
+import globalStyles from '_server/global-styles'
 import theme from 'app/theme'
 import getGeneralData from '_server/general-data'
 import App from 'app/app'
@@ -41,6 +42,7 @@ const renderPage = (ctx: Object, pageData?: Object = {}) => {
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
         ${helmet.link.toString()}
+        <style>${globalStyles}</style>
         <style id="jss-server-side">${new CleanCSS().minify(css).styles}</style>
       </head>
       <body ${helmet.bodyAttributes.toString()}>

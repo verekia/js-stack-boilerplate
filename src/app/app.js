@@ -12,11 +12,13 @@ import NotFoundPage from 'error/cmp-page/not-found-page'
 
 const mstp = ({ general }) => ({ isLoggedIn: !!general.user })
 
+const BASE_TITLE = 'My Notes'
+
 const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
   <div>
-    <Helmet>
-      <title>App</title>
-      <meta httpEquiv="x-ua-compatible" content="ie=edge" />>
+    <Helmet titleTemplate={`%s | ${BASE_TITLE}`} defaultTitle={BASE_TITLE}>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta httpEquiv="x-ua-compatible" content="ie=edge" />
     </Helmet>
     {isLoggedIn && <Nav />}
     <Switch>
