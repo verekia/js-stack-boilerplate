@@ -22,9 +22,7 @@ import { Link } from 'react-router-dom'
 
 const navConfigs = allPageConfigs.filter(c => c.showInNav)
 
-const styles = {
-  navLink: { textDecoration: 'none' },
-}
+const styles = { navLink: { textDecoration: 'none' } }
 
 const mstp = ({ general }) => ({ username: general.user.username })
 
