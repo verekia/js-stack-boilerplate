@@ -3,7 +3,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { homePageConfig } from 'home/home-config'
+import { welcomePageConfig } from 'welcome/welcome-config'
 
 export default () => (
   <form action="/login" method="post">
@@ -16,6 +16,6 @@ export default () => (
       <input name="password" type="password" />
     </label>
     <button>Log In</button>
-    or <Link to={homePageConfig.route.path}>Sign Up</Link>
+    or <Link to={welcomePageConfig.route.path}>Sign Up</Link>
   </form>
 )

@@ -9,7 +9,7 @@ import { compose } from 'recompose'
 import Nav from 'app/cmp/nav-cmp'
 import { allPageRoutesExceptRoot } from '_shared/shared-config'
 import NotFoundPage from 'error/cmp-page/not-found-page'
-import HomePage from 'home/cmp-page/home-page'
+import WelcomePage from 'welcome/cmp-page/welcome-page'
 import NotesPage from 'note/cmp-page/notes-page'
 
 const mstp = ({ general }) => ({ isLoggedIn: !!general.user })
@@ -22,9 +22,9 @@ const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
     </Helmet>
-    {isLoggedIn && <Nav />}
-    <Switch>
-      <Route path="/" exact={true} component={isLoggedIn ? NotesPage : HomePage} />
+    {/* {isLoggedIn && <Nav />} */}
+    {/* <Switch>
+      <Route path="/" exact={true} component={isLoggedIn ? NotesPage : WelcomePage} />
       {allPageRoutesExceptRoot.map(
         ({
           path,
@@ -45,9 +45,8 @@ const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
           />
         ),
       )}
-      {/* <Route component={NotFoundPage} /> */}
       <Route render={props => <NotFoundPage {...props} />} />
-    </Switch>
+    </Switch> */}
   </div>
 )
 

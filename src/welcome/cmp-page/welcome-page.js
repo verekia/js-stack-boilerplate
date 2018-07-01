@@ -6,7 +6,7 @@ import SignupForm from 'auth/cmp/signup-form-cmp'
 
 export default () => (
   <div>
-    <h1>Home</h1>
+    <h1>Welcome</h1>
     <SignupForm />
   </div>
 )
