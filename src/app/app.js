@@ -22,8 +22,8 @@ const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
     </Helmet>
-    {/* {isLoggedIn && <Nav />} */}
-    {/* <Switch>
+    {isLoggedIn && <Nav />}
+    <Switch>
       <Route path="/" exact={true} component={isLoggedIn ? NotesPage : WelcomePage} />
       {allPageRoutesExceptRoot.map(
         ({
@@ -46,7 +46,7 @@ const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
         ),
       )}
       <Route render={props => <NotFoundPage {...props} />} />
-    </Switch> */}
+    </Switch>
   </div>
 )
 
