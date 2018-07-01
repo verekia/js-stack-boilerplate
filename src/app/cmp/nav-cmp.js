@@ -6,34 +6,31 @@ import { compose, withState } from 'recompose'
 import AppBar from '@material-ui/core/AppBar'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import MenuIcon from '@material-ui/icons/Menu'
-import LogoutIcon from '@material-ui/icons/ExitToApp'
+import LogoutIcon from '@material-ui/icons/PowerSettingsNew'
 import { withStyles } from '@material-ui/core/styles'
 
 import IconButton from '@material-ui/core/IconButton'
 import Toolbar from '@material-ui/core/Toolbar'
 
-import { allPageConfigs } from '_shared/shared-config'
+import { allPageConfigsExceptRoot } from '_shared/shared-config'
+import { notesPageConfig } from 'note/note-config'
+import NavItem from 'app/cmp/nav-item-cmp'
 
-import { Link } from 'react-router-dom'
-
-const navConfigs = allPageConfigs.filter(c => c.showInNav)
-
-const styles = { navLink: { textDecoration: 'none' } }
+const navConfigs = allPageConfigsExceptRoot.filter(c => c.showInNav)
 
 const mstp = ({ general }) => ({ username: general.user.username })
 
-type Props = {
+const styles = theme => ({ appBarPusher: theme.mixins.toolbar })
+
+type NavProps = {
   classes: Object,
   username: string,
   isOpen: boolean,
   updateIsOpen: Function,
 }
 
-const Nav = ({ classes, username, isOpen, updateIsOpen }: Props) => (
+const Nav = ({ classes, username, isOpen, updateIsOpen }: NavProps) => (
   <Fragment>
     <AppBar position="fixed">
       <Toolbar>
@@ -42,6 +39,7 @@ const Nav = ({ classes, username, isOpen, updateIsOpen }: Props) => (
         </IconButton>
       </Toolbar>
     </AppBar>
+    <div className={classes.appBarPusher} />
     <SwipeableDrawer
       anchor="left"
       open={isOpen}
@@ -51,24 +49,15 @@ const Nav = ({ classes, username, isOpen, updateIsOpen }: Props) => (
       onClick={() => updateIsOpen(false)}
     >
       <List>
-        {navConfigs.map(({ icon: Icon, route, title }) => (
-          <Link key={route.path} to={route.path} className={classes.navLink}>
-            <ListItem button>
-              <ListItemIcon>
-                <Icon />
-              </ListItemIcon>
-              <ListItemText primary={title} />
-            </ListItem>
-          </Link>
+        <NavItem
+          url={notesPageConfig.route.path}
+          label={notesPageConfig.title}
+          icon={notesPageConfig.icon}
+        />
+        {navConfigs.map(c => (
+          <NavItem key={c.route.path} url={c.route.path} label={c.title} icon={c.icon} />
         ))}
-        <a href="/logout" className={classes.navLink}>
-          <ListItem button>
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary="Log Out" />
-          </ListItem>
-        </a>
+        <NavItem url="/logout" label="Log Out" icon={LogoutIcon} />
       </List>
     </SwipeableDrawer>
   </Fragment>

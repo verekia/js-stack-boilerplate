@@ -5,7 +5,8 @@ import { protect } from '_server/server-util'
 export const noteSchema = `
   type Note {
     id: ID!
-    name: String
+    title: String!
+    description: String
   }
 
   type Query {
@@ -14,7 +15,9 @@ export const noteSchema = `
   }
 `
 
+const notes = [{ id: '123', title: 'Great title' }]
+
 export const noteResolvers = {
   notes: protect(() => []),
-  note: protect(({ id }) => [].find(d => d.id === id)),
+  note: protect(({ id }) => notes.find(n => n.id === id)),
 }

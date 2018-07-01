@@ -7,8 +7,10 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
 import Nav from 'app/cmp/nav-cmp'
-import { allPageRoutes } from '_shared/shared-config'
+import { allPageRoutesExceptRoot } from '_shared/shared-config'
 import NotFoundPage from 'error/cmp-page/not-found-page'
+import HomePage from 'home/cmp-page/home-page'
+import NotesPage from 'note/cmp-page/notes-page'
 
 const mstp = ({ general }) => ({ isLoggedIn: !!general.user })
 
@@ -22,7 +24,8 @@ const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
     </Helmet>
     {isLoggedIn && <Nav />}
     <Switch>
-      {allPageRoutes.map(
+      <Route path="/" exact={true} component={isLoggedIn ? NotesPage : HomePage} />
+      {allPageRoutesExceptRoot.map(
         ({
           path,
           exact,

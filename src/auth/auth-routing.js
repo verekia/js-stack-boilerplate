@@ -15,6 +15,7 @@ const logIn = (ctx, id, username) => {
 const authRouting = (router: Object) => {
   router.post('/signup', async ctx => {
     const { username, password } = ctx.request.body
+    ctx.session = {}
     if (!username || username === '' || !password || password === '') {
       renderPage(ctx, {
         prefill: ctx.request.body,
@@ -30,6 +31,7 @@ const authRouting = (router: Object) => {
 
   router.post('/login', async ctx => {
     const { username, password } = ctx.request.body
+    ctx.session = {}
     const user = await findUserByUsername(username)
     if (user && (await bcrypt.compare(password, user.passwordHash))) {
       logIn(ctx, user.id, user.username)

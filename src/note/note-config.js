@@ -6,8 +6,9 @@ import NotesIcon from '@material-ui/icons/Description'
 
 export const notesPageConfig: Object = {
   route: {
-    path: '/notes',
+    path: '/',
     component: NotesPage,
+    exact: true,
   },
   graphql: {
     query: '{ notes { id, title, description } }',
@@ -21,6 +22,7 @@ export const notePageConfig: Object = {
   route: {
     path: '/note/:id',
     component: NotePage,
+    exact: true,
   },
   graphql: {
     query: 'query ($id: ID!) { note(id: $id) { id, title, description } }',
