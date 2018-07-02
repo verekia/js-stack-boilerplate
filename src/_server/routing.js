@@ -30,7 +30,12 @@ const graphqlCall = async (url: String, cookie: string) => {
   if (activeConfig.graphql) {
     const queryVariables =
       activeConfig.graphql.urlParamsToVars && activeConfig.graphql.urlParamsToVars(match.params)
-    return fetchGraphQL(activeConfig.graphql.query, queryVariables, cookie)
+    return fetchGraphQL({
+      baseUrl: 'http://localhost:8000',
+      query: activeConfig.graphql.query,
+      variables: queryVariables,
+      cookie,
+    })
   }
   return undefined
 }

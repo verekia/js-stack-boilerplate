@@ -14,8 +14,10 @@ const loadPageFailure = createAction(LOAD_PAGE_FAILURE)
 export const loadPage = (query: string, variables?: Object) => async (dispatch: Function) => {
   dispatch(loadPageRequest())
   try {
-    dispatch(loadPageSuccess(await fetchGraphQL(query, variables)))
+    dispatch(loadPageSuccess(await fetchGraphQL({ query, variables })))
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err)
     dispatch(loadPageFailure())
   }
 }
@@ -25,7 +27,7 @@ const initialState = { page: {}, general: {} }
 const reducer = (state: Object = initialState, action: Object) => {
   switch (action.type) {
     case LOAD_PAGE_REQUEST:
-      return { ...state, general: { ...state.general, isLoading: true, hasError: false } }
+      return { page: {}, general: { ...state.general, isLoading: true, hasError: false } }
     case LOAD_PAGE_SUCCESS:
       return { page: action.payload, general: { ...state.general, isLoading: false } }
     case LOAD_PAGE_FAILURE:
