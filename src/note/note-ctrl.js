@@ -15,9 +15,9 @@ export const noteSchema = `
   }
 `
 
-const notes = [{ id: '123', title: 'Great title' }]
+const notes = [{ id: '123', title: 'Great title' }, { id: '234', title: 'Lame title' }]
 
 export const noteResolvers = {
-  notes: protect(() => []),
+  notes: protect(() => notes),
   note: protect(({ id }) => notes.find(n => n.id === id)),
 }

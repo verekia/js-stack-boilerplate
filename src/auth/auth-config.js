@@ -4,7 +4,7 @@ import LoginPage from 'auth/cmp-page/login-page'
 
 export const loginPageConfig: Object = {
   route: {
-    path: '/login',
+    path: () => '/login',
     exact: true,
     component: LoginPage,
   },

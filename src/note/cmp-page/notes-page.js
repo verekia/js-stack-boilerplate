@@ -3,7 +3,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose, lifecycle as withLifecycle } from 'recompose'
-import { notesPageConfig } from 'note/note-config'
+import { notesPageConfig, notePageConfig } from 'note/note-config'
+import { Link } from 'react-router-dom'
 
 import { loadPage } from '_client/duck'
 
@@ -12,7 +13,9 @@ const mdtp = dispatch => ({ fetchPage: () => dispatch(loadPage(notesPageConfig.g
 
 const lifecycle = {
   componentDidMount() {
-    this.props.fetchPage()
+    if (!this.props.notes) {
+      this.props.fetchPage()
+    }
   },
 }
 
@@ -21,7 +24,13 @@ const NotesPage = ({ notes }: { notes?: Object[] }) => (
     {notes && (
       <div>
         {notes.length > 0 ? (
-          <ul>{notes.map(n => <li key={n.id}>{n.title}</li>)}</ul>
+          <ul>
+            {notes.map(n => (
+              <li key={n.id}>
+                <Link to={notePageConfig.route.path(n.id)}>{n.title}</Link>
+              </li>
+            ))}
+          </ul>
         ) : (
           <div>No notes</div>
         )}

@@ -9,7 +9,7 @@ import renderPage from '_server/render-page'
 
 const logIn = (ctx, id, username) => {
   ctx.session.user = { id, username }
-  ctx.redirect(notesPageConfig.route.path)
+  ctx.redirect(notesPageConfig.route.path())
 }
 
 const authRouting = (router: Object) => {

@@ -6,7 +6,7 @@ import NotesIcon from '@material-ui/icons/Description'
 
 export const notesPageConfig: Object = {
   route: {
-    path: '/',
+    path: () => '/',
     component: NotesPage,
     exact: true,
   },
@@ -20,7 +20,7 @@ export const notesPageConfig: Object = {
 
 export const notePageConfig: Object = {
   route: {
-    path: '/note/:id',
+    path: (id: ?string) => `/note/${id || ':id'}`,
     component: NotePage,
     exact: true,
   },

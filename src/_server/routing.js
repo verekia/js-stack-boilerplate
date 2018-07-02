@@ -23,7 +23,7 @@ const graphqlCall = async (url: String, cookie: string) => {
 
   const activeConfig: Object =
     allPageConfigsExceptRoot.concat(notesPageConfig).find(({ route }) => {
-      match = matchPath(url, route)
+      match = matchPath(url, { ...route, path: route.path() })
       return match
     }) || {}
 

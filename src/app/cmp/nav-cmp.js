@@ -50,12 +50,12 @@ const Nav = ({ classes, username, isOpen, updateIsOpen }: NavProps) => (
     >
       <List>
         <NavItem
-          url={notesPageConfig.route.path}
+          url={notesPageConfig.route.path()}
           label={notesPageConfig.title}
           icon={notesPageConfig.icon}
         />
         {navConfigs.map(c => (
-          <NavItem key={c.route.path} url={c.route.path} label={c.title} icon={c.icon} />
+          <NavItem key={c.route.path()} url={c.route.path()} label={c.title} icon={c.icon} />
         ))}
         <NavItem url="/logout" label="Log Out" icon={LogoutIcon} />
       </List>

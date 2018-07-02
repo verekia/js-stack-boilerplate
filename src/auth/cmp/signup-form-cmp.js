@@ -16,6 +16,6 @@ export default () => (
       <input name="password" type="password" />
     </label>
     <button>Sign Up</button>
-    or <Link to={loginPageConfig.route.path}>Log In</Link>
+    or <Link to={loginPageConfig.route.path()}>Log In</Link>
   </form>
 )
