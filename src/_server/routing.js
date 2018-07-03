@@ -23,13 +23,13 @@ const graphqlCall = async (url: String, cookie: string) => {
 
   const activeConfig: Object =
     allPageConfigsExceptRoot.concat(notesPageConfig).find(({ route }) => {
-      match = matchPath(url, { ...route, path: route.path() })
+      match = matchPath(url, route)
       return match
     }) || {}
 
   if (activeConfig.graphql) {
     const queryVariables =
-      activeConfig.graphql.urlParamsToVars && activeConfig.graphql.urlParamsToVars(match.params)
+      activeConfig.graphql.mapParams && activeConfig.graphql.mapParams(match.params)
     return fetchGraphQL({
       baseUrl: 'http://localhost:8000',
       query: activeConfig.graphql.query,

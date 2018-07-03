@@ -32,14 +32,14 @@ const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
           component: Cmp,
           ...rest
         }: {
-          path: Function,
+          path: string,
           exact?: boolean,
           component: Function,
         }) => (
-          // <Route key={path()} path={path()} exact={exact} component={component} />
+          // <Route key={path} path={path} exact={exact} component={component} />
           <Route
-            key={path()}
-            path={path()}
+            key={path}
+            path={path}
             exact={exact}
             render={props => <Cmp {...props} {...rest} />}
           />

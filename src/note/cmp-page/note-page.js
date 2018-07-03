@@ -1,37 +1,21 @@
 // @flow
 
 import React from 'react'
-import { connect } from 'react-redux'
-import { compose, lifecycle as withLifecycle } from 'recompose'
-import { notePageConfig } from 'note/note-config'
 
-import { loadPage } from '_client/duck'
+import { noteGraphql } from 'note/note-graphql'
+import isPage from 'app/hoc/is-page'
 
-const mstp = ({ page }) => ({ note: page.note })
-const mdtp = dispatch => ({
-  fetchPage: id => dispatch(loadPage(notePageConfig.graphql.query, { id })),
-})
+const NotePage = ({ title, description }: { title: string, description?: string }) => (
+  <div>
+    <h1>Note: {title}</h1>
+    <p>{description}</p>
+  </div>
+)
 
-const lifecycle = {
-  componentDidMount() {
-    if (!this.props.note) {
-      this.props.fetchPage(this.props.match.params.id)
-    }
-  },
-}
+const NoteNotFound = () => <h2>Opps, couldn't find this note</h2>
 
-const NotePage = ({ note }: { note?: Object }) =>
-  note ? (
-    <div>
-      <h1>Note: {note.title}</h1>
-      <p>{note.description}</p>
-    </div>
-  ) : null
-
-export default compose(
-  connect(
-    mstp,
-    mdtp,
-  ),
-  withLifecycle(lifecycle),
-)(NotePage)
+export default isPage({
+  mainDataProp: 'note',
+  graphqlQuery: noteGraphql.query,
+  DefaultCmp: NoteNotFound,
+})(NotePage)

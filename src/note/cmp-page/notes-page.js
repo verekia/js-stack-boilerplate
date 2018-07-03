@@ -1,23 +1,11 @@
 // @flow
 
 import React from 'react'
-import { connect } from 'react-redux'
-import { compose, lifecycle as withLifecycle } from 'recompose'
-import { notesPageConfig, notePageConfig } from 'note/note-config'
+import { notePath } from 'note/note-paths'
+import { notesGraphql } from 'note/note-graphql'
 import { Link } from 'react-router-dom'
 
-import { loadPage } from '_client/duck'
-
-const mstp = ({ page }) => ({ notes: page.notes })
-const mdtp = dispatch => ({ fetchPage: () => dispatch(loadPage(notesPageConfig.graphql.query)) })
-
-const lifecycle = {
-  componentDidMount() {
-    if (!this.props.notes) {
-      this.props.fetchPage()
-    }
-  },
-}
+import isPage from 'app/hoc/is-page'
 
 const NotesPage = ({ notes }: { notes?: Object[] }) => (
   <div>
@@ -27,7 +15,7 @@ const NotesPage = ({ notes }: { notes?: Object[] }) => (
           <ul>
             {notes.map(n => (
               <li key={n.id}>
-                <Link to={notePageConfig.route.path(n.id)}>{n.title}</Link>
+                <Link to={notePath(n.id)}>{n.title}</Link>
               </li>
             ))}
           </ul>
@@ -39,10 +27,10 @@ const NotesPage = ({ notes }: { notes?: Object[] }) => (
   </div>
 )
 
-export default compose(
-  connect(
-    mstp,
-    mdtp,
-  ),
-  withLifecycle(lifecycle),
-)(NotesPage)
+const NoNotes = () => <h2>You don't have any note yet, create one!</h2>
+
+export default isPage({
+  mainDataProp: 'notes',
+  graphqlQuery: notesGraphql.query,
+  DefaultCmp: NoNotes,
+})(NotesPage)

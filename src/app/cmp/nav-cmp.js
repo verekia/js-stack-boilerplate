@@ -16,6 +16,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import { allPageConfigsExceptRoot } from '_shared/shared-config'
 import { notesPageConfig } from 'note/note-config'
 import NavItem from 'app/cmp/nav-item-cmp'
+import { logoutPath } from 'auth/auth-paths'
 
 const navConfigs = allPageConfigsExceptRoot.filter(c => c.showInNav)
 
@@ -50,14 +51,14 @@ const Nav = ({ classes, username, isOpen, updateIsOpen }: NavProps) => (
     >
       <List>
         <NavItem
-          url={notesPageConfig.route.path()}
+          url={notesPageConfig.route.path}
           label={notesPageConfig.title}
           icon={notesPageConfig.icon}
         />
         {navConfigs.map(c => (
-          <NavItem key={c.route.path()} url={c.route.path()} label={c.title} icon={c.icon} />
+          <NavItem key={c.route.path} url={c.route.path} label={c.title} icon={c.icon} />
         ))}
-        <NavItem url="/logout" label="Log Out" icon={LogoutIcon} />
+        <NavItem url={logoutPath()} label="Log Out" icon={LogoutIcon} />
       </List>
     </SwipeableDrawer>
   </Fragment>

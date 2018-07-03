@@ -3,7 +3,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { loginPageConfig } from 'auth/auth-config'
+import { loginPath } from 'auth/auth-paths'
 
 export default () => (
   <form action="/signup" method="post">
@@ -16,6 +16,6 @@ export default () => (
       <input name="password" type="password" />
     </label>
     <button>Sign Up</button>
-    or <Link to={loginPageConfig.route.path()}>Log In</Link>
+    or <Link to={loginPath()}>Log In</Link>
   </form>
 )

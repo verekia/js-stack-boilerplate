@@ -10,3 +10,4 @@ module.system.node.resolve_dirname=src
 .*/node_modules/express-graphql/.*
 .*/node_modules/koa-graphql/.*
 .*/node_modules/config-chain/.*
+.*/node_modules/graphviz/.*

@@ -3,13 +3,13 @@
 import uuid from 'uuid/v4'
 import bcrypt from 'bcrypt'
 
-import { notesPageConfig } from 'note/note-config'
+import { notesPath } from 'note/note-paths'
 import { createUser, findUserByUsername } from 'user/user-db'
 import renderPage from '_server/render-page'
 
 const logIn = (ctx, id, username) => {
   ctx.session.user = { id, username }
-  ctx.redirect(notesPageConfig.route.path())
+  ctx.redirect(notesPath())
 }
 
 const authRouting = (router: Object) => {
