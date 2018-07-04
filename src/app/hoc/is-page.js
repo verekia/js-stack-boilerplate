@@ -7,11 +7,11 @@ import { loadPage } from 'app/duck'
 
 const isPage = ({
   mainDataProp,
-  graphqlQuery,
+  graphql,
   DefaultCmp,
 }: {
   mainDataProp: string,
-  graphqlQuery: string,
+  graphql: Object,
   DefaultCmp: Function,
 }) => (BaseComponent: Function) => {
   const mstp = ({ general, page }) => ({
@@ -19,7 +19,8 @@ const isPage = ({
     isLoading: general.isLoading,
   })
   const mdtp = dispatch => ({
-    fetchPage: params => dispatch(loadPage(graphqlQuery, params)),
+    fetchPage: params =>
+      dispatch(loadPage(graphql.query, graphql.mapParams ? graphql.mapParams(params) : params)),
   })
 
   const EnhancedComponent = props => {

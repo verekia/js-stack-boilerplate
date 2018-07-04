@@ -21,6 +21,6 @@ const NoNotes = () => <h2>You don't have any note yet, create one!</h2>
 
 export default isPage({
   mainDataProp: 'notes',
-  graphqlQuery: notesGraphql.query,
+  graphql: notesGraphql,
   DefaultCmp: NoNotes,
 })(NotesPage)
