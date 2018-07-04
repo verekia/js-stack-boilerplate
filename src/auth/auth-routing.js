@@ -8,14 +8,13 @@ import { createUser, findUserByUsername } from 'user/user-db'
 import renderPage from '_server/render-page'
 
 const logIn = (ctx, id, username) => {
-  ctx.session.user = { id, username }
+  ctx.session = { user: { id, username } }
   ctx.redirect(notesPath())
 }
 
 const authRouting = (router: Object) => {
   router.post('/signup', async ctx => {
     const { username, password } = ctx.request.body
-    ctx.session = {}
     if (!username || username === '' || !password || password === '') {
       renderPage(ctx, {
         prefill: ctx.request.body,
@@ -31,7 +30,6 @@ const authRouting = (router: Object) => {
 
   router.post('/login', async ctx => {
     const { username, password } = ctx.request.body
-    ctx.session = {}
     const user = await findUserByUsername(username)
     if (user && (await bcrypt.compare(password, user.passwordHash))) {
       logIn(ctx, user.id, user.username)

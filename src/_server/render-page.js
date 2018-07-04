@@ -21,17 +21,22 @@ const renderPage = (ctx: Object, pageData?: Object = {}) => {
   const sheetsRegistry = new SheetsRegistry()
   const generateClassName = createGenerateClassName()
   const store = createStore(() => ({ page: pageData, general: getGeneralData(ctx) }))
+  const routerContext = {}
   const appHtml = ReactDOMServer.renderToString(
     <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
       <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
         <ReduxProvider store={store}>
-          <StaticRouter location={ctx.req.url} context={{}}>
+          <StaticRouter location={ctx.req.url} context={routerContext}>
             <App />
           </StaticRouter>
         </ReduxProvider>
       </MuiThemeProvider>
     </JssProvider>,
   )
+  if (routerContext.action === 'REPLACE') {
+    ctx.redirect(routerContext.url)
+    return
+  }
   const css = sheetsRegistry.toString()
   const helmet = Helmet.renderStatic()
 

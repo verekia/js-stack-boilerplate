@@ -2,6 +2,7 @@
 
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { compose, withState } from 'recompose'
 import AppBar from '@material-ui/core/AppBar'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
@@ -22,7 +23,10 @@ const navConfigs = allPageConfigsExceptRoot.filter(c => c.showInNav)
 
 const mstp = ({ general }) => ({ username: general.user.username })
 
-const styles = theme => ({ appBarPusher: theme.mixins.toolbar })
+const styles = theme => ({
+  appBarPusher: theme.mixins.toolbar,
+  navLink: { textDecoration: 'none' },
+})
 
 type NavProps = {
   classes: Object,
@@ -50,15 +54,17 @@ const Nav = ({ classes, username, isOpen, updateIsOpen }: NavProps) => (
       onClick={() => updateIsOpen(false)}
     >
       <List>
-        <NavItem
-          url={notesPageConfig.route.path}
-          label={notesPageConfig.title}
-          icon={notesPageConfig.icon}
-        />
+        <Link to={notesPageConfig.route.path} className={classes.navLink}>
+          <NavItem label={notesPageConfig.title} icon={notesPageConfig.icon} />
+        </Link>
         {navConfigs.map(c => (
-          <NavItem key={c.route.path} url={c.route.path} label={c.title} icon={c.icon} />
+          <Link key={c.route.path} to={c.route.path} className={classes.navLink}>
+            <NavItem label={c.title} icon={c.icon} />
+          </Link>
         ))}
-        <NavItem url={logoutPath()} label="Log Out" icon={LogoutIcon} />
+        <a href={logoutPath()} className={classes.navLink}>
+          <NavItem label="Log Out" icon={LogoutIcon} />
+        </a>
       </List>
     </SwipeableDrawer>
   </Fragment>
