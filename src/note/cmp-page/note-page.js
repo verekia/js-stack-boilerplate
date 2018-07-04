@@ -12,10 +12,10 @@ const NotePage = ({ title, description }: { title: string, description?: string 
   </div>
 )
 
-const NoteNotFound = () => <h2>Opps, couldn't find this note</h2>
+const NoNote = () => <h2>Opps, couldn't find this note</h2>
 
 export default isPage({
   mainDataProp: 'note',
   graphqlQuery: noteGraphql.query,
-  DefaultCmp: NoteNotFound,
+  DefaultCmp: NoNote,
 })(NotePage)

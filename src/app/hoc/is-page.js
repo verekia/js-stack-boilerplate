@@ -14,13 +14,22 @@ const isPage = ({
   graphqlQuery: string,
   DefaultCmp: Function,
 }) => (BaseComponent: Function) => {
-  const mstp = ({ page }) => ({ ...page[mainDataProp] })
+  const mstp = ({ page }) => ({ [mainDataProp]: page[mainDataProp] })
   const mdtp = dispatch => ({
     fetchPage: params => dispatch(loadPage(graphqlQuery, params)),
   })
 
-  const EnhancedComponent = props =>
-    props[mainDataProp] ? <BaseComponent {...props} /> : <DefaultCmp {...props} />
+  const EnhancedComponent = props => {
+    const mainData = props[mainDataProp]
+    const hasData = Array.isArray(mainData) ? mainData.length > 0 : !!mainData
+    const onlyDataProps = Array.isArray(mainData)
+      ? { [mainDataProp]: mainData }
+      : { ...props[mainDataProp] }
+    if (hasData) {
+      return <BaseComponent {...onlyDataProps} />
+    }
+    return DefaultCmp ? <DefaultCmp {...onlyDataProps} /> : null
+  }
 
   return compose(
     connect(
