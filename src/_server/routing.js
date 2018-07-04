@@ -18,9 +18,12 @@ import { notesPageConfig } from 'note/note-config'
 const combinedSchemas = [noteSchema].join(' ')
 const combinedResolvers = { ...noteResolvers }
 
-const graphqlCall = async (url: String, cookie: string) => {
-  let match = {}
+const graphqlCall = async (ctx: Object) => {
+  const { url } = ctx.req
+  const { cookie } = ctx.req.headers
+  const baseUrl = ctx.request.origin
 
+  let match = {}
   const activeConfig: Object =
     allPageConfigsExceptRoot.concat(notesPageConfig).find(({ route }) => {
       match = matchPath(url, route)
@@ -32,7 +35,7 @@ const graphqlCall = async (url: String, cookie: string) => {
       ? activeConfig.graphql.mapParams(match.params)
       : match.params
     return fetchGraphQL({
-      baseUrl: 'http://localhost:8000',
+      baseUrl,
       query: activeConfig.graphql.query,
       variables: queryVariables,
       cookie,
@@ -68,7 +71,7 @@ const setUpRouting = (router: Object) => {
     // (if not logged out homepage)
     if (!(ctx.req.url === '/' && !ctx.session.user)) {
       try {
-        pageData = await graphqlCall(ctx.req.url, ctx.req.headers.cookie)
+        pageData = await graphqlCall(ctx)
       } catch (err) {
         if (err.message === 'unauthorized') {
           ctx.redirect('/login')
