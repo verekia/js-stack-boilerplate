@@ -3,7 +3,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
 import Nav from 'app/cmp/nav-cmp'
@@ -11,7 +11,6 @@ import { allPageRoutesExceptRoot } from '_shared/shared-config'
 import NotFoundPage from 'error/cmp-page/not-found-page'
 import WelcomePage from 'welcome/cmp-page/welcome-page'
 import NotesPage from 'note/cmp-page/notes-page'
-import { logoutPath } from 'auth/auth-paths'
 
 const mstp = ({ general }) => ({ isLoggedIn: !!general.user })
 
