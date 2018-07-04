@@ -14,7 +14,10 @@ const isPage = ({
   graphqlQuery: string,
   DefaultCmp: Function,
 }) => (BaseComponent: Function) => {
-  const mstp = ({ page }) => ({ [mainDataProp]: page[mainDataProp] })
+  const mstp = ({ general, page }) => ({
+    [mainDataProp]: page[mainDataProp],
+    isLoading: general.isLoading,
+  })
   const mdtp = dispatch => ({
     fetchPage: params => dispatch(loadPage(graphqlQuery, params)),
   })
@@ -27,6 +30,9 @@ const isPage = ({
       : { ...props[mainDataProp] }
     if (hasData) {
       return <BaseComponent {...onlyDataProps} />
+    }
+    if (!hasData && props.isLoading) {
+      return null
     }
     return DefaultCmp ? <DefaultCmp {...onlyDataProps} /> : null
   }
