@@ -6,6 +6,7 @@ import NotesIcon from '@material-ui/icons/Description'
 
 import { noteGraphql, notesGraphql } from 'note/note-graphql'
 import { notePath, notesPath } from 'note/note-paths'
+import { noteTitle, notesTitle } from 'note/note-titles'
 
 export const notesPageConfig: Object = {
   route: {
@@ -14,7 +15,7 @@ export const notesPageConfig: Object = {
     exact: true,
   },
   graphql: notesGraphql,
-  title: 'Notes',
+  createTitle: notesTitle,
   showInNav: true,
   icon: NotesIcon,
 }
@@ -26,4 +27,5 @@ export const notePageConfig: Object = {
     exact: true,
   },
   graphql: noteGraphql,
+  createTitle: noteTitle,
 }

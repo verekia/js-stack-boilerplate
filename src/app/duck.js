@@ -11,10 +11,22 @@ const loadPageRequest = createAction(LOAD_PAGE_REQUEST)
 const loadPageSuccess = createAction(LOAD_PAGE_SUCCESS)
 const loadPageFailure = createAction(LOAD_PAGE_FAILURE)
 
-export const loadPage = (query: string, variables?: Object) => async (dispatch: Function) => {
+type Options = {
+  query?: string,
+  variables?: Object,
+  createTitle?: Function,
+}
+
+export const loadPage = ({ query, variables, createTitle }: Options) => async (
+  dispatch: Function,
+) => {
   dispatch(loadPageRequest())
   try {
-    dispatch(loadPageSuccess(await fetchGraphQL({ query, variables })))
+    const pageData = query ? await fetchGraphQL({ query, variables }) : {}
+    if (createTitle) {
+      pageData.title = createTitle(pageData)
+    }
+    dispatch(loadPageSuccess(pageData))
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err)

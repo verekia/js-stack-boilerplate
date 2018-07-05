@@ -12,13 +12,14 @@ import NotFoundPage from 'error/cmp-page/not-found-page'
 import WelcomePage from 'welcome/cmp-page/welcome-page'
 import NotesPage from 'note/cmp-page/notes-page'
 
-const mstp = ({ general }) => ({ isLoggedIn: !!general.user })
+const mstp = ({ general, page }) => ({ isLoggedIn: !!general.user, title: page.title })
 
-const BASE_TITLE = 'My Notes'
+const BASE_TITLE = 'Notesapp'
 
-const App = ({ isLoggedIn }: { isLoggedIn: boolean }) => (
+const App = ({ isLoggedIn, title }: { isLoggedIn: boolean, title?: string }) => (
   <div>
     <Helmet titleTemplate={`%s | ${BASE_TITLE}`} defaultTitle={BASE_TITLE}>
+      <title>{title}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
     </Helmet>

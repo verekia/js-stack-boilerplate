@@ -1,7 +1,8 @@
 // @flow
 
-import { loginPath } from 'auth/auth-paths'
 import LoginPage from 'auth/cmp-page/login-page'
+import { loginPath } from 'auth/auth-paths'
+import { loginTitle } from 'auth/auth-titles'
 
 export const loginPageConfig: Object = {
   route: {
@@ -9,5 +10,5 @@ export const loginPageConfig: Object = {
     exact: true,
     component: LoginPage,
   },
-  title: 'Log In',
+  createTitle: loginTitle,
 }

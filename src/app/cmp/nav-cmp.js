@@ -21,7 +21,7 @@ import { logoutPath } from 'auth/auth-paths'
 
 const navConfigs = allPageConfigsExceptRoot.filter(c => c.showInNav)
 
-const mstp = ({ general }) => ({ username: general.user.username })
+const mstp = ({ general, page }) => ({ username: general.user.username, title: page.title })
 
 const styles = theme => ({
   appBarPusher: theme.mixins.toolbar,
@@ -30,17 +30,19 @@ const styles = theme => ({
 
 type NavProps = {
   classes: Object,
+  title?: string,
   username: string,
   isOpen: boolean,
   updateIsOpen: Function,
 }
 
-const Nav = ({ classes, username, isOpen, updateIsOpen }: NavProps) => (
+const Nav = ({ classes, title, username, isOpen, updateIsOpen }: NavProps) => (
   <Fragment>
     <AppBar position="fixed">
       <Toolbar>
         <IconButton color="inherit" onClick={() => updateIsOpen(!isOpen)}>
           <MenuIcon />
+          {title}
         </IconButton>
       </Toolbar>
     </AppBar>
@@ -55,7 +57,7 @@ const Nav = ({ classes, username, isOpen, updateIsOpen }: NavProps) => (
     >
       <List>
         <Link to={notesPageConfig.route.path} className={classes.navLink}>
-          <NavItem label={notesPageConfig.title} icon={notesPageConfig.icon} />
+          <NavItem label={notesPageConfig.createTitle()} icon={notesPageConfig.icon} />
         </Link>
         {navConfigs.map(c => (
           <Link key={c.route.path} to={c.route.path} className={classes.navLink}>

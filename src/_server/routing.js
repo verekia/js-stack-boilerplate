@@ -18,30 +18,19 @@ import { notesPageConfig } from 'note/note-config'
 const combinedSchemas = [noteSchema].join(' ')
 const combinedResolvers = { ...noteResolvers }
 
-const graphqlCall = async (ctx: Object) => {
-  const { url } = ctx.req
-  const { cookie } = ctx.req.headers
-  const baseUrl = ctx.request.origin
-
-  let match = {}
-  const activeConfig: Object =
-    allPageConfigsExceptRoot.concat(notesPageConfig).find(({ route }) => {
-      match = matchPath(url, route)
-      return match
-    }) || {}
-
-  if (activeConfig.graphql) {
-    const queryVariables = activeConfig.graphql.mapParams
-      ? activeConfig.graphql.mapParams(match.params)
-      : match.params
-    return fetchGraphQL({
-      baseUrl,
-      query: activeConfig.graphql.query,
-      variables: queryVariables,
-      cookie,
-    })
-  }
-  return undefined
+const graphqlCall = async (
+  graphql: Object,
+  params: Object,
+  baseUrl: string,
+  cookie: string,
+): Object => {
+  const queryVariables = graphql.mapParams ? graphql.mapParams(params) : params
+  return fetchGraphQL({
+    baseUrl,
+    query: graphql.query,
+    variables: queryVariables,
+    cookie,
+  })
 }
 
 const setUpRouting = (router: Object) => {
@@ -61,26 +50,48 @@ const setUpRouting = (router: Object) => {
   })
 
   router.get('*', async (ctx, next) => {
-    if (ctx.req.url.startsWith('/static')) {
+    const { url } = ctx.req
+    const { cookie } = ctx.req.headers
+    const baseUrl = ctx.request.origin
+
+    if (url.startsWith('/static')) {
       next()
       return
     }
 
-    let pageData
+    let pageData = {}
+
+    let match = {}
+    let activeConfig: Object =
+      allPageConfigsExceptRoot.find(({ route }) => {
+        match = matchPath(url, route)
+        return match
+      }) || {}
 
     // (if not logged out homepage)
     if (!(ctx.req.url === '/' && !ctx.session.user)) {
-      try {
-        pageData = await graphqlCall(ctx)
-      } catch (err) {
-        if (err.message === 'unauthorized') {
-          ctx.redirect('/login')
-          return
+      if (ctx.req.url === '/') {
+        match = matchPath(ctx.req.url, notesPageConfig.route)
+        activeConfig = notesPageConfig
+      }
+      if (activeConfig.graphql) {
+        try {
+          pageData = await graphqlCall(activeConfig.graphql, match.params, baseUrl, cookie)
+        } catch (err) {
+          if (err.message === 'unauthorized') {
+            ctx.redirect('/login')
+            return
+          }
+          // eslint-disable-next-line no-console
+          console.error(err)
         }
-        // eslint-disable-next-line no-console
-        console.error(err)
       }
     }
+
+    if (activeConfig.createTitle) {
+      pageData.title = activeConfig.createTitle(pageData)
+    }
+
     renderPage(ctx, pageData)
   })
 }

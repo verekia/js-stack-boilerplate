@@ -3,9 +3,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import isPage from 'app/hoc/is-page'
 import { welcomePath } from 'welcome/welcome-paths'
 
-export default () => (
+const LoginPage = () => (
   <form action="/login" method="post">
     <label>
       Username
@@ -19,3 +20,5 @@ export default () => (
     or <Link to={welcomePath()}>Sign Up</Link>
   </form>
 )
+
+export default isPage(LoginPage)
