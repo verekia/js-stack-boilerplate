@@ -1,10 +1,22 @@
 // @flow
 
-import LoginPage from 'auth/cmp-page/login-page'
-import { LOGIN_PATH } from 'auth/auth-paths'
+import LogoutIcon from '@material-ui/icons/PowerSettingsNew'
 
-export const loginRoute = {
-  path: LOGIN_PATH,
-  exact: true,
-  component: LoginPage,
+import { LOGIN_PATH, LOGOUT_PATH } from 'auth/auth-paths'
+import LoginPage from 'auth/cmp-page/login-page'
+
+export const loginRoute: Object = {
+  route: {
+    path: LOGIN_PATH,
+    exact: true,
+    component: LoginPage,
+  },
+  title: 'Log In',
+}
+
+export const logoutRoute: Object = {
+  htmlHref: LOGOUT_PATH,
+  title: 'Log Out',
+  Icon: LogoutIcon,
+  inNav: true,
 }

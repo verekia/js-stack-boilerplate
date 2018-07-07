@@ -7,30 +7,33 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
 import Nav from 'app/cmp/nav-cmp'
-import { allPageConfigs } from '_shared/shared-config'
-import { notFoundPageConfig } from 'error/error-page-configs'
-import { filterPageConfigsByLoggedIn } from '_shared/shared-util'
+import { getRoutes, getMatchAndRoute, getTitle } from '_shared/routes'
 
-const mstp = ({ general }) => ({ isLoggedIn: !!general.user })
+const mstp = ({ general, page }) => ({ isLoggedIn: !!general.user, pageData: page })
 
-const App = ({ isLoggedIn, location }: { isLoggedIn: boolean, location: Object }) => {
-  const pageConfig =
-    filterPageConfigsByLoggedIn(allPageConfigs, isLoggedIn).find(
-      ({ route }) => location.pathname === route.path,
-    ) || notFoundPageConfig
+type Props = {
+  isLoggedIn: boolean,
+  location: Object,
+  pageData: Object,
+}
+
+const App = ({ isLoggedIn, location, pageData }: Props) => {
+  const { route: activeRoute } = getMatchAndRoute(isLoggedIn, location.pathname)
+  const title = getTitle(activeRoute, pageData)
   return (
     <div>
       <Helmet
         titleTemplate={`%s | Notesapp`}
         defaultTitle={'Notesapp – Great Notes for Great People'}
       >
+        <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
       </Helmet>
-      {isLoggedIn && <Nav pageConfig={pageConfig} />}
+      {isLoggedIn && <Nav title={title} />}
       <Switch>
-        {filterPageConfigsByLoggedIn(allPageConfigs, isLoggedIn).map(({ route }) => (
-          <Route key={route.path || 'not-found-key'} {...route} />
+        {getRoutes(isLoggedIn).map(({ route }) => (
+          <Route key={(route && route.path) || 'not-found-key'} {...route} />
         ))}
       </Switch>
     </div>

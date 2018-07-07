@@ -1,10 +1,12 @@
 // @flow
 
 import React from 'react'
+import { compose } from 'recompose'
 import { notePath } from 'note/note-paths'
 import { Link } from 'react-router-dom'
 
-import isPage from 'app/hoc/is-page'
+import pageWithData from 'app/hoc/page-with-data'
+import withDefault from 'app/hoc/with-default'
 
 const NotesPage = ({ notes }: { notes: Object[] }) => (
   <ul>
@@ -18,6 +20,7 @@ const NotesPage = ({ notes }: { notes: Object[] }) => (
 
 const NoNotes = () => <h2>You don't have any note yet, create one!</h2>
 
-export default isPage({
-  DefaultCmp: NoNotes,
-})(NotesPage)
+export default compose(
+  pageWithData,
+  withDefault('notes', NoNotes),
+)(NotesPage)

@@ -5,11 +5,15 @@ import ServerErrorPage from 'error/cmp-page/server-error-page'
 import NotFoundPage from 'error/cmp-page/not-found-page'
 
 export const serverErrorRoute: Object = {
-  path: SERVER_ERROR_PATH,
-  exact: true,
-  component: ServerErrorPage,
+  route: {
+    path: SERVER_ERROR_PATH,
+    exact: true,
+    component: ServerErrorPage,
+  },
+  title: 'Server Error',
 }
 
 export const notFoundRoute: Object = {
-  component: NotFoundPage,
+  route: { component: NotFoundPage },
+  title: 'Not Found',
 }

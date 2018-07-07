@@ -11,20 +11,12 @@ const loadPageRequest = createAction(LOAD_PAGE_REQUEST)
 const loadPageSuccess = createAction(LOAD_PAGE_SUCCESS)
 const loadPageFailure = createAction(LOAD_PAGE_FAILURE)
 
-type Options = {
-  query?: string,
-  variables?: Object,
-  createTitle?: Function,
-}
-
-export const loadPage = ({ query, variables, createTitle }: Options) => async (
-  dispatch: Function,
-) => {
+export const loadPage = (options: Object, mapResp?: Function) => async (dispatch: Function) => {
   dispatch(loadPageRequest())
   try {
-    const pageData = query ? await fetchGraphQL({ query, variables }) : {}
-    if (createTitle) {
-      pageData.title = createTitle(pageData)
+    let pageData = await fetchGraphQL(options)
+    if (mapResp) {
+      pageData = mapResp(pageData)
     }
     dispatch(loadPageSuccess(pageData))
   } catch (err) {

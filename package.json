@@ -12,7 +12,7 @@
     "client-watch": "parcel watch src/_client/client.js --public-url . -d dist/js -o bundle.js",
     "client-build": "parcel build src/_client/client.js --no-source-maps -d dist/js -o bundle.js",
     "docker": "docker-compose up -d",
-    "clean": "rimraf cache lib dist",
+    "clean": "rimraf .cache lib dist",
     "nodemon": "nodemon",
     "babel": "babel src -d lib --ignore .test.js",
     "lint": "eslint src && flow && madge --circular src",

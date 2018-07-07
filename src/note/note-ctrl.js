@@ -10,8 +10,8 @@ export const noteSchema = `
   }
 
   type Query {
-    notes: [Note]
-    note(id: ID!): Note
+    getNotes: [Note]
+    getNote(id: ID!): Note
   }
 `
 

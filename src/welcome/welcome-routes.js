@@ -3,10 +3,11 @@
 import { WELCOME_PATH } from 'welcome/welcome-paths'
 import WelcomePage from 'welcome/cmp-page/welcome-page'
 
-export const welcomeRoute = {
+export const welcomeRoute: Object = {
   route: {
     path: WELCOME_PATH,
     exact: true,
     component: WelcomePage,
   },
+  loggedOutOnly: true,
 }

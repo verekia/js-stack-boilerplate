@@ -1,19 +1,16 @@
 // @flow
 
-import { matchPath } from 'react-router-dom'
-
 // flow-disable-next-line
 import graphqlHTTP from 'koa-graphql'
 // flow-disable-next-line
 import { buildSchema } from 'graphql'
 
 import { fetchGraphQL } from '_shared/api-calls'
-import { allPageConfigs } from '_shared/shared-config'
 import renderPage from '_server/render-page'
+import { getMatchAndRoute } from '_shared/routes'
 
 import { noteSchema, noteResolvers } from 'note/note-ctrl'
 import authRouting from 'auth/auth-routing'
-import { filterPageConfigsByLoggedIn } from '_shared/shared-util'
 
 const combinedSchemas = [noteSchema].join(' ')
 const combinedResolvers = { ...noteResolvers }
@@ -49,6 +46,7 @@ const setUpRouting = (router: Object) => {
     throw Error('Fake Server Error')
   })
 
+  // Server-side rendering
   router.get('*', async (ctx, next) => {
     const { url } = ctx.req
     const { cookie } = ctx.req.headers
@@ -61,16 +59,15 @@ const setUpRouting = (router: Object) => {
 
     let pageData = {}
 
-    let match = {}
-    const pageConfig =
-      filterPageConfigsByLoggedIn(allPageConfigs, !!ctx.session.user).find(({ route }) => {
-        match = matchPath(url, route)
-        return match
-      }) || {}
+    const { match, route } = getMatchAndRoute(!!ctx.session.user, url)
+    const { graphql } = route
 
-    if (pageConfig.graphql) {
+    if (graphql) {
       try {
-        pageData = await graphqlCall(pageConfig.graphql, match.params, baseUrl, cookie)
+        pageData = await graphqlCall(graphql, match.params, baseUrl, cookie)
+        if (graphql.mapResp) {
+          pageData = graphql.mapResp(pageData)
+        }
       } catch (err) {
         if (err.message === 'unauthorized') {
           ctx.redirect('/login')

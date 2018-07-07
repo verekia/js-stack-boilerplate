@@ -3,7 +3,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import isPage from 'app/hoc/is-page'
 import { WELCOME_PATH } from 'welcome/welcome-paths'
 
 const LoginPage = () => (
@@ -21,4 +20,4 @@ const LoginPage = () => (
   </form>
 )
 
-export default isPage(LoginPage)
+export default LoginPage
