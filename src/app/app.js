@@ -32,9 +32,19 @@ const App = ({ isLoggedIn, location, pageData }: Props) => {
       </Helmet>
       {isLoggedIn && <Nav title={title} />}
       <Switch>
-        {getRoutes(isLoggedIn).map(({ route }) => (
-          <Route key={(route && route.path) || 'not-found-key'} {...route} />
-        ))}
+        {getRoutes(isLoggedIn)
+          .filter(r => r.route)
+          .map(({ route, ...rest }) => {
+            const { path, exact, Cmp } = route
+            return (
+              <Route
+                key={path || 'not-found-key'}
+                path={path}
+                exact={exact}
+                render={props => <Cmp {...props} {...rest} />}
+              />
+            )
+          })}
       </Switch>
     </div>
   )

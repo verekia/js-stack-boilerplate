@@ -7,7 +7,7 @@ export const welcomeRoute: Object = {
   route: {
     path: WELCOME_PATH,
     exact: true,
-    component: WelcomePage,
+    Cmp: WelcomePage,
   },
   loggedOutOnly: true,
 }

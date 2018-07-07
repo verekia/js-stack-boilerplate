@@ -8,12 +8,12 @@ export const serverErrorRoute: Object = {
   route: {
     path: SERVER_ERROR_PATH,
     exact: true,
-    component: ServerErrorPage,
+    Cmp: ServerErrorPage,
   },
   title: 'Server Error',
 }
 
 export const notFoundRoute: Object = {
-  route: { component: NotFoundPage },
+  route: { Cmp: NotFoundPage },
   title: 'Not Found',
 }

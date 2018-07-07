@@ -9,7 +9,7 @@ export const loginRoute: Object = {
   route: {
     path: LOGIN_PATH,
     exact: true,
-    component: LoginPage,
+    Cmp: LoginPage,
   },
   title: 'Log In',
 }

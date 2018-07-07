@@ -10,7 +10,7 @@ export const notesRoute: Object = {
   route: {
     path: NOTES_PATH,
     exact: true,
-    component: NotesPage,
+    Cmp: NotesPage,
   },
   loggedInOnly: true,
   title: 'Notes',
@@ -18,7 +18,6 @@ export const notesRoute: Object = {
     query: '{ getNotes { id, title, description } }',
     mapResp: ({ getNotes: notes }) => ({ notes }),
   },
-  mainDataPropName: 'notes',
   Icon: NotesIcon,
   inNav: true,
 }
@@ -27,13 +26,12 @@ export const noteRoute: Object = {
   route: {
     path: notePath(),
     exact: true,
-    component: NotePage,
+    Cmp: NotePage,
   },
   loggedInOnly: true,
-  title: ({ note }) => note.title,
+  title: ({ note }) => (note ? note.title : 'Note not found'),
   graphql: {
     query: 'query ($id: ID!) { getNote(id: $id) { id, title, description } }',
     mapResp: ({ getNote: note }) => ({ note }),
   },
-  mainDataPropName: 'note',
 }
