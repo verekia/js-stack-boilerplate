@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import { compose, lifecycle } from 'recompose'
 import { loadPage } from '_client/duck'
 
-const mstp = ({ page }) => ({ ...page })
+const mstp = ({ general, page }) => ({ isSsr: general.isSsr, ...page })
 
 const pageWithData = (BaseComponent: Function) =>
   compose(
     connect(mstp),
     lifecycle({
       componentDidMount() {
-        const { dispatch, match, graphql } = this.props
-        if (graphql) {
+        const { dispatch, match, graphql, isSsr } = this.props
+        if (graphql && !isSsr) {
           dispatch(
             loadPage(
               {

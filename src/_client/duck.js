@@ -3,6 +3,9 @@
 import { createAction } from 'redux-actions'
 import { fetchGraphQL } from '_shared/api-calls'
 
+const TURN_OFF_SSR = 'TURN_OFF_SSR'
+export const turnOffSsr = createAction(TURN_OFF_SSR)
+
 const LOAD_PAGE_REQUEST = 'LOAD_PAGE_REQUEST'
 const LOAD_PAGE_SUCCESS = 'LOAD_PAGE_SUCCESS'
 const LOAD_PAGE_FAILURE = 'LOAD_PAGE_FAILURE'
@@ -30,6 +33,8 @@ const initialState = { page: {}, general: {} }
 
 const reducer = (state: Object = initialState, action: Object) => {
   switch (action.type) {
+    case TURN_OFF_SSR:
+      return { ...state, general: { ...state.general, isSsr: false } }
     case LOAD_PAGE_REQUEST:
       return { page: {}, general: { ...state.general, isLoading: true, hasError: false } }
     case LOAD_PAGE_SUCCESS:

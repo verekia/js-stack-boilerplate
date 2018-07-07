@@ -10,7 +10,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Provider as ReduxProvider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import reducer from '_client/duck'
+import reducer, { turnOffSsr } from '_client/duck'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import theme from 'app/theme'
 
@@ -46,6 +46,8 @@ const renderApp = () => {
 }
 
 renderApp()
+
+store.dispatch(turnOffSsr())
 
 const jssStyles = document.getElementById('jss-server-side')
 if (jssStyles && jssStyles.parentNode) {

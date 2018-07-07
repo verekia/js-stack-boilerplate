@@ -21,23 +21,24 @@ const styles = theme => ({
   navLink: { textDecoration: 'none' },
 })
 
-const mstp = ({ general }) => ({ username: general.user.username })
+const mstp = ({ general }) => ({ username: general.user.username, isLoading: general.isLoading })
 
 type NavProps = {
   classes: Object,
   title?: string,
   username: string,
   isOpen: boolean,
+  isLoading?: boolean,
   updateIsOpen: Function,
 }
 
-const Nav = ({ classes, title, username, isOpen, updateIsOpen }: NavProps) => (
+const Nav = ({ classes, title, username, isLoading, isOpen, updateIsOpen }: NavProps) => (
   <Fragment>
     <AppBar position="fixed">
       <Toolbar>
         <IconButton color="inherit" onClick={() => updateIsOpen(!isOpen)}>
           <MenuIcon />
-          {title}
+          {!isLoading && title}
         </IconButton>
       </Toolbar>
     </AppBar>
