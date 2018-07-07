@@ -8,12 +8,12 @@ import graphqlHTTP from 'koa-graphql'
 import { buildSchema } from 'graphql'
 
 import { fetchGraphQL } from '_shared/api-calls'
-import { allPageConfigsExceptRoot } from '_shared/shared-config'
+import { allPageConfigs } from '_shared/shared-config'
 import renderPage from '_server/render-page'
 
 import { noteSchema, noteResolvers } from 'note/note-ctrl'
 import authRouting from 'auth/auth-routing'
-import { notesPageConfig } from 'note/note-config'
+import { filterPageConfigsByLoggedIn } from '_shared/shared-util'
 
 const combinedSchemas = [noteSchema].join(' ')
 const combinedResolvers = { ...noteResolvers }
@@ -62,34 +62,23 @@ const setUpRouting = (router: Object) => {
     let pageData = {}
 
     let match = {}
-    let activeConfig: Object =
-      allPageConfigsExceptRoot.find(({ route }) => {
+    const pageConfig =
+      filterPageConfigsByLoggedIn(allPageConfigs, !!ctx.session.user).find(({ route }) => {
         match = matchPath(url, route)
         return match
       }) || {}
 
-    // (if not logged out homepage)
-    if (!(ctx.req.url === '/' && !ctx.session.user)) {
-      if (ctx.req.url === '/') {
-        match = matchPath(ctx.req.url, notesPageConfig.route)
-        activeConfig = notesPageConfig
-      }
-      if (activeConfig.graphql) {
-        try {
-          pageData = await graphqlCall(activeConfig.graphql, match.params, baseUrl, cookie)
-        } catch (err) {
-          if (err.message === 'unauthorized') {
-            ctx.redirect('/login')
-            return
-          }
-          // eslint-disable-next-line no-console
-          console.error(err)
+    if (pageConfig.graphql) {
+      try {
+        pageData = await graphqlCall(pageConfig.graphql, match.params, baseUrl, cookie)
+      } catch (err) {
+        if (err.message === 'unauthorized') {
+          ctx.redirect('/login')
+          return
         }
+        // eslint-disable-next-line no-console
+        console.error(err)
       }
-    }
-
-    if (activeConfig.createTitle) {
-      pageData.title = activeConfig.createTitle(pageData)
     }
 
     renderPage(ctx, pageData)

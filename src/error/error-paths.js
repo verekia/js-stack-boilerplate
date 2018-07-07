@@ -1,3 +1,3 @@
 // @flow
 
-export const errorPath = () => '/error'
+export const SERVER_ERROR_PATH = '/error'

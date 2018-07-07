@@ -3,27 +3,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose, lifecycle } from 'recompose'
-import { loadPage } from 'app/duck'
+import { loadPage } from '_client/duck'
 import { allPageConfigsExceptRoot } from '_shared/shared-config'
 import { notesPageConfig } from 'note/note-config'
 
 const isPage = ({
-  mainDataProp,
+  mainDataPropName,
   graphql,
   DefaultCmp,
   createTitle,
 }: {
-  mainDataProp?: string,
+  mainDataPropName?: string,
   graphql?: Object,
   DefaultCmp?: Function,
   createTitle?: Function,
 }) => (BaseComponent: Function) => {
+  // TODO: mainDataPropName should only be used for DefaultCmp
   const mapStateToProps = ({ general, page }) => {
     const props = {
       isLoading: general.isLoading,
     }
-    if (mainDataProp) {
-      props[mainDataProp] = page[mainDataProp]
+    if (mainDataPropName) {
+      props[mainDataPropName] = page[mainDataPropName]
     }
   }
   const mapDispatchToProps = (dispatch, props) => {
@@ -48,11 +49,11 @@ const isPage = ({
   }
 
   const EnhancedComponent = props => {
-    const mainData = props[mainDataProp]
+    const mainData = props[mainDataPropName]
     const hasData = Array.isArray(mainData) ? mainData.length > 0 : !!mainData
     const onlyDataProps = Array.isArray(mainData)
-      ? { [mainDataProp]: mainData }
-      : { ...props[mainDataProp] }
+      ? { [mainDataPropName]: mainData }
+      : { ...props[mainDataPropName] }
     if (hasData) {
       return <BaseComponent {...onlyDataProps} />
     }
@@ -69,7 +70,7 @@ const isPage = ({
     ),
     lifecycle({
       componentDidMount() {
-        if (!this.props[mainDataProp]) {
+        if (!this.props[mainDataPropName]) {
           this.props.fetchPage(this.props.match.params)
         }
       },

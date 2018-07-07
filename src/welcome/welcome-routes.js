@@ -1,11 +1,11 @@
 // @flow
 
-import { welcomePath } from 'welcome/welcome-paths'
+import { WELCOME_PATH } from 'welcome/welcome-paths'
 import WelcomePage from 'welcome/cmp-page/welcome-page'
 
-export const welcomePageConfig: Object = {
+export const welcomeRoute = {
   route: {
-    path: welcomePath(),
+    path: WELCOME_PATH,
     exact: true,
     component: WelcomePage,
   },

@@ -1,3 +1,3 @@
 // @flow
 
-export const welcomePath = () => '/'
+export const WELCOME_PATH = '/'

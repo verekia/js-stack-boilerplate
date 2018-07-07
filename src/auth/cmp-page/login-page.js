@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import isPage from 'app/hoc/is-page'
-import { welcomePath } from 'welcome/welcome-paths'
+import { WELCOME_PATH } from 'welcome/welcome-paths'
 
 const LoginPage = () => (
   <form action="/login" method="post">
@@ -17,7 +17,7 @@ const LoginPage = () => (
       <input name="password" type="password" />
     </label>
     <button>Log In</button>
-    or <Link to={welcomePath()}>Sign Up</Link>
+    or <Link to={WELCOME_PATH}>Sign Up</Link>
   </form>
 )
 

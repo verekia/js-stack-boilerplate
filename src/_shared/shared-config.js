@@ -1,9 +1,16 @@
 // @flow
 
-import { notePageConfig } from 'note/note-config'
-import { loginPageConfig } from 'auth/auth-config'
+import { loginPageConfig, logoutPageConfig } from 'auth/auth-page-configs'
+import { serverErrorPageConfig, notFoundPageConfig } from 'error/error-page-configs'
+import { welcomePageConfig } from 'welcome/welcome-page-configs'
+import { notesPageConfig, notePageConfig } from 'note/note-page-configs'
 
-export const allPageConfigsExceptRoot = [loginPageConfig, notePageConfig]
-
-// flow-disable-next-line
-export const allPageRoutesExceptRoot = allPageConfigsExceptRoot.map(c => c.route)
+export const allPageConfigs = [
+  welcomePageConfig,
+  loginPageConfig,
+  notesPageConfig,
+  notePageConfig,
+  logoutPageConfig,
+  serverErrorPageConfig,
+  notFoundPageConfig,
+]

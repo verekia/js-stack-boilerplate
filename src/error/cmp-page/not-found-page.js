@@ -2,4 +2,12 @@
 
 import React from 'react'
 
-export default () => <h1>Not Found</h1>
+import Typography from '@material-ui/core/Typography'
+
+const NotFoundPage = () => (
+  <div>
+    <Typography variant="title">Not Found</Typography>
+  </div>
+)
+
+export default NotFoundPage

@@ -7,53 +7,35 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
 import Nav from 'app/cmp/nav-cmp'
-import { allPageRoutesExceptRoot } from '_shared/shared-config'
-import NotFoundPage from 'error/cmp-page/not-found-page'
-import WelcomePage from 'welcome/cmp-page/welcome-page'
-import NotesPage from 'note/cmp-page/notes-page'
+import { allPageConfigs } from '_shared/shared-config'
+import { notFoundPageConfig } from 'error/error-page-configs'
+import { filterPageConfigsByLoggedIn } from '_shared/shared-util'
 
-const mstp = ({ general, page }) => ({ isLoggedIn: !!general.user, title: page.title })
+const mstp = ({ general }) => ({ isLoggedIn: !!general.user })
 
-const BASE_TITLE = 'Notesapp'
-
-const App = ({ isLoggedIn, title }: { isLoggedIn: boolean, title?: string }) => (
-  <div>
-    <Helmet titleTemplate={`%s | ${BASE_TITLE}`} defaultTitle={BASE_TITLE}>
-      <title>{title}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-    </Helmet>
-    {isLoggedIn && <Nav />}
-    <Switch>
-      <Route path="/" exact={true} component={isLoggedIn ? NotesPage : WelcomePage} />
-      {allPageRoutesExceptRoot.map(
-        ({
-          path,
-          exact,
-          component: Cmp,
-          ...rest
-        }: {
-          path: string,
-          exact?: boolean,
-          component: Function,
-        }) => (
-          // <Route key={path} path={path} exact={exact} component={component} />
-          <Route
-            key={path}
-            path={path}
-            exact={exact}
-            render={props => <Cmp {...props} {...rest} />}
-          />
-        ),
-      )}
-      <Route render={props => <NotFoundPage {...props} />} />
-    </Switch>
-  </div>
-)
-
-// Using component={component} instead of render causes a warning in the console, related to:
-// https://github.com/ReactTraining/react-router/issues/6056
-// https://github.com/reduxjs/react-redux/issues/914
+const App = ({ isLoggedIn, location }: { isLoggedIn: boolean, location: Object }) => {
+  const pageConfig =
+    filterPageConfigsByLoggedIn(allPageConfigs, isLoggedIn).find(
+      ({ route }) => location.pathname === route.path,
+    ) || notFoundPageConfig
+  return (
+    <div>
+      <Helmet
+        titleTemplate={`%s | Notesapp`}
+        defaultTitle={'Notesapp – Great Notes for Great People'}
+      >
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+      </Helmet>
+      {isLoggedIn && <Nav pageConfig={pageConfig} />}
+      <Switch>
+        {filterPageConfigsByLoggedIn(allPageConfigs, isLoggedIn).map(({ route }) => (
+          <Route key={route.path || 'not-found-key'} {...route} />
+        ))}
+      </Switch>
+    </div>
+  )
+}
 
 export default compose(
   withRouter,

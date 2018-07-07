@@ -1,5 +1,7 @@
 // @flow
 
+/* eslint-disable no-underscore-dangle */
+
 import 'babel-polyfill'
 
 import React from 'react'
@@ -8,17 +10,14 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Provider as ReduxProvider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import reducer from 'app/duck'
+import reducer from '_client/duck'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import theme from 'app/theme'
 
 /*
 import setUpSocket from '_client/socket-client'
-
 setUpSocket(store)
 */
-
-/* eslint-disable no-underscore-dangle */
 
 const composeEnhancers =
   (process.env.NODE_ENV === 'production' ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
