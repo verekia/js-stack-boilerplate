@@ -5,6 +5,7 @@ import graphqlHTTP from 'koa-graphql'
 // flow-disable-next-line
 import { buildSchema } from 'graphql'
 
+import parseFields from '_shared/parse-fields'
 import { fetchGraphQL } from '_shared/api-calls'
 import renderPage from '_server/render-page'
 import { DISABLE_SSL, isProd } from '_server/env'
@@ -32,9 +33,9 @@ const setUpRouting = (router: Object) => {
     throw Error('Fake Server Error')
   })
 
-  // Server-side rendering
+  // Server-side only
   router.all('*', async (ctx, next) => {
-    let pageData = {}
+    let pageData: Object = {}
     const { cookie } = ctx.req.headers
     const { match, route } = getMatchAndRoute(!!ctx.session.user, ctx.req.url)
     const { graphql, graphqlPost } = route
@@ -54,19 +55,17 @@ const setUpRouting = (router: Object) => {
         }
       }
       if (ctx.method === 'POST' && graphqlPost) {
+        const parsedFields = parseFields(ctx.request.body, graphqlPost.fieldTypes)
         const mutationResult = await fetchGraphQL({
           query: graphqlPost.query,
-          variables: graphqlPost.mapBody ? graphqlPost.mapBody(ctx.request.body) : ctx.request.body,
+          variables: graphqlPost.mapFields ? graphqlPost.mapFields(parsedFields) : parsedFields,
           baseUrl,
           cookie,
         })
-        const isAjax = ctx.request.get('X-Requested-With') === 'XMLHttpRequest'
-        if (graphqlPost.redirect) {
-          if (isAjax) {
-            ctx.body = mutationResult
-          } else {
-            ctx.redirect(graphqlPost.redirect(mutationResult))
-          }
+        if (mutationResult.errorMessage) {
+          pageData = { prefill: ctx.request.body, ...mutationResult }
+        } else if (graphqlPost.redirect) {
+          ctx.redirect(graphqlPost.redirect(mutationResult))
           return
         }
       }

@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 import { compose, lifecycle } from 'recompose'
-import { loadPage } from '_client/duck'
+import { loadPageAsync } from '_client/duck'
 
 const mstp = ({ general, page }) => ({ isSsr: general.isSsr, ...page })
 
@@ -14,7 +14,7 @@ const pageWithData = (BaseComponent: Function) =>
         const { dispatch, match, graphql, isSsr } = this.props
         if (graphql && !isSsr) {
           dispatch(
-            loadPage(
+            loadPageAsync(
               {
                 query: graphql.query,
                 variables: graphql.mapParams ? graphql.mapParams(match.params) : match.params,

@@ -27,10 +27,17 @@ export const noteSchema = `
   }
 `
 
+const validateNoteInput = input => {
+  if (input.title.length > 20) {
+    throw Error('The title should be shorter than 20 characters')
+  }
+  return input
+}
+
 export const noteResolvers = {
   getNotes: protect(userId => getAllNotes(userId)),
   getNote: protect((userId, { id }) => findNote(userId, id)),
-  createNote: protect((userId, { input }) => createNote(userId, input)),
-  updateNote: protect((userId, { id, input }) => updateNote(userId, id, input)),
+  createNote: protect((userId, { input }) => createNote(userId, validateNoteInput(input))),
+  updateNote: protect((userId, { id, input }) => updateNote(userId, id, validateNoteInput(input))),
   deleteNote: protect((userId, { id }) => deleteNote(userId, id)),
 }

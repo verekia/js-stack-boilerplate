@@ -11,10 +11,12 @@ const LOAD_PAGE_SUCCESS = 'LOAD_PAGE_SUCCESS'
 const LOAD_PAGE_FAILURE = 'LOAD_PAGE_FAILURE'
 
 const loadPageRequest = createAction(LOAD_PAGE_REQUEST)
-const loadPageSuccess = createAction(LOAD_PAGE_SUCCESS)
 const loadPageFailure = createAction(LOAD_PAGE_FAILURE)
+export const loadPageSuccess = createAction(LOAD_PAGE_SUCCESS)
 
-export const loadPage = (options: Object, mapResp?: Function) => async (dispatch: Function) => {
+export const loadPageAsync = (options: Object, mapResp?: Function) => async (
+  dispatch: Function,
+) => {
   dispatch(loadPageRequest())
   try {
     let pageData = await fetchGraphQL(options)

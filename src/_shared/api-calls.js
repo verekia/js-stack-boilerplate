@@ -24,8 +24,7 @@ export const fetchGraphQL = async ({ baseUrl, query, variables, cookie }: Option
     return null
   }
   if (resp.errors) {
-    throw Error(resp.errors[0].message)
-  } else {
-    return resp.data
+    return { errorMessage: resp.errors[0].message }
   }
+  return resp.data
 }

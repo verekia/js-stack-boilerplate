@@ -49,7 +49,7 @@ export const newNoteRoute: Object = {
   title: 'New Note',
   graphqlPost: {
     query: 'mutation ($input: NoteInput!) { createNote(input: $input) }',
-    mapBody: body => ({ input: body }),
+    mapFields: fields => ({ input: fields }),
     redirect: ({ createNote: id }) => notePath(id),
   },
   Icon: NewIcon,
