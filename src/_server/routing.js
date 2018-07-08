@@ -60,8 +60,14 @@ const setUpRouting = (router: Object) => {
           baseUrl,
           cookie,
         })
+        const isAjax = ctx.request.get('X-Requested-With') === 'XMLHttpRequest'
         if (graphqlPost.redirect) {
-          ctx.redirect(graphqlPost.redirect(mutationResult))
+          if (isAjax) {
+            ctx.body = mutationResult
+          } else {
+            ctx.redirect(graphqlPost.redirect(mutationResult))
+          }
+          return
         }
       }
     } catch (err) {

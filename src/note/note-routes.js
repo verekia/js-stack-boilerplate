@@ -45,6 +45,7 @@ export const newNoteRoute: Object = {
     Cmp: NewNotePage,
   },
   loggedInOnly: true,
+  inNav: true,
   title: 'New Note',
   graphqlPost: {
     query: 'mutation ($input: NoteInput!) { createNote(input: $input) }',

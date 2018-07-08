@@ -54,7 +54,7 @@ const main = async () => {
   )
 
   app
-    .use(body())
+    .use(body({ multipart: true }))
     .use(compress())
     .use(mount('/static', serveStatic('dist')))
     .use(mount('/static', serveStatic('public')))
