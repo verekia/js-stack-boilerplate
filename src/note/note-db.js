@@ -6,9 +6,6 @@ import knex from '_db/pg'
 
 const NOTE = 'Note'
 
-export const createNote = (userId: string, note: Object) =>
-  knex(NOTE).insert({ ...note, id: uuid(), userId })
-
 export const getAllNotes = (userId: string) => knex(NOTE).where({ userId })
 
 export const findNote = (userId: string, id: string) =>
@@ -16,12 +13,18 @@ export const findNote = (userId: string, id: string) =>
     .where({ userId, id })
     .first()
 
-export const updateNote = (userId: string, id: string, note: Object) =>
-  knex(NOTE)
-    .update({ ...note, updatedAt: knex.fn.now() })
-    .where({ userId, id })
+export const createNote = async (userId: string, input: Object) => {
+  const id = uuid()
+  await knex(NOTE).insert({ ...input, id, userId })
+  return id
+}
 
-export const deleteNote = (userId: string, id: string) =>
-  knex(NOTE)
+export const updateNote = async (userId: string, id: string, input: Object) =>
+  !!(await knex(NOTE)
+    .update({ ...input, updatedAt: knex.fn.now() })
+    .where({ userId, id }))
+
+export const deleteNote = async (userId: string, id: string) =>
+  !!(await knex(NOTE)
     .where({ userId, id })
-    .del()
+    .del())

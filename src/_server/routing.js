@@ -7,7 +7,7 @@ import { buildSchema } from 'graphql'
 
 import { fetchGraphQL } from '_shared/api-calls'
 import renderPage from '_server/render-page'
-import { DISABLE_SSL } from '_server/env'
+import { DISABLE_SSL, isProd } from '_server/env'
 import { getMatchAndRoute } from '_shared/routes'
 
 import { noteSchema, noteResolvers } from 'note/note-ctrl'
@@ -39,7 +39,7 @@ const setUpRouting = (router: Object) => {
     graphqlHTTP({
       schema: buildSchema(combinedSchemas),
       rootValue: combinedResolvers,
-      graphiql: true,
+      graphiql: !isProd,
     }),
   )
 
