@@ -1,6 +1,7 @@
 // @flow
 
 import { protect } from '_server/server-util'
+import { findNote, getAllNotes } from 'note/note-db'
 
 export const noteSchema = `
   type Note {
@@ -15,9 +16,7 @@ export const noteSchema = `
   }
 `
 
-const notes = [{ id: '123', title: 'Great title' }, { id: '234', title: 'Lame title' }]
-
 export const noteResolvers = {
-  getNotes: protect(() => notes),
-  getNote: protect(({ id }) => notes.find(n => n.id === id)),
+  getNotes: protect(userId => getAllNotes(userId)),
+  getNote: protect((userId, { id }) => findNote(userId, id)),
 }

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 services:
   db:
     image: postgres:latest
@@ -6,9 +6,16 @@ services:
       - ./data/postgres:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+    networks:
+      - js-stack-net
   redis:
     image: redis:latest
     volumes:
       - ./data/redis:/data
     ports:
       - '6379:6379'
+    networks:
+      - js-stack-net
+networks:
+  js-stack-net:
+    name: js-stack-net
