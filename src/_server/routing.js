@@ -7,6 +7,7 @@ import { buildSchema } from 'graphql'
 
 import { fetchGraphQL } from '_shared/api-calls'
 import renderPage from '_server/render-page'
+import { DISABLE_SSL } from '_server/env'
 import { getMatchAndRoute } from '_shared/routes'
 
 import { noteSchema, noteResolvers } from 'note/note-ctrl'
@@ -50,7 +51,9 @@ const setUpRouting = (router: Object) => {
   router.get('*', async (ctx, next) => {
     const { url } = ctx.req
     const { cookie } = ctx.req.headers
-    const baseUrl = ctx.request.origin
+
+    // Because Heroku uses x-forwarded-proto, ctx.request.origin's protocol is always 'http'
+    const baseUrl = `http${DISABLE_SSL ? '' : 's'}://${ctx.request.host}`
 
     if (url.startsWith('/static')) {
       next()
