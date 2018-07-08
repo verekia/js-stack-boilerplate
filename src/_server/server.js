@@ -11,10 +11,11 @@ import favicon from 'koa-favicon'
 import mount from 'koa-mount'
 import Router from 'koa-router'
 import session from 'koa-session'
+import enforceHttps from 'koa-sslify'
 import serveStatic from 'koa-static'
 
 import redis from '_db/redis'
-import { PORT, SESSION_SECRET_KEY, isProd } from '_server/env'
+import { DISABLE_SSL, PORT, SESSION_SECRET_KEY, isProd } from '_server/env'
 import setUpRouting from '_server/routing'
 
 const main = async () => {
@@ -23,6 +24,8 @@ const main = async () => {
 
   const router = new Router()
   setUpRouting(router)
+
+  DISABLE_SSL || app.use(enforceHttps({ trustProtoHeader: true }))
 
   app.use(async (ctx, next) => {
     try {

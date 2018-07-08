@@ -82,6 +82,7 @@
     "koa-mount": "^3.0.0",
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.1",
+    "koa-sslify": "^2.1.2",
     "koa-static": "^5.0.0",
     "lodash": "^4.17.10",
     "pg": "^7.4.3",
