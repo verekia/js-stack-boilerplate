@@ -1,10 +1,12 @@
 // @flow
 
 import NotesIcon from '@material-ui/icons/Description'
+import NewIcon from '@material-ui/icons/Create'
 
-import { NOTES_PATH, notePath } from 'note/note-paths'
+import { NOTES_PATH, NEW_NOTE_PATH, notePath } from 'note/note-paths'
 import NotesPage from 'note/cmp-page/notes-page'
 import NotePage from 'note/cmp-page/note-page'
+import NewNotePage from 'note/cmp-page/new-note-page'
 
 export const notesRoute: Object = {
   route: {
@@ -34,4 +36,20 @@ export const noteRoute: Object = {
     query: 'query ($id: ID!) { getNote(id: $id) { id, title, description } }',
     mapResp: ({ getNote: note }) => ({ note }),
   },
+}
+
+export const newNoteRoute: Object = {
+  route: {
+    path: NEW_NOTE_PATH,
+    exact: true,
+    Cmp: NewNotePage,
+  },
+  loggedInOnly: true,
+  title: 'New Note',
+  graphqlPost: {
+    query: 'mutation ($input: NoteInput!) { createNote(input: $input) }',
+    mapBody: body => ({ input: body }),
+    redirect: ({ createNote: id }) => notePath(id),
+  },
+  Icon: NewIcon,
 }

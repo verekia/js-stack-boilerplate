@@ -16,21 +16,6 @@ import authRouting from 'auth/auth-routing'
 const combinedSchemas = [noteSchema].join(' ')
 const combinedResolvers = { ...noteResolvers }
 
-const graphqlCall = async (
-  graphql: Object,
-  params: Object,
-  baseUrl: string,
-  cookie: string,
-): Object => {
-  const queryVariables = graphql.mapParams ? graphql.mapParams(params) : params
-  return fetchGraphQL({
-    baseUrl,
-    query: graphql.query,
-    variables: queryVariables,
-    cookie,
-  })
-}
-
 const setUpRouting = (router: Object) => {
   authRouting(router)
 
@@ -48,29 +33,46 @@ const setUpRouting = (router: Object) => {
   })
 
   // Server-side rendering
-  router.get('*', async (ctx, next) => {
+  router.all('*', async (ctx, next) => {
     let pageData = {}
+    const { cookie } = ctx.req.headers
     const { match, route } = getMatchAndRoute(!!ctx.session.user, ctx.req.url)
-    const { graphql } = route
+    const { graphql, graphqlPost } = route
+    // Because Heroku uses x-forwarded-proto, ctx.request.origin's protocol is always 'http'
+    const baseUrl = `http${DISABLE_SSL ? '' : 's'}://${ctx.request.host}`
 
-    if (graphql) {
-      try {
-        // Because Heroku uses x-forwarded-proto, ctx.request.origin's protocol is always 'http'
-        const baseUrl = `http${DISABLE_SSL ? '' : 's'}://${ctx.request.host}`
-        pageData = await graphqlCall(graphql, match.params, baseUrl, ctx.req.headers.cookie)
-
+    try {
+      if (ctx.method === 'GET' && graphql) {
+        pageData = await fetchGraphQL({
+          query: graphql.query,
+          variables: graphql.mapParams ? graphql.mapParams(match.params) : match.params,
+          baseUrl,
+          cookie,
+        })
         if (graphql.mapResp) {
           pageData = graphql.mapResp(pageData)
         }
-      } catch (err) {
-        if (err.message === 'unauthorized') {
-          ctx.redirect('/login')
-          return
-        }
-        // eslint-disable-next-line no-console
-        console.error(err)
       }
+      if (ctx.method === 'POST' && graphqlPost) {
+        const mutationResult = await fetchGraphQL({
+          query: graphqlPost.query,
+          variables: graphqlPost.mapBody ? graphqlPost.mapBody(ctx.request.body) : ctx.request.body,
+          baseUrl,
+          cookie,
+        })
+        if (graphqlPost.redirect) {
+          ctx.redirect(graphqlPost.redirect(mutationResult))
+        }
+      }
+    } catch (err) {
+      if (err.message === 'unauthorized') {
+        ctx.redirect('/login')
+        return
+      }
+      // eslint-disable-next-line no-console
+      console.error(err)
     }
+
     renderPage(ctx, pageData)
   })
 }

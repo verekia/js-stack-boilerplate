@@ -5,13 +5,14 @@ import { matchPath } from 'react-router-dom'
 import { loginRoute, logoutRoute } from 'auth/auth-routes'
 import { serverErrorRoute, notFoundRoute } from 'error/error-routes'
 import { welcomeRoute } from 'welcome/welcome-routes'
-import { notesRoute, noteRoute } from 'note/note-routes'
+import { notesRoute, noteRoute, newNoteRoute } from 'note/note-routes'
 
 export const allRoutes = [
   welcomeRoute,
   loginRoute,
   notesRoute,
   noteRoute,
+  newNoteRoute,
   logoutRoute,
   serverErrorRoute,
   notFoundRoute,
