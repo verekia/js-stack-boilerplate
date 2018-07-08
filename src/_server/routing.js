@@ -49,25 +49,16 @@ const setUpRouting = (router: Object) => {
 
   // Server-side rendering
   router.get('*', async (ctx, next) => {
-    const { url } = ctx.req
-    const { cookie } = ctx.req.headers
-
-    // Because Heroku uses x-forwarded-proto, ctx.request.origin's protocol is always 'http'
-    const baseUrl = `http${DISABLE_SSL ? '' : 's'}://${ctx.request.host}`
-
-    if (url.startsWith('/static')) {
-      next()
-      return
-    }
-
     let pageData = {}
-
-    const { match, route } = getMatchAndRoute(!!ctx.session.user, url)
+    const { match, route } = getMatchAndRoute(!!ctx.session.user, ctx.req.url)
     const { graphql } = route
 
     if (graphql) {
       try {
-        pageData = await graphqlCall(graphql, match.params, baseUrl, cookie)
+        // Because Heroku uses x-forwarded-proto, ctx.request.origin's protocol is always 'http'
+        const baseUrl = `http${DISABLE_SSL ? '' : 's'}://${ctx.request.host}`
+        pageData = await graphqlCall(graphql, match.params, baseUrl, ctx.req.headers.cookie)
+
         if (graphql.mapResp) {
           pageData = graphql.mapResp(pageData)
         }
@@ -80,7 +71,6 @@ const setUpRouting = (router: Object) => {
         console.error(err)
       }
     }
-
     renderPage(ctx, pageData)
   })
 }
